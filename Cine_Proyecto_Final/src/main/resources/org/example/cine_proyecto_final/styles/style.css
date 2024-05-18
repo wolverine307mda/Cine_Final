@@ -1,0 +1,25 @@
+/* Estilo para el AnchorPane */
+.anchorpane {
+    -fx-background-color: #100E12; /* Color de fondo del AnchorPane */
+}
+
+/* Estilo para los botones */
+.button {
+    -fx-background-color: #491512; /* Color de fondo del botón */
+    -fx-background-radius: 20; /* Radio del borde redondeado */
+    -fx-border-radius: 20; /* Borde redondeado */
+    -fx-text-fill: rgb(196, 196, 196); /* Color del texto */
+    -fx-font-size: 25px; /* Tamaño de la fuente */
+    -fx-font-family: "Arial Black"; /* Fuente Arial Black */
+}
+
+.button:hover {
+    -fx-background-color: #732424; /* Color de fondo al pasar el ratón */
+    -fx-text-fill: white; /* Color del texto al pasar el ratón */
+}
+
+/* Estilo para las imágenes */
+.image-view {
+    -fx-background-radius: 20; /* Radio del borde redondeado */
+    -fx-border-radius: 20; /* Borde redondeado */
+}
