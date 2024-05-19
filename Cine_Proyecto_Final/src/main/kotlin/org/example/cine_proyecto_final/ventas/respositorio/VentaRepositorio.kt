@@ -1,10 +1,10 @@
-package org.example.cine_proyecto_final.ventas.respository
+package org.example.cine_proyecto_final.ventas.respositorio
 
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.cine_proyecto_final.ventas.models.Venta
 import java.time.LocalDateTime
 
-interface VentaRepository {
+interface VentaRepositorio {
     fun findAll(): List<Venta>
     fun findById(id: String): Venta?
     fun save(venta: Venta, ignoreKey : Boolean = false): Venta?

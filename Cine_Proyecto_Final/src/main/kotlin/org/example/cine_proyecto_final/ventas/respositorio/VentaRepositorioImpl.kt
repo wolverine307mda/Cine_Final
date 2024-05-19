@@ -1,4 +1,4 @@
-package org.example.cine_proyecto_final.ventas.respository
+package org.example.cine_proyecto_final.ventas.respositorio
 
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepository
 import org.example.cine_proyecto_final.database.SqlDelightManager
@@ -18,12 +18,12 @@ import java.time.LocalDateTime
  * @property productosRepositorio Repositorio de productos para acceder a la información de los productos.
  * @property clienteRepositorio Repositorio de cuentas de cliente para acceder a la información del cliente.
  */
-class VentaRepositoryImpl(
+class VentaRepositorioImpl(
     private val sqlDelightManager: SqlDelightManager,
     private val productosRepositorio: ProductosRepository,
     private val clienteRepositorio : CuentaRepository,
     private val butacaRepository: ButacaRepository
-) : VentaRepository {
+) : VentaRepositorio {
 
     private var db = sqlDelightManager.databaseQueries
 

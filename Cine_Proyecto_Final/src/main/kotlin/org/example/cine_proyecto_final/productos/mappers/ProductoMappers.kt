@@ -1,4 +1,4 @@
-package org.example.cine_proyecto_final.productos.mappers
+package org.example.cine_final.productos.mappers
 
 import database.ProductoEntity
 import org.example.cine_proyecto_final.productos.dto.ProductoDto
@@ -15,7 +15,7 @@ fun ProductoDto.toProducto() : Producto{
         id = this.id,
         nombre = this.nombre,
         precio = this.precio,
-        tipo = elegirTipoProducto(this.tipo),
+        tipo = elegirTipoProducto(this.tipo).toString(),
         stock = this.stock.toInt(),
         image = this.image,
         createdAt = LocalDateTime.parse(this.createdAt),
@@ -28,13 +28,13 @@ fun ProductoDto.toProducto() : Producto{
  * Convierte un objeto productoDto a producto
  * @return El producto convertido a un objeto ProductoDto
  */
-fun Producto.toDto() : ProductoDto {
+fun Producto.toProductoDto() : ProductoDto {
     return ProductoDto(
         id = this.id,
         nombre = this.nombre,
         precio = this.precio,
-        tipo = this.tipo!!.name,
-        stock = this.stock,
+        tipo = this.tipo!!.toString(),
+        stock = this.stock.toInt(),
         image = this.image,
         createdAt = this.createdAt.toString(),
         updatedAt = this.updatedAt.toString(),
@@ -55,7 +55,7 @@ fun ProductoEntity.toProducto(): Producto {
         id = this.id,
         nombre = this.nombre,
         precio = this.precio,
-        tipo = elegirTipoProducto(this.tipo),
+        tipo = elegirTipoProducto(this.tipo).toString(),
         stock = this.stock.toInt(),
         image = this.imagen,
         createdAt = LocalDateTime.parse(this.createdAt),
