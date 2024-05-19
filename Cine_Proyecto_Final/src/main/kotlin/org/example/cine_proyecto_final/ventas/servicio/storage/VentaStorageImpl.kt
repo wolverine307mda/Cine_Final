@@ -7,7 +7,7 @@ import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorage
 import org.example.cine_proyecto_final.ventas.servicio.storage.json.VentaStorageJson
 import java.io.File
 
-class ventaStorageImpl (
+class VentaStorageImpl (
     private val ventaStorageJson: VentaStorageJson,
     private val ventaStorageHtml : VentaStorageHtml
 ) : VentaStorage {
