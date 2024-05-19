@@ -3,7 +3,6 @@ CREATE TABLE IF NOT EXISTS ButacaEntity (
    id TEXT NOT NULL,
    tipo TEXT NOT NULL, -- Normal o VIP
    estado TEXT NOT NULL, -- Libre, ocupada o fuera de servicio
-   ocupamiento TEXT NOT NULL,
    id_venta TEXT,
    precio INTEGER NOT NULL,
    createdAt TEXT NOT NULL,
@@ -140,7 +139,7 @@ LIMIT 1;
 -- Actualizar butaca
 updateButaca:
 UPDATE ButacaEntity
-SET estado = ?, ocupamiento = ?, updatedAt = ?, tipo = ?, isDeleted = ?
+SET estado = ?, updatedAt = ?, tipo = ?, isDeleted = ?
 WHERE id = ?;
 
 -- Eliminar (marcar como eliminada) una butaca
@@ -332,7 +331,7 @@ VALUES (?, ?, ?, ?, ?);
 
 -- Insertar nueva línea de venta
 insertLineaVenta:
-INSERT INTO LineaVentaEntity (id, id_venta, id_complemento, precio, cantidad, createdAt, updatedAt, isDeleted)
+INSERT INTO LineaVentaEntity (id, id_venta, id_producto, precio, cantidad, createdAt, updatedAt, isDeleted)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 -- Verificar si existe una venta por ID

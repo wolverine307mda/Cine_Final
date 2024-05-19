@@ -19,10 +19,11 @@ class ButacaRepositoryImpl:ButacaRepository {
     override fun update(id: String, butaca: Butaca): Butaca?{
         TODO("Not yet implemented")
     }
-    override fun delete(id: String): Butaca?{
+    override fun findByIdAndDate(id : String, date: LocalDateTime) : Butaca?{
         TODO("Not yet implemented")
     }
-    override fun findByIdAndDate(id : String, date: LocalDateTime) : Butaca?{
+
+    override fun getAllByVentaId(id: String): List<Butaca> {
         TODO("Not yet implemented")
     }
 }

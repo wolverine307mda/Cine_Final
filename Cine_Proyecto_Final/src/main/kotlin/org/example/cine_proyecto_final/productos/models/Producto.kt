@@ -1,4 +1,4 @@
-package org.example.cine_proyecto_final.productos.models
+package org.example.cine_final.productos.models
 
 import java.time.LocalDateTime
 import java.util.UUID
@@ -10,6 +10,7 @@ import java.util.UUID
  * @property precio El precio del producto.
  * @property stock El stock disponible del producto.
  * @property tipo El tipo de producto.
+ * @property image El nombre de la imagen del producto.
  * @property createdAt La fecha y hora de creación del producto.
  * @property updatedAt La fecha y hora de la última actualización del producto.
  * @property isDeleted Indica si el producto ha sido eliminado.
@@ -20,6 +21,7 @@ data class Producto(
     var precio: Double,
     var stock: Int,
     var tipo: TipoProducto?,
+    var image: String,
     var createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now(),
     var isDeleted: Boolean = false
