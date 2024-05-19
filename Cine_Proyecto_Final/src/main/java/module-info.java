@@ -3,10 +3,9 @@ module org.example.cine_proyecto_final {
     requires javafx.fxml;
     requires kotlin.stdlib;
     requires kotlin.result.jvm;
-    requires kotlinx.serialization.core;
     requires logging.jvm;
     requires sqlite.driver;
-    requires runtime.jvm;
+    requires kotlinx.serialization.core;
 
 
     opens org.example.cine_proyecto_final to javafx.fxml;
