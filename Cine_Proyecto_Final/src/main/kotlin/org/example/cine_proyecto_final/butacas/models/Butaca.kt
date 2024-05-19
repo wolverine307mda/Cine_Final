@@ -1,5 +1,6 @@
 package org.example.cine_proyecto_final.butacas.models
 
+import org.example.cine_proyecto_final.ventas.models.Venta
 import java.time.LocalDateTime
 
 /**
@@ -8,8 +9,7 @@ import java.time.LocalDateTime
  * @property id El identificador único de la butaca.
  * @property tipo El tipo de la butaca, puede ser "NORMAL" o "VIP".
  * @property estado El estado actual de la butaca, puede ser "LIBRE", "OCUPADA" o "FUERA_DE_SERVICIO".
- * @property ocupamiento El estado de ocupación de la butaca.
- * @property idVenta El identificador de la venta asociada a la butaca.
+ * @property venta La venta asociada a la butaca si tiene alguna venta asociada con ella.
  * @property precio El precio asociado a la butaca.
  * @property createdAt La fecha y hora de creación de la butaca, se establece en el momento de la creación por defecto.
  * @property updatedAt La fecha y hora de la última actualización de la butaca, se establece en el momento de la creación por defecto.
@@ -18,34 +18,25 @@ import java.time.LocalDateTime
 data class Butaca(
     var id: String,
     var estado: org.example.cine_proyecto_final.butacas.models.Estado?,
-    var ocupamiento: String,
     var tipo: org.example.cine_proyecto_final.butacas.models.Tipo?,
-    var idVenta: String?, // Agregamos la propiedad idVenta
-    var precio: Int, // Agregamos la propiedad precio
+    var venta: Venta?, // Agregamos la propiedad idVenta
+    var precio: Double, // Agregamos la propiedad precio
     var createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now(),
     var isDeleted: Boolean = false
-){
+){}
 
+/**
+ * Enumeración que representa los tipos de butacas que puede haber
+ *
+*/
 enum class Tipo {
     NORMAL, VIP
 }
 
+/**
+ * Enumeración que representa el estado en el que se puede encontrar la butaca
+ */
 enum class Estado {
     LIBRE, OCUPADA, FUERA_DE_SERVICIO
-}
-
-
-}
-
-enum class Estado{
-    ACTIVA, EN_MANTENIMIENTO, FUERA_DE_SERVICIO
-}
-
-enum class Ocupamiento{
-    LIBRE, RESERVADA, OCUPADA
-}
-
-enum class Tipo(val precio : Int){
-    VIP(8), NORMAL(5)
 }

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="888.0" fitWidth="1406.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../images/admin_background.jpg" />
+                      </image>
+                  </ImageView>
+                    <AnchorPane layoutY="-8.0" prefHeight="819.0" prefWidth="1321.0">
+                        <children>
+                            <Text fill="#e2e1e1" layoutX="442.0" layoutY="134.0" text="Bienvenido/a">
+                                <font>
+                                    <Font size="69.0" />
+                                </font>
+                            </Text>
+                            <GridPane hgap="20" layoutX="226.0" layoutY="172.0" prefHeight="520.0" prefWidth="869.0" vgap="20">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="33" />
+                                    <ColumnConstraints percentWidth="33" />
+                                    <ColumnConstraints percentWidth="33" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints maxHeight="291.9999694824219" minHeight="126.0" percentHeight="50.0" prefHeight="202.0" />
+                                    <RowConstraints maxHeight="274.0" minHeight="108.00003051757812" percentHeight="50.0" prefHeight="198.0" />
+                                </rowConstraints>
+                                <children>
+                                    <Button maxHeight="285.0" maxWidth="335.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="335.0" style="-fx-background-radius: 20px; -fx-background-color: rgb(123, 35, 36, 0.5);" text="">
+                                        <graphic>
+                                            <AnchorPane prefHeight="146.0" prefWidth="184.0">
+                                                <children>
+                                                    <ImageView fitHeight="163.0" fitWidth="176.0" layoutX="45.0" layoutY="19.0">
+                                                        <image>
+                                                            <Image url="@../icons/productos_icon.png" />
+                                                        </image>
+                                                    </ImageView>
+                                                    <Text fill="#efecec" layoutX="65.0" layoutY="221.0" text="Productos">
+                                             <font>
+                                                <Font size="27.0" />
+                                             </font>
+                                          </Text>
+                                                </children>
+                                            </AnchorPane>
+                                        </graphic>
+                                    </Button>
+                              <Button maxHeight="285.0" maxWidth="335.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="335.0" style="-fx-background-radius: 20px; -fx-background-color: rgb(123, 35, 36, 0.5);" text="" GridPane.columnIndex="1">
+                                 <graphic>
+                                    <AnchorPane prefHeight="146.0" prefWidth="184.0">
+                                       <children>
+                                           <ImageView fitHeight="179.0" fitWidth="176.0" layoutX="45.0" layoutY="22.0">
+                                               <image>
+                                                   <Image url="@../icons/money_icon.png" />
+                                               </image>
+                                           </ImageView>
+                                          <Text fill="#efecec" layoutX="34.0" layoutY="220.0" text="Ver recaudación">
+                                             <font>
+                                                <Font size="27.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                              <Button maxHeight="285.0" maxWidth="335.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="335.0" style="-fx-background-radius: 20px; -fx-background-color: rgb(123, 35, 36, 0.5);" text="" GridPane.columnIndex="2">
+                                 <graphic>
+                                    <AnchorPane prefHeight="146.0" prefWidth="184.0">
+                                       <children>
+                                           <ImageView fitHeight="147.0" fitWidth="176.0" layoutX="45.0" layoutY="22.0">
+                                               <image>
+                                                   <Image url="@../icons/seat_icon.png" />
+                                               </image>
+                                           </ImageView>
+                                          <Text fill="#efecec" layoutX="80.0" layoutY="220.0" text="Butacas">
+                                             <font>
+                                                <Font size="27.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                              <Button maxHeight="285.0" maxWidth="335.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="335.0" style="-fx-background-radius: 20px; -fx-background-color: rgb(123, 35, 36, 0.5);" text="" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <AnchorPane prefHeight="146.0" prefWidth="184.0">
+                                       <children>
+                                           <ImageView fitHeight="166.0" fitWidth="176.0" layoutX="45.0" layoutY="22.0">
+                                               <image>
+                                                   <Image url="@../icons/export_icon.png" />
+                                               </image>
+                                           </ImageView>
+                                          <Text fill="#efecec" layoutX="36.0" layoutY="219.0" text="Exportar estado">
+                                             <font>
+                                                <Font size="27.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                              <Button maxHeight="285.0" maxWidth="335.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="335.0" style="-fx-background-radius: 20px; -fx-background-color: rgb(123, 35, 36, 0.5);" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <AnchorPane prefHeight="146.0" prefWidth="184.0">
+                                       <children>
+                                           <ImageView fitHeight="174.0" fitWidth="176.0" layoutX="31.0" layoutY="13.0">
+                                               <image>
+                                                   <Image url="@../icons/restore_icon.png" />
+                                               </image>
+                                           </ImageView>
+                                          <Text fill="#efecec" layoutX="69.0" layoutY="217.0" text="Restaurar">
+                                             <font>
+                                                <Font size="27.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                              <Button maxHeight="285.0" maxWidth="335.0" mnemonicParsing="false" prefHeight="285.0" prefWidth="335.0" style="-fx-background-radius: 20px; -fx-background-color: rgb(123, 35, 36, 0.5);" text="" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <AnchorPane prefHeight="146.0" prefWidth="184.0">
+                                       <children>
+                                           <ImageView fitHeight="162.0" fitWidth="162.0" layoutX="45.0" layoutY="22.0">
+                                               <image>
+                                                   <Image url="@../icons/exit_icon.png" />
+                                               </image>
+                                           </ImageView>
+                                          <Text fill="#efecec" layoutX="100.0" layoutY="220.0" text="Salir">
+                                             <font>
+                                                <Font size="27.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                 </graphic>
+                              </Button>
+                                </children>
+                            </GridPane>
+                        </children>
+                    </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </StackPane>
+    </children>
+</HBox>

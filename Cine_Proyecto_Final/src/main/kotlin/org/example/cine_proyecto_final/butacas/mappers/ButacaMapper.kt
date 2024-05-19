@@ -1,27 +1,26 @@
 package org.example.cine_proyecto_final.butacas.mappers
 
 import database.ButacaEntity
+import org.example.cine_proyecto_final.butacas.dto.ButacaDto
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.models.Estado
-import org.example.cine_proyecto_final.butacas.models.Ocupamiento
 import org.example.cine_proyecto_final.butacas.models.Tipo
+import org.example.cine_proyecto_final.ventas.models.Venta
 import java.time.LocalDateTime
 
 /**
  * Convierte una entidad de butaca a un objeto Butaca.
  * @return Un objeto Butaca.
  */
-fun ButacaEntity.toButaca(): Butaca {
+fun ButacaEntity.toButaca(venta: Venta): Butaca {
     return Butaca(
         id = this.id,
         estado = elegirEstado(this.estado),
-        ocupamiento = elegirOcupamiento(this.ocupamiento).toString(),
         tipo = elegirTipo(this.tipo),
         createdAt = LocalDateTime.parse(this.createdAt),
         updatedAt = LocalDateTime.parse(this.updatedAt),
-        idVenta = this.idVenta,
-        precio = this.precio,
-        isDeleted = this.isDeleted.toInt() == 1
+        venta = venta,
+        precio = this.precio.toDouble()
     )
 }
 
@@ -34,9 +33,8 @@ fun Butaca.toButacaEntity(): ButacaEntity {
         id = this.id,
         tipo = this.tipo.toString(),
         estado = this.estado.toString(),
-        ocupamiento = this.ocupamiento,
-        id_venta = this.idVenta,
-        precio = this.precio,
+        id_venta = this.venta?.id,
+        precio = this.precio.toLong(),
         createdAt = this.createdAt.toString(),
         updatedAt = this.updatedAt.toString(),
         isDeleted = if (this.isDeleted) 1 else 0
@@ -58,21 +56,6 @@ fun elegirTipo(s: String): Tipo? {
 }
 
 /**
- * Convierte una cadena que representa el estado de ocupación.
- *
- * @param s La cadena que representa el estado de ocupación.
- * @return El estado de ocupación correspondiente, o null.
- */
-fun elegirOcupamiento(s: String): Ocupamiento? {
-    return when (s) {
-        "OCUPADA" -> Ocupamiento.OCUPADA
-        "RESERVADA" -> Ocupamiento.RESERVADA
-        "LIBRE" -> Ocupamiento.LIBRE
-        else -> null
-    }
-}
-
-/**
  * Convierte una cadena que representa el estado de una butaca.
  *
  * @param s La cadena que representa el estado de la butaca.
@@ -80,9 +63,9 @@ fun elegirOcupamiento(s: String): Ocupamiento? {
  */
 fun elegirEstado(s: String): Estado? {
     return when (s) {
-        "ACTIVA" -> Estado.ACTIVA
-        "FUERA_SERVICIO" -> Estado.FUERA_SERVICIO
-        "EN_MANTENIMIENTO" -> Estado.EN_MANTENIMIENTO
+        "LIBRE" -> Estado.LIBRE
+        "OCUPADA" -> Estado.OCUPADA
+        "FUERA_DE_SERVICIO" -> Estado.FUERA_DE_SERVICIO
         else -> null
     }
 }
@@ -92,13 +75,14 @@ fun elegirEstado(s: String): Estado? {
  *
  * @return Un objeto DTO de butaca.
  */
-/*fun Butaca.toButacaDto(): ButacaDto {
+fun Butaca.toButacaDto() : ButacaDto {
     return ButacaDto(
         id = this.id,
         tipo = this.tipo!!.name,
+        idVenta = this.venta?.id,
         estado = this.estado!!.name,
-        ocupamiento = this.ocupamiento,
-        createdAt = "${this.createdAt.dayOfMonth}/${this.createdAt.monthValue}/${this.createdAt.year} ${this.createdAt.hour}:${this.createdAt.minute}:${this.createdAt.second}",
-        updatedAt = "${this.updatedAt.dayOfMonth}/${this.updatedAt.monthValue}/${this.updatedAt.year} ${this.updatedAt.hour}:${this.updatedAt.minute}:${this.updatedAt.second}"
+        precio = this.precio,
+        createdAt = this.createdAt.toString(),
+        updatedAt = this.updatedAt.toString(),
     )
-}*/
+}

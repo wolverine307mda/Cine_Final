@@ -18,10 +18,4 @@ class ButacaServiceImpl: ButacaService{
     override fun findAllByDate(date : LocalDateTime) : Result<List<Butaca>, ButacaError>{
         TODO("Not yet implemented")
     }
-    override fun exportAllToFile(date : LocalDateTime) : Result<Unit, ButacaError>{
-        TODO("Not yet implemented")
-    }
-    override fun cargarButacas() : Result<Unit, ButacaError>{
-        TODO("Not yet implemented")
-    }
 }

@@ -1,4 +1,4 @@
-package org.example.cine_proyecto_final.cuentas.errors
+package cuenta.errors
 
 /**
  * Representa un error personalizado para el módulo de Cuenta.

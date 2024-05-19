@@ -1,24 +1,36 @@
 package org.example.cine_proyecto_final.cuentas.repository
 
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
+import org.example.cine_proyecto_final.database.SqlDelightManager
 
-class CuentaRepositoryImpl :CuentaRepository {
-    override fun findAll(): List<Cuenta> {
-        TODO("Not yet implemented")
+class CuentaRepositoryImpl(
+    val dataBaseManager: SqlDelightManager
+) : CuentaRepository {
+
+    /**
+     * Recupera todas las cuentas de usuario almacenadas en la base de datos.
+     * @return una lista de todas las cuentas de usuario, o una lista vacía si no se encontraron cuentas o si ocurrió un error.
+     */
+
+    /**
+     * Busca una cuenta de usuario por su identificador único.
+     * @param id El identificador único de la cuenta de usuario a buscar.
+     * @return la cuenta de usuario encontrada, o null si no se encontró ninguna cuenta con el identificador proporcionado o si ocurrió un error.
+     */
+    override fun findById(id: String): Cuenta? {
+        TODO()
     }
-    override fun save(cuenta: Cuenta): Cuenta {
-        TODO("Not yet implemented")
+
+    /**
+     * Guarda una nueva cuenta de usuario en la base de datos.
+     * @param cuenta La cuenta de usuario a guardar.
+     * @return la cuenta de usuario guardada, o null si la cuenta ya existe en la base de datos o si ocurrió un error.
+     */
+    override fun save(cuenta: Cuenta): Cuenta? {
+        TODO()
     }
 
     override fun update(email: String, cuenta: Cuenta): Cuenta? {
-        TODO("Not yet implemented")
-    }
-
-    override fun findByEmail(email: String): Cuenta? {
-        TODO("Not yet implemented")
-    }
-
-    override fun delete(email: String): Cuenta?{
         TODO("Not yet implemented")
     }
 }

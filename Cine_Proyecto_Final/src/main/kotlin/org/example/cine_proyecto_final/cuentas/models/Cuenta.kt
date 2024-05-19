@@ -12,7 +12,6 @@ import java.time.LocalDateTime
  * @property tipo El tipo de cuenta (ADMINISTRADOR, USUARIO, etc.).
  * @property createdAt La fecha y hora de creación de la cuenta, por defecto es el momento actual.
  * @property updatedAt La fecha y hora de la última actualización de la cuenta, por defecto es el momento actual.
- * @property isDeleted Indica si la cuenta ha sido eliminada (true) o no (false), por defecto es falso.
  */
 data class Cuenta (
     var email: String,
@@ -20,8 +19,11 @@ data class Cuenta (
     var apellido: String,
     var imagen: String,
     var password: String,
-    var tipo: String,
+    var tipo: TipoCuenta?,
     var createdAt: LocalDateTime = LocalDateTime.now(),
-    var updatedAt: LocalDateTime = LocalDateTime.now(),
-    var isDeleted: Boolean = false
+    var updatedAt: LocalDateTime = LocalDateTime.now()
 )
+
+enum class TipoCuenta {
+    ADMINISTRADOR, USUARIO
+}
