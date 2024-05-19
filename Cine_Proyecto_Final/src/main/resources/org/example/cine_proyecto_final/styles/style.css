@@ -1,0 +1,56 @@
+/* Archivo: style.css */
+
+/* Estilo para el AnchorPane */
+.anchorpane {
+    -fx-background-color: #100E12; /* Color de fondo del AnchorPane */
+}
+
+/* Estilo para TextField y PasswordField */
+.text-field, .password-field {
+    -fx-background-color: #2a2e37;
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-border-color: #5f97ff;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10 5 10;
+    -fx-font-size: 14px;
+}
+
+/* Efecto al pasar el ratón sobre el TextField y PasswordField */
+.text-field:hover, .password-field:hover {
+    -fx-background-color: #343a46; /* Color de fondo al pasar el ratón */
+}
+
+/* Efecto al hacer foco en el TextField y PasswordField */
+.text-field:focused, .password-field:focused {
+    -fx-border-color: red/*#a6c0ff*/;
+    -fx-background-color: #1e222a;
+}
+
+/* Estilo para los botones */
+.button {
+    -fx-background-color: #531516; /* Color de fondo del botón */
+    -fx-background-radius: 20; /* Radio del borde redondeado */
+    -fx-border-radius: 20; /* Borde redondeado */
+    -fx-text-fill: rgb(196, 196, 196); /* Color del texto */
+    -fx-font-size: 25px; /* Tamaño de la fuente */
+    -fx-font-family: "Arial Black"; /* Fuente Arial Black */
+    -fx-cursor: hand; /* Cambia el cursor al pasar sobre el botón */
+}
+
+.button:hover {
+    -fx-background-color: #661C1D; /* Color de fondo al pasar el ratón */
+    -fx-text-fill: white; /* Color del texto al pasar el ratón */
+}
+
+.button:pressed {
+    -fx-background-color: #3a6ab8;
+}
+
+/* Estilo para las imágenes */
+.image-view {
+    -fx-background-radius: 20; /* Radio del borde redondeado */
+    -fx-border-radius: 20; /* Borde redondeado */
+}
