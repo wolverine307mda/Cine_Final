@@ -31,7 +31,7 @@
       </ImageView>
       <ImageView fitHeight="276.0" fitWidth="783.0" layoutX="252.0" layoutY="90.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Downloads/Captura_de_pantalla_2024-05-18_130633-removebg-preview.png" />
+            <Image url="@../icons/icono_pantalla.png" />
          </image>
       </ImageView>
       <GridPane layoutX="322.0" layoutY="314.0" prefHeight="390.0" prefWidth="618.0">

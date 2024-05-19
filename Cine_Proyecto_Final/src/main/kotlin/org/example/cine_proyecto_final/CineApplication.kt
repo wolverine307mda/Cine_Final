@@ -18,7 +18,7 @@ class CineApplication : Application() {
         initializeApp()
 
         // Cargar la escena de JavaFX
-        val fxmlLoader = FXMLLoader(CineApplication::class.java.getResource("general_bienvenido_screen.fxml"))
+        val fxmlLoader = FXMLLoader(CineApplication::class.java.getResource("/org/example/cine_proyecto_final/general_bienvenido_screen.fxml"))
         val scene = Scene(fxmlLoader.load(), 320.0, 240.0)
 
         // Obtener el controlador y pasar el cliente de base de datos

@@ -35,7 +35,7 @@
             <Image url="@../icons/logo_nombre_slogan_blanco.png" />
          </image>
       </ImageView>
-      <Button layoutX="913.0" layoutY="31.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="344.0" style="-fx-background-color: trasparent;" text="Iniciar Sesión   " />
+      <Button fx:id="iniciar_sesion_button" layoutX="913.0" layoutY="31.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="344.0" style="-fx-background-color: trasparent;" text="Iniciar Sesión   " />
       <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="1180.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/user_white.png" />

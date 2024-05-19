@@ -6,6 +6,7 @@ module org.example.cine_proyecto_final {
     requires logging.jvm;
     requires sqlite.driver;
     requires kotlinx.serialization.core;
+    requires runtime.jvm;
 
 
     opens org.example.cine_proyecto_final to javafx.fxml;
