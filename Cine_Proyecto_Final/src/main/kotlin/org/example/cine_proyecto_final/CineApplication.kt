@@ -19,7 +19,23 @@ class CineApplication : Application() {
             // Initialize application configuration and database client
             initializeApp()
 
-
+            // Load JavaFX scene
+            val fxmlLoader = FXMLLoader(javaClass.getResource("views/general_bienvenido_screen.fxml"))
+            val scene = Scene(fxmlLoader.load(), 1280.0, 800.0)
+            stage.isResizable = false
+            logger.info { "b" }
+            // Get the controller and pass the database client
+            val controller = fxmlLoader.getController<GeneralBienvenidoController>()
+            dbClient = SqlDeLightClient(AppConfig())
+            controller.dbClient = dbClient
+            stage.title = "Hello!"
+            stage.scene = scene
+            stage.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Handle exception appropriately
+        }
+    }
 
     private fun initializeApp() {
         // Initialize application configuration
