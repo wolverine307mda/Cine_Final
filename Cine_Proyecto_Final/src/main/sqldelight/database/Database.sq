@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS ButacaEntity (
    precio INTEGER NOT NULL,
    createdAt TEXT NOT NULL,
    updatedAt TEXT NOT NULL,
-   isDeleted INTEGER NOT NULL,
    PRIMARY KEY(id, updatedAt),
    FOREIGN KEY (id_venta) REFERENCES VentaEntity(id)
 );
@@ -139,13 +138,7 @@ LIMIT 1;
 -- Actualizar butaca
 updateButaca:
 UPDATE ButacaEntity
-SET estado = ?, updatedAt = ?, tipo = ?, isDeleted = ?
-WHERE id = ?;
-
--- Eliminar (marcar como eliminada) una butaca
-deleteButaca:
-UPDATE ButacaEntity
-SET isDeleted = 1
+SET estado = ?, updatedAt = ?, tipo = ?
 WHERE id = ?;
 
 -- Obtener butacas basadas en fecha
@@ -159,6 +152,24 @@ WHERE (id, updatedAt) IN (
     GROUP BY id
 );
 
+countButacasByVentaId:
+SELECT COUNT(*) FROM ButacaEntity
+WHERE (id, updatedAt) IN (
+    SELECT id, MAX(updatedAt)
+    FROM ButacaEntity
+    GROUP BY id
+)
+AND id_venta = ?;
+
+getButacasByVentaId:
+SELECT * FROM ButacaEntity
+WHERE (id, updatedAt) IN (
+    SELECT id, MAX(updatedAt)
+    FROM ButacaEntity
+    GROUP BY id
+)
+AND id_venta = ?;
+
 -- Contar butacas basadas en fecha
 countButacasBasedOnDate:
 SELECT COUNT(*)
@@ -169,6 +180,11 @@ WHERE (id, updatedAt) IN (
     WHERE updatedAt <= ?
     GROUP BY id
 );
+
+-- Insertar nuevo
+insertButaca:
+INSERT INTO ButacaEntity (id, estado,precio, tipo, createdAt, updatedAt)
+VALUES (?, ?, ?, ?, ?, ?);
 
 -- Insertar nuevo producto
 insertProducto:

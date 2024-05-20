@@ -22,5 +22,4 @@ data class LineaVentaDto(
     var createdAt : String,
     var updatedAt : String,
     var isDeleted : Boolean = false
-) {
-}
+)

@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.stage.Stage
-import org.example.cine_proyecto_final.database.SqlDeLightClient
+import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.database.logger
 import org.example.cine_proyecto_final.viewmodels.GeneralBienvenidoViewModel
 import org.koin.core.component.KoinComponent
@@ -15,7 +15,7 @@ import java.io.IOException
 class GeneralBienvenidoController : KoinComponent {
 
     // Mantener dbClient como lateinit var para inyección manual
-    lateinit var dbClient: SqlDeLightClient
+    lateinit var dbClient: SqlDelightManager
     private val viewModel: GeneralBienvenidoViewModel by inject()
 
     @FXML
