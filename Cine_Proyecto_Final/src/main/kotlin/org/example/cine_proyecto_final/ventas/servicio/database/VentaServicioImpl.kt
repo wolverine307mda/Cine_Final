@@ -1,17 +1,18 @@
 package org.example.cine_proyecto_final.ventas.servicio.database
 
 import com.github.michaelbull.result.*
+import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorage
 import org.example.cine_proyecto_final.ventas.errors.VentaError
 import org.example.cine_proyecto_final.ventas.models.Venta
-import org.example.cine_proyecto_final.ventas.respository.VentaRepository
+import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorio
 import java.time.LocalDateTime
 
 /**
  * Implementación del service de gestión de ventas.
- * @property ventaRepository Repositorio de ventas para interactuar con la base de datos.
+ * @property ventaRepositorio Repositorio de ventas para interactuar con la base de datos.
  */
 class VentaServicioImpl (
-    private var ventaRepository: VentaRepository,
+    private var ventaRepositorio: VentaRepositorio,
 ) : VentaServicio {
 
 
@@ -21,7 +22,7 @@ class VentaServicioImpl (
      * @return [Result] que contiene la venta guardada en caso de éxito, o un [VentaError] en caso de error.
      */
     override fun save(venta: Venta): Result<Venta, VentaError> {
-        ventaRepository.save(venta)?.let {
+        ventaRepositorio.save(venta)?.let {
             return Ok(it)
         }
         return Err(VentaError.VentaStorageError("No se ha podido guardar la venta con id: ${venta.id}"))
@@ -32,7 +33,7 @@ class VentaServicioImpl (
      * @return [Result] que contiene la lista de ventas encontradas en caso de éxito, o un [VentaError] en caso de error.
      */
     override fun findAll(): Result<List<Venta>, VentaError> {
-        return Ok(ventaRepository.findAll().filter { !it.isDeleted })
+        return Ok(ventaRepositorio.findAll().filter { !it.isDeleted })
     }
 
     /**
@@ -41,7 +42,7 @@ class VentaServicioImpl (
      * @return [Result] que contiene la venta encontrada en caso de éxito, o un [VentaError] en caso de error.
      */
     override fun findById(id: String): Result<Venta, VentaError> {
-        ventaRepository.findById(id)?.let {
+        ventaRepositorio.findById(id)?.let {
             return Ok(it)
         }
         return Err(VentaError.VentaStorageError("No existe ninguna venta con el id: $id en la base de datos"))
@@ -53,7 +54,7 @@ class VentaServicioImpl (
      * @return [Result] que contiene la lista de ventas encontradas en caso de éxito, o un [VentaError] en caso de error.
      */
     override fun findAllByDate(date: LocalDateTime): Result<List<Venta>, VentaError> {
-        return Ok(ventaRepository.findAllByDate(date))
+        return Ok(ventaRepositorio.findAllByDate(date))
     }
 
     /**
@@ -62,7 +63,7 @@ class VentaServicioImpl (
      * @return [Result] que contiene la lista de ventas encontradas en caso de éxito, o un [VentaError] en caso de error.
      */
     override fun getAllVentasByDate(date : LocalDateTime): Result<List<Venta>, VentaError> {
-        return Ok(ventaRepository.findAllByDate(date))
+        return Ok(ventaRepositorio.findAllByDate(date))
     }
 
     /**
@@ -71,7 +72,7 @@ class VentaServicioImpl (
      * @return [Result] que contiene la venta eliminada en caso de éxito, o un [VentaError] en caso de error.
      */
     override fun delete(id: String): Result<Venta, VentaError> {
-        ventaRepository.delete(id)?.let {
+        ventaRepositorio.delete(id)?.let {
             return Ok(it)
         }
         return Err(VentaError.VentaStorageError("La venta que está intentando borrar no existe"))
@@ -83,7 +84,7 @@ class VentaServicioImpl (
      * @return [Result] que contiene las ventas de un cliente o un [VentaError] en caso de error.
      */
     override fun findVentasByClienteId(id: String): Result<List<Venta>, VentaError> {
-        return Ok(ventaRepository.findAll().filter { it.cliente.email == id && !it.isDeleted})
+        return Ok(ventaRepositorio.findAll().filter { it.cliente.email == id && !it.isDeleted})
     }
 
 
