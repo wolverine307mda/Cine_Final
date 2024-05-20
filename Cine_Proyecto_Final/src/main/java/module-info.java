@@ -10,6 +10,7 @@ module org.example.cine_proyecto_final {
     requires org.slf4j;
     requires java.sql;
     requires kotlinx.serialization.json;
+    requires koin.core.jvm;
 
 
     opens org.example.cine_proyecto_final to javafx.fxml;

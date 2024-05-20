@@ -23,11 +23,15 @@ class CineApplication : Application() {
             val fxmlLoader = FXMLLoader(javaClass.getResource("views/general_bienvenido_screen.fxml"))
             val scene = Scene(fxmlLoader.load(), 1280.0, 800.0)
             stage.isResizable = false
-            logger.info { "b" }
+
             // Get the controller and pass the database client
             val controller = fxmlLoader.getController<GeneralBienvenidoController>()
+            
             dbClient = SqlDelightManager(AppConfig())
+            
             controller.dbClient = dbClient
+
+            // Set up the stage
             stage.title = "Hello!"
             stage.scene = scene
             stage.show()
@@ -51,4 +55,3 @@ class CineApplication : Application() {
 fun main() {
     Application.launch(CineApplication::class.java)
 }
-

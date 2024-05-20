@@ -1,0 +1,18 @@
+id,nombre,precio,stock,tipo,imagen
+1,Coca-Cola,1.50,100,BEBIDA,coca_cola.jpg
+2,Pepsi,1.25,80,BEBIDA,pepsi.jpg
+3,Sprite,1.75,120,BEBIDA,sprite.jpg
+4,Pizza,8.99,50,COMIDA,pizza.jpg
+5,Hamburguesa,6.49,60,COMIDA,hamburguesa.jpg
+6,Hot Dog,4.99,70,COMIDA,hot_dog.jpg
+7,Cerveza,2.99,90,BEBIDA,cerveza.jpg
+8,Vino,12.99,40,BEBIDA,vino.jpg
+9,Galletas,3.49,110,COMIDA,galletas.jpg
+10,Agua,0.99,150,BEBIDA,agua.jpg
+11,Refresco de Limón,1.75,70,BEBIDA,refresco_limón.jpg
+12,Patatas Fritas,2.49,80,COMIDA,patatas_fritas.jpg
+13,Helado,4.99,60,COMIDA,helado.jpg
+14,Jugo de Naranja,2.25,100,BEBIDA,jugo_naranja.jpg
+15,Pizza Pepperoni,9.99,40,COMIDA,pizza_pepperoni.jpg
+16,Refresco de Manzana,1.75,90,BEBIDA,refresco_manzana.jpg
+17,Palomitas de Maíz,3.99,120,COMIDA,palomitas_maíz.jpg
