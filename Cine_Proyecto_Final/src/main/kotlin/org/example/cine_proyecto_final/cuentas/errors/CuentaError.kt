@@ -11,7 +11,7 @@ package cuenta.errors
  * Cada subclase representa un escenario de error específico dentro del módulo de Cuenta.
  */
 sealed class CuentaError (val message : String) {
-    class CuentaInvalidaError(message: String) : CuentaError(message)
+    class CuentaInvalida(message: String) : CuentaError(message)
     class CuentaStorageError(message: String) : CuentaError(message)
     class CuentaNotFoundError(message: String) : CuentaError(message)
 }

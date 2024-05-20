@@ -4,7 +4,7 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.cine_proyecto_final.database.logger
-import org.example.cine_proyecto_final.productos.mappers.elegirTipoProducto
+import org.example.cine_final.productos.mappers.elegirTipoProducto
 import org.example.productos.errors.ProductoError
 import org.example.cine_final.productos.models.Producto
 import java.io.File
@@ -31,7 +31,7 @@ class ProductoStorageCSVImpl : ProductoStorageCSV {
                             id = UUID.randomUUID().toString(),
                             nombre = producto[0],
                             stock = producto[1].toInt(),
-                            tipo = elegirTipoProducto(producto[2]),
+                            tipo = elegirTipoProducto(producto[2]).toString(),
                             image = producto[3],
                             precio = producto[4].toDouble(),
                             isDeleted = false,
