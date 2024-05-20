@@ -7,6 +7,7 @@ import javafx.stage.Stage
 import org.example.cine_proyecto_final.config.AppConfig
 import org.example.cine_proyecto_final.controllers.GeneralBienvenidoController
 import org.example.cine_proyecto_final.database.SqlDeLightClient
+import org.example.cine_proyecto_final.database.logger
 
 class CineApplication : Application() {
 
@@ -14,35 +15,40 @@ class CineApplication : Application() {
     private lateinit var dbClient: SqlDeLightClient
 
     override fun start(stage: Stage) {
-        // Inicializar la configuración de la aplicación y el cliente de base de datos
-        initializeApp()
+        try {
+            // Initialize application configuration and database client
+            initializeApp()
 
-        // Cargar la escena de JavaFX
-        val fxmlLoader = FXMLLoader(CineApplication::class.java.getResource("/org/example/cine_proyecto_final/general_bienvenido_screen.fxml"))
-        val scene = Scene(fxmlLoader.load(), 320.0, 240.0)
-
-        // Obtener el controlador y pasar el cliente de base de datos
-        val controller = fxmlLoader.getController<GeneralBienvenidoController>()
-        controller.dbClient = dbClient
-
-        stage.title = "Hello!"
-        stage.scene = scene
-        stage.show()
+            // Load JavaFX scene
+            val fxmlLoader = FXMLLoader(javaClass.getResource("views/general_bienvenido_screen.fxml"))
+            val scene = Scene(fxmlLoader.load(), 1280.0, 800.0)
+            stage.isResizable = false
+            logger.info { "b" }
+            // Get the controller and pass the database client
+            val controller = fxmlLoader.getController<GeneralBienvenidoController>()
+            dbClient = SqlDeLightClient(AppConfig())
+            controller.dbClient = dbClient
+            stage.title = "Hello!"
+            stage.scene = scene
+            stage.show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Handle exception appropriately
+        }
     }
 
-
     private fun initializeApp() {
-        // Inicializar configuración de la aplicación
+        // Initialize application configuration
         appConfig = AppConfig()
 
-        // Inicializar cliente de base de datos
+        // Initialize database client
         dbClient = SqlDeLightClient(appConfig)
 
-        // Puedes realizar otras inicializaciones aquí si es necesario
-        // Ejemplo: dbClient.dbQueries.someQuery()
+        // Additional initializations if necessary
     }
 }
 
 fun main() {
     Application.launch(CineApplication::class.java)
 }
+
