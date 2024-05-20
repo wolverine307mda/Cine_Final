@@ -15,7 +15,7 @@ fun ProductoDto.toProducto() : Producto{
         id = this.id,
         nombre = this.nombre,
         precio = this.precio,
-        tipo = elegirTipoProducto(this.tipo).toString(),
+        tipo = elegirTipoProducto(this.tipo),
         stock = this.stock.toInt(),
         image = this.image,
         createdAt = LocalDateTime.parse(this.createdAt),
@@ -28,12 +28,12 @@ fun ProductoDto.toProducto() : Producto{
  * Convierte un objeto productoDto a producto
  * @return El producto convertido a un objeto ProductoDto
  */
-fun Producto.toProductoDto() : ProductoDto {
+fun Producto.toDto() : ProductoDto {
     return ProductoDto(
         id = this.id,
         nombre = this.nombre,
         precio = this.precio,
-        tipo = this.tipo!!.toString(),
+        tipo = this.tipo!!.name,
         stock = this.stock.toInt(),
         image = this.image,
         createdAt = this.createdAt.toString(),
@@ -55,7 +55,7 @@ fun ProductoEntity.toProducto(): Producto {
         id = this.id,
         nombre = this.nombre,
         precio = this.precio,
-        tipo = elegirTipoProducto(this.tipo).toString(),
+        tipo = elegirTipoProducto(this.tipo),
         stock = this.stock.toInt(),
         image = this.imagen,
         createdAt = LocalDateTime.parse(this.createdAt),

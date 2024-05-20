@@ -31,7 +31,7 @@ class ProductoStorageCSVImpl : ProductoStorageCSV {
                             id = UUID.randomUUID().toString(),
                             nombre = producto[0],
                             stock = producto[1].toInt(),
-                            tipo = elegirTipoProducto(producto[2]).toString(),
+                            tipo = elegirTipoProducto(producto[2]),
                             image = producto[3],
                             precio = producto[4].toDouble(),
                             isDeleted = false,

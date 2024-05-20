@@ -2,13 +2,13 @@ package org.example.cine_proyecto_final.ventas.mappers
 
 import database.LineaVentaEntity
 import database.VentaEntity
+import org.example.cine_final.productos.mappers.toDto
+import org.example.cine_final.productos.mappers.toProducto
 import org.example.cine_final.productos.models.Producto
 import org.example.cine_proyecto_final.butacas.mappers.toButaca
 import org.example.cine_proyecto_final.butacas.mappers.toDto
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
-import org.example.cine_proyecto_final.productos.mappers.toDto
-import org.example.cine_proyecto_final.productos.mappers.toProducto
 import org.example.cine_proyecto_final.ventas.dto.LineaVentaDto
 import org.example.cine_proyecto_final.ventas.dto.VentaDto
 import org.example.cine_proyecto_final.ventas.models.LineaVenta

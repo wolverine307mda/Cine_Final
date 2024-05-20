@@ -4,8 +4,6 @@ import org.example.cine_proyecto_final.butacas.mappers.toButaca
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.database.logger
-import org.example.cine_proyecto_final.ventas.models.Venta
-import org.example.cine_proyecto_final.ventas.respository.VentaRepository
 import java.time.LocalDateTime
 
 class ButacaRepositoryImpl (
