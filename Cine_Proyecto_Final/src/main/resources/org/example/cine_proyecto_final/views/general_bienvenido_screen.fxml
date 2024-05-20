@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.GeneralBienvenidoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.GeneralBienvenidoController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -35,11 +33,13 @@
             <Image url="@../icons/logo_nombre_slogan_blanco.png" />
          </image>
       </ImageView>
-      <Button fx:id="iniciar_sesion_button" layoutX="913.0" layoutY="31.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="344.0" style="-fx-background-color: trasparent;" text="Iniciar Sesión   " />
-      <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="1180.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../icons/user_white.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="iniciar_sesion_button" layoutX="1044.0" layoutY="44.0" mnemonicParsing="false" opacity="0.73" prefHeight="66.0" prefWidth="213.0" style="-fx-background-color: trasparent; -fx-border-color: white;" text="  Iniciar Sesión   ">
+         <graphic>
+            <ImageView fitHeight="41.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/user_white.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>

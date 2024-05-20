@@ -8,6 +8,7 @@ module org.example.cine_proyecto_final {
     requires kotlinx.serialization.core;
     requires runtime.jvm;
     requires org.slf4j;
+    requires koin.core.jvm;
 
 
     opens org.example.cine_proyecto_final to javafx.fxml;
