@@ -4,16 +4,16 @@ import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import database.DatabaseQueries
 import org.cine.database.AppDatabase
 import org.example.cine_final.config.Config
+import org.example.cine_proyecto_final.config.AppConfig
 import org.lighthousegames.logging.logging
 
 val logger = logging()
 
 class SqlDelightManager(
-    private val config : Config
+    private val config : AppConfig
 ) {
     private val databaseUrl: String = config.databaseUrl
-    private val databaseInitData: Boolean = config.databaseInitData
-    private val databaseInMemory: Boolean = config.databaseInMemory
+    private val databaseInitData: Boolean = config.databaseInit
     val databaseQueries: DatabaseQueries = initQueries()
 
     init {
@@ -29,13 +29,8 @@ class SqlDelightManager(
      */
     private fun initQueries(): DatabaseQueries {
 
-        return if (databaseInMemory) {
-            logger.debug { "SqlDeLightClient - InMemory" }
-            JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
-        } else {
-            logger.debug { "SqlDeLightClient - File: ${databaseUrl}" }
-            JdbcSqliteDriver(databaseUrl)
-        }.let { driver ->
+        logger.debug { "SqlDeLightClient - File: ${databaseUrl}" }
+        return JdbcSqliteDriver(databaseUrl).let { driver ->
             // Creamos la base de datos
             logger.debug { "Creando Tablas (si es necesario)" }
             AppDatabase.Schema.create(driver)

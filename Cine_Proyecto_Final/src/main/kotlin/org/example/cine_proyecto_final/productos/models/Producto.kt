@@ -20,7 +20,7 @@ data class Producto(
     var nombre: String,
     var precio: Double,
     var stock: Int,
-    var tipo: String,
+    var tipo: TipoProducto?,
     var image: String,
     var createdAt: LocalDateTime = LocalDateTime.now(),
     var updatedAt: LocalDateTime = LocalDateTime.now(),
