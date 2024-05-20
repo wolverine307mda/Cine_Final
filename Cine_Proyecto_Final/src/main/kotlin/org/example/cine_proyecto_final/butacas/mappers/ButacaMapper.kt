@@ -12,14 +12,13 @@ import java.time.LocalDateTime
  * Convierte una entidad de butaca a un objeto Butaca.
  * @return Un objeto Butaca.
  */
-fun ButacaEntity.toButaca(venta: Venta): Butaca {
+fun ButacaEntity.toButaca(): Butaca {
     return Butaca(
         id = this.id,
         estado = elegirEstado(this.estado),
         tipo = elegirTipo(this.tipo),
         createdAt = LocalDateTime.parse(this.createdAt),
         updatedAt = LocalDateTime.parse(this.updatedAt),
-        venta = venta,
         precio = this.precio.toDouble()
     )
 }
@@ -28,16 +27,15 @@ fun ButacaEntity.toButaca(venta: Venta): Butaca {
  * Convierte un objeto Butaca a una entidad de butaca.
  * @return Una entidad ButacaEntity.
  */
-fun Butaca.toButacaEntity(): ButacaEntity {
+fun Butaca.toButacaEntity(venta : Venta?): ButacaEntity {
     return ButacaEntity(
         id = this.id,
         tipo = this.tipo.toString(),
         estado = this.estado.toString(),
-        id_venta = this.venta?.id,
+        id_venta = venta?.id,
         precio = this.precio.toLong(),
         createdAt = this.createdAt.toString(),
-        updatedAt = this.updatedAt.toString(),
-        isDeleted = if (this.isDeleted) 1 else 0
+        updatedAt = this.updatedAt.toString()
     )
 }
 
@@ -75,14 +73,24 @@ fun elegirEstado(s: String): Estado? {
  *
  * @return Un objeto DTO de butaca.
  */
-fun Butaca.toButacaDto() : ButacaDto {
+fun Butaca.toDto() : ButacaDto {
     return ButacaDto(
         id = this.id,
         tipo = this.tipo!!.name,
-        idVenta = this.venta?.id,
         estado = this.estado!!.name,
         precio = this.precio,
         createdAt = this.createdAt.toString(),
         updatedAt = this.updatedAt.toString(),
+    )
+}
+
+fun ButacaDto.toButaca(): Butaca{
+    return Butaca(
+        id = this.id,
+        tipo = elegirTipo(this.tipo),
+        estado = elegirEstado(this.estado),
+        createdAt = LocalDateTime.parse(this.createdAt),
+        updatedAt = LocalDateTime.parse(this.updatedAt),
+        precio = this.precio
     )
 }

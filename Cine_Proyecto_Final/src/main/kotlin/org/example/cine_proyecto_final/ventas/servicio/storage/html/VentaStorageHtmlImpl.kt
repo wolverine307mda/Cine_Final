@@ -75,7 +75,6 @@ class VentaStorageHtmlImpl : VentaStorageHtml {
   </body>
 </html>
 """
-            val date = venta.updatedAt
             file.writeText(output)
             return Ok(Unit)
         }catch (e : Exception){
@@ -84,6 +83,11 @@ class VentaStorageHtmlImpl : VentaStorageHtml {
         }
     }
 
+    /**
+     * Calcula la cantidad de dinero que vale la compra
+     * @param venta la venta que estamos guardando
+     * @return el precio transformado en string para poder meterlo en el HTML
+     */
     private fun getPrice(venta: Venta): String {
         var price = 0.0
         venta.lineasVenta.forEach {
@@ -95,6 +99,11 @@ class VentaStorageHtmlImpl : VentaStorageHtml {
         return price.toString()
     }
 
+    /**
+     * Crea una string con elementos li para ponerlos en el html como una String
+     * @param venta la venta que estamos guardando
+     * @return una String que contiene un elemento li para cada elemento
+     */
     private fun getProductList(venta: Venta) : String{
         var output = ""
         venta.lineasVenta.forEach {
@@ -104,6 +113,11 @@ class VentaStorageHtmlImpl : VentaStorageHtml {
         else return output
     }
 
+    /**
+     * Crea una string con elementos li para ponerlos en el html como una String
+     * @param butacas las butacas que forman parte de esta venta
+     * @return una String que contiene un elemento li para cada elemento
+     */
     private fun getButacaList(butacas : List<Butaca>) : String{
         var output = ""
         butacas.forEach {

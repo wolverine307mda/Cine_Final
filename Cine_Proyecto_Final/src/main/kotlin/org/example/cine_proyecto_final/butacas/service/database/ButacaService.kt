@@ -1,4 +1,4 @@
-package org.example.cine_proyecto_final.butacas.service
+package org.example.cine_proyecto_final.butacas.service.database
 
 import com.github.michaelbull.result.Result
 import org.example.cine_proyecto_final.butacas.errors.ButacaError

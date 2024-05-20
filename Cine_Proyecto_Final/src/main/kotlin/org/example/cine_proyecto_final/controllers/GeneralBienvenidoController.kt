@@ -1,10 +1,10 @@
 package org.example.cine_proyecto_final.controllers
 
-import org.example.cine_proyecto_final.database.SqlDeLightClient
+import org.example.cine_proyecto_final.database.SqlDelightManager
 
 
 class GeneralBienvenidoController {
-    lateinit var dbClient: SqlDeLightClient
+    lateinit var dbClient: SqlDelightManager
     /*@FXML
     private val continuar_button: Button? = null
 

@@ -26,7 +26,7 @@ fun CuentaDTO.toCuenta() : Cuenta {
  * Convierte un objeto [Cuenta] en un objeto [CuentaDTO].
  * @return el objeto [CuentaDTO] resultante.
  */
-fun Cuenta.toCuentaDto() : CuentaDTO {
+fun Cuenta.toDto() : CuentaDTO {
     return CuentaDTO(
         email = this.email,
         createdAt = this.toString(),

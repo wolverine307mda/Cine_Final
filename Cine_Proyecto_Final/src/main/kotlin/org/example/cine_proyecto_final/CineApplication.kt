@@ -6,13 +6,13 @@ import javafx.scene.Scene
 import javafx.stage.Stage
 import org.example.cine_proyecto_final.config.AppConfig
 import org.example.cine_proyecto_final.controllers.GeneralBienvenidoController
-import org.example.cine_proyecto_final.database.SqlDeLightClient
+import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.database.logger
 
 class CineApplication : Application() {
 
     private lateinit var appConfig: AppConfig
-    private lateinit var dbClient: SqlDeLightClient
+    private lateinit var dbClient: SqlDelightManager
 
     override fun start(stage: Stage) {
         try {
@@ -26,7 +26,7 @@ class CineApplication : Application() {
             logger.info { "b" }
             // Get the controller and pass the database client
             val controller = fxmlLoader.getController<GeneralBienvenidoController>()
-            dbClient = SqlDeLightClient(AppConfig())
+            dbClient = SqlDelightManager(AppConfig())
             controller.dbClient = dbClient
             stage.title = "Hello!"
             stage.scene = scene
@@ -42,7 +42,7 @@ class CineApplication : Application() {
         appConfig = AppConfig()
 
         // Initialize database client
-        dbClient = SqlDeLightClient(appConfig)
+        dbClient = SqlDelightManager(appConfig)
 
         // Additional initializations if necessary
     }
