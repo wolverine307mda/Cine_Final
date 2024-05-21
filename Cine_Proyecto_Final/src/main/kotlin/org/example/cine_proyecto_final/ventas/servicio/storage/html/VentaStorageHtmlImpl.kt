@@ -8,18 +8,11 @@ import org.example.cine_proyecto_final.database.logger
 import org.example.cine_proyecto_final.ventas.errors.VentaError
 import org.example.cine_proyecto_final.ventas.models.Venta
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Paths
 
 /**
  * Implementación del almacenamiento de ventas desde y hacia archivos HTML.
  */
 class VentaStorageHtmlImpl : VentaStorageHtml {
-
-    init {
-        Files.createDirectories(Paths.get("data","ventas"))
-    }
-
     /**
      * Carga productos desde un archivo CSV.
      * @param venta la venta que quieres guardar.
