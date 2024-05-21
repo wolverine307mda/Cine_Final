@@ -26,7 +26,7 @@ class ProductoServicioImpl(
      */
     override fun save(producto: Producto) : Result<Producto, ProductoError> {
         logger.debug { "Guardando el producto con id: ${producto.id}" }
-        productoValidador.validate(producto) //Para esegurarse que es un producto válido
+        productoValidador.validate(producto) //Para asegurarse que es un producto válido
             .onSuccess {
                 productosRepositorio.save(producto)?.let {
                     return Ok(producto)
