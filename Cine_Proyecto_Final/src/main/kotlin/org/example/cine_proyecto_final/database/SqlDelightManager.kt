@@ -6,7 +6,7 @@ import org.cine.database.AppDatabase
 import org.example.cine_proyecto_final.config.AppConfig
 import org.lighthousegames.logging.logging
 
-val logger = logging()
+private val logger = logging()
 
 class SqlDelightManager(
     private val config : AppConfig

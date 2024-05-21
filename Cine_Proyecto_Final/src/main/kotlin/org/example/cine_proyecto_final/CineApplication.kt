@@ -7,7 +7,9 @@ import javafx.stage.Stage
 import org.example.cine_proyecto_final.config.AppConfig
 import org.example.cine_proyecto_final.controllers.GeneralBienvenidoController
 import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.example.cine_proyecto_final.database.logger
+import org.lighthousegames.logging.logging
+
+private val logger = logging()
 
 class CineApplication : Application() {
 

@@ -2,7 +2,6 @@ package org.example.cine_proyecto_final.ventas.respositorio
 
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepository
 import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.example.cine_proyecto_final.database.logger
 import org.example.cuenta.mappers.toLong
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
@@ -10,8 +9,10 @@ import org.example.cine_proyecto_final.ventas.mappers.toLineaVenta
 import org.example.cine_proyecto_final.ventas.mappers.toVenta
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.cine_proyecto_final.ventas.models.Venta
+import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
 
+private val logger = logging()
 /**
  * Implementación del repositorio de ventas que interactúa con la base de datos.
  * @property sqlDelightManager Gestor de SqlDelight para acceder a la base de datos.

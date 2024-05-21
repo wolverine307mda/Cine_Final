@@ -5,13 +5,15 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.example.cine_proyecto_final.database.logger
 import org.example.cine_proyecto_final.ventas.dto.VentaDto
 import org.example.cine_proyecto_final.ventas.errors.VentaError
 import org.example.cine_proyecto_final.ventas.mappers.toDto
 import org.example.cine_proyecto_final.ventas.mappers.toVenta
 import org.example.cine_proyecto_final.ventas.models.Venta
+import org.lighthousegames.logging.logging
 import java.io.File
+
+private val logger = logging()
 
 class VentaStorageJsonImpl : VentaStorageJson {
     /**

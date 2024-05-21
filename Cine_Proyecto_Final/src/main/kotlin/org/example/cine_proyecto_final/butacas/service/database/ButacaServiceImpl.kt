@@ -6,7 +6,10 @@ import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepository
 import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
 import org.example.cine_proyecto_final.config.AppConfig
+import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
+
+private val logger = logging()
 
 /**
  * Implementación de los servicios relacionados con las butacas.
@@ -28,6 +31,7 @@ class ButacaServiceImpl(
      * o un error de ButacaError si no se encuentran butacas.
      */
     override fun findAll(): Result<List<Butaca>, ButacaError> {
+        logger.debug { "Buscando todas las butacas en la base de datos" }
         val result = butacaRepositorio.findAll()
         if (result.isNotEmpty()) return Ok(result)
         else return Err(ButacaError.ButacaStorageError("No hay ninguna butaca en la base de datos"))
@@ -41,6 +45,7 @@ class ButacaServiceImpl(
      * @return Un resultado que contiene una butaca si la operación tiene éxito,
      */
     override fun findById(id: String): Result<Butaca, ButacaError> {
+        logger.debug { "Buscando una butaca con id= $id en la base de datos" }
         butacaRepositorio.findById(id)?.let {
             return Ok(it)
         }
@@ -54,6 +59,7 @@ class ButacaServiceImpl(
      * @param butaca La butaca a crear.
      */
     override fun update(id: String, butaca: Butaca): Result<Butaca, ButacaError> {
+        logger.debug { "Actualizando la butaca con id= $id en la base de datos" }
         butacaValidator.validate(butaca).onSuccess {
             butacaRepositorio.update(id = id, butaca = butaca)?.let {
                 return Ok(it)
@@ -71,6 +77,7 @@ class ButacaServiceImpl(
      * o un error de ButacaError si no se encuentran butacas.
      */
     override fun findAllByDate(date: LocalDateTime): Result<List<Butaca>, ButacaError> {
+        logger.debug { "Buscando todas las butacas en la base de datos antes de ${date.dayOfMonth}/${date.monthValue}/${date.year}" }
         val result = butacaRepositorio.findAllBasedOnDate(date)
         if (result.isNotEmpty()) return Ok(result)
         else return Err(ButacaError.ButacaStorageError("No hay ninguna butaca en la base de datos"))

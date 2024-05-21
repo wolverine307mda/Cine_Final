@@ -2,7 +2,14 @@ package org.example.cine_proyecto_final.cuentas.repository
 
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.database.SqlDelightManager
+import org.lighthousegames.logging.logging
 
+private val logger = logging()
+
+/**
+ * Implementación del repositorio de cuentas de usuarios.
+ * Esta clase se encarga de administrar las cuentas de usuario en la base de datos.
+ */
 class CuentaRepositoryImpl(
     val dataBaseManager: SqlDelightManager
 ) : CuentaRepository {

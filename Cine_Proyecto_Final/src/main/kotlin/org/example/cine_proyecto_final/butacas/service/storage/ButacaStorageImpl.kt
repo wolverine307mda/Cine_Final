@@ -5,7 +5,10 @@ import org.example.cine_proyecto_final.butacas.errors.ButacaError
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.service.storage.csv.ButacaStorageCsv
 import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJson
+import org.lighthousegames.logging.logging
 import java.io.File
+
+private val logger = logging()
 
 class ButacaStorageImpl(
     private val butacaStorageCsv : ButacaStorageCsv,

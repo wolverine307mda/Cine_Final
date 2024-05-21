@@ -6,11 +6,13 @@ import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.stage.Stage
 import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.example.cine_proyecto_final.database.logger
 import org.example.cine_proyecto_final.viewmodels.GeneralBienvenidoViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.lighthousegames.logging.logging
 import java.io.IOException
+
+private val logger = logging()
 
 class GeneralBienvenidoController : KoinComponent {
 

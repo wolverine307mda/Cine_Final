@@ -10,8 +10,10 @@ import org.example.cine_proyecto_final.butacas.errors.ButacaError
 import org.example.cine_proyecto_final.butacas.mappers.toButaca
 import org.example.cine_proyecto_final.butacas.mappers.toDto
 import org.example.cine_proyecto_final.butacas.models.Butaca
-import org.example.cine_proyecto_final.database.logger
+import org.lighthousegames.logging.logging
 import java.io.File
+
+private val logger = logging()
 
 class ButacaStorageJsonImpl : ButacaStorageJson {
     /**

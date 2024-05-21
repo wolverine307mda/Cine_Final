@@ -7,9 +7,11 @@ import org.example.cine_proyecto_final.butacas.errors.ButacaError
 import org.example.cine_proyecto_final.butacas.mappers.elegirEstado
 import org.example.cine_proyecto_final.butacas.mappers.elegirTipo
 import org.example.cine_proyecto_final.butacas.models.Butaca
-import org.example.cine_proyecto_final.database.logger
+import org.lighthousegames.logging.logging
 import java.io.File
 import java.time.LocalDateTime
+
+private val logger = logging()
 
 class ButacaStorageCsvImpl : ButacaStorageCsv {
     /**

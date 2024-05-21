@@ -3,13 +3,15 @@ package org.example.cine_proyecto_final.productos.servicio.storage.csv
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
-import org.example.cine_proyecto_final.database.logger
 import org.example.cine_final.productos.mappers.elegirTipoProducto
 import org.example.productos.errors.ProductoError
 import org.example.cine_final.productos.models.Producto
+import org.lighthousegames.logging.logging
 import java.io.File
 import java.time.LocalDateTime
 import java.util.*
+
+private val logger = logging()
 
 /**
  * Implementación del almacenamiento de productos desde y hacia archivos CSV.

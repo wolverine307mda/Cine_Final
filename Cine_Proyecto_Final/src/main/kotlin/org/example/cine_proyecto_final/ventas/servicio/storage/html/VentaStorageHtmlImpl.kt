@@ -4,10 +4,12 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.cine_proyecto_final.butacas.models.Butaca
-import org.example.cine_proyecto_final.database.logger
 import org.example.cine_proyecto_final.ventas.errors.VentaError
 import org.example.cine_proyecto_final.ventas.models.Venta
+import org.lighthousegames.logging.logging
 import java.io.File
+
+private val logger = logging()
 
 /**
  * Implementación del almacenamiento de ventas desde y hacia archivos HTML.

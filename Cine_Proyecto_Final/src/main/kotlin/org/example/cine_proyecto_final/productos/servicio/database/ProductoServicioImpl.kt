@@ -5,6 +5,9 @@ import org.example.productos.errors.ProductoError
 import org.example.cine_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.productos.validador.ProductoValidador
+import org.lighthousegames.logging.logging
+
+private val logger = logging()
 
 /**
  * Implementación del service de productos.
@@ -22,6 +25,7 @@ class ProductoServicioImpl(
      * @return Un resultado que contiene el producto guardado o un error.
      */
     override fun save(producto: Producto) : Result<Producto, ProductoError> {
+        logger.debug { "Guardando el producto con id: ${producto.id}" }
         productoValidador.validate(producto) //Para esegurarse que es un producto válido
             .onSuccess {
                 productosRepositorio.save(producto)?.let {
@@ -37,6 +41,7 @@ class ProductoServicioImpl(
      * @return Un resultado que contiene una lista de productos o un error.
      */
     override fun findAll(): Result<List<Producto>, ProductoError> {
+        logger.debug { "Obteniendo todos los productos" }
         val result = productosRepositorio.findAll()
         if (result.isNotEmpty()) return Ok(result)
         else return Err(ProductoError.ProductoStorageError("No hay ningún producto en la base de datos"))
@@ -48,12 +53,11 @@ class ProductoServicioImpl(
      * @return Un resultado que contiene el producto encontrado o un error si no se encontró ningún producto con el ID dado.
      */
     override fun findById(id: String): Result<Producto, ProductoError> {
-        val producto = productosRepositorio.findById(id)
-        return if (producto != null) {
-            Ok(producto)
-        } else {
-            Err(ProductoError.ProductoNotFoundError("El producto con ID $id no existe"))
+        logger.debug { "Buscando un producto con id: $id" }
+        productosRepositorio.findById(id)?.let {
+            return Ok(it)
         }
+        return Err(ProductoError.ProductoNotFoundError("El producto con ID $id no existe"))
     }
 
     /**
@@ -63,21 +67,27 @@ class ProductoServicioImpl(
      * @return Un resultado que contiene el producto actualizado o un error si no se pudo actualizar.
      */
     override fun update(id: String, producto: Producto): Result<Producto, ProductoError> {
-        val existingProducto = productosRepositorio.findById(id)
-        return if (existingProducto != null) {
-            val updatedProducto = producto.copy(id = id)
-            val result = productosRepositorio.update(id, updatedProducto)
-            if (result != null) {
-                Ok(updatedProducto)
-            } else {
-                Err(ProductoError.ProductoStorageError("No se pudo actualizar el Producto"))
+        logger.debug { "Actualizando el producto con id: $id"}
+        productoValidador.validate(producto).onSuccess {
+            productosRepositorio.findById(id)?.let {
+                val updatedProducto = producto.copy(id = id)
+                productosRepositorio.update(id,updatedProducto)?.let {
+                }
             }
-        } else {
-            Err(ProductoError.ProductoNotFoundError("El producto con ID $id no existe"))
         }
+        return Err(ProductoError.ProductoStorageError("No se pudo actualizar el Producto"))
     }
 
+    /**
+     * Borra un producto existente.
+     * @param id El ID del producto a borrar.
+     * @return Un resultado que contiene Unit si se ha borrado bien o un error sino.
+     */
     override fun delete(id: String): Result<Unit, ProductoError> {
-        TODO("Not yet implemented")
+        logger.debug { "Borrando el producto con id: $id" }
+        productosRepositorio.delete(id)?.let {
+            return Ok(Unit)
+        }
+        return Err(ProductoError.ProductoStorageError("No se pudo borrar el producto con id: $id"))
     }
 }

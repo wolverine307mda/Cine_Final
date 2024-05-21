@@ -3,9 +3,16 @@ package org.example.cine_proyecto_final.butacas.repository
 import org.example.cine_proyecto_final.butacas.mappers.toButaca
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.example.cine_proyecto_final.database.logger
+import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
 
+private val logger = logging()
+
+/**
+ * Implementación de la interfaz ButacaRepository.
+ *
+ * @property sqlDelightManager El gestor de la base de datos SqlDelight.
+*/
 class ButacaRepositoryImpl (
     private val sqlDelightManager: SqlDelightManager,
 ):ButacaRepository{
