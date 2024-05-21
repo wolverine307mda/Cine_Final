@@ -1,102 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="org.example.cine_proyecto_final.controllers.ClienteSeleccionProductosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.ClienteSeleccionProductosController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fondo_seleccion_productos.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="atras_button" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
-         <graphic>
-            <ImageView fitHeight="46.0" fitWidth="42.0" opacity="0.68" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/icono_atras_blanco.png" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <BorderPane prefHeight="800.0" prefWidth="1280.0">
-         <top>
-            <Label prefHeight="116.0" prefWidth="756.0" text="Añade los complementos deseados" textFill="WHITE" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="Arial Black" size="36.0" />
-               </font>
-            </Label>
-         </top>
-         <left>
-            <VBox alignment="CENTER_LEFT" prefHeight="684.0" prefWidth="650.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.6380224578914535" prefHeight="802.0" prefWidth="1284.0" style="-fx-background-color: transparent;">
+         <items>
+            <AnchorPane prefHeight="800.0" prefWidth="690.0">
                <children>
-                  <ButtonBar buttonMinWidth="150.0" prefHeight="74.0" prefWidth="520.0">
-                    <buttons>
-                        <Button mnemonicParsing="false" text="COMIDA" />
-                        <Button mnemonicParsing="false" text="REFRESCOS" />
-                      <Button mnemonicParsing="false" text="OTROS" />
-                    </buttons>
-                     <VBox.margin>
-                        <Insets right="80.0" />
-                     </VBox.margin>
+                  <Text fill="WHITE" layoutX="27.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Añade los complementos deseados" textAlignment="CENTER" wrappingWidth="786.8113708496094">
+                     <font>
+                        <Font name="Arial Black" size="43.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="atras_button" mnemonicParsing="false" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="46.0" fitWidth="42.0" opacity="0.68" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/icono_atras_blanco.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <VBox layoutX="101.0" layoutY="145.0" opacity="0.7" prefHeight="616.0" prefWidth="610.0" style="-fx-background-color: black; -fx-background-radius: 20;" />
+                  <ButtonBar buttonMinWidth="150.0" layoutX="55.0" layoutY="154.0" prefHeight="58.0" prefWidth="631.0">
+                     <buttons>
+                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="241.0" text="COMIDA" />
+                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="241.0" text="BEBIDAS" />
+                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="241.0" text="OTROS" />
+                     </buttons>
                      <padding>
                         <Insets left="50.0" />
                      </padding>
                   </ButtonBar>
-                  <ListView prefHeight="474.0" prefWidth="620.0">
-                     <VBox.margin>
-                        <Insets bottom="120.0" top="10.0" />
-                     </VBox.margin>
-                  </ListView>
+                  <TableView layoutX="124.0" layoutY="220.0" opacity="0.6" prefHeight="519.0" prefWidth="564.0" style="-fx-background-color: black; -fx-background-radius: 20;">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="Nombre" />
+                      <TableColumn prefWidth="75.0" text="precio" />
+                    </columns>
+                  </TableView>
                </children>
-               <padding>
-                  <Insets left="90.0" />
-               </padding>
-            </VBox>
-         </left>
-         <right>
-            <VBox prefHeight="684.0" prefWidth="498.0" BorderPane.alignment="CENTER">
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="411.0" text="Limpiar">
-                     <VBox.margin>
-                        <Insets left="85.0" right="85.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Label prefHeight="53.0" prefWidth="335.0" text="            Tu cesta:" textFill="#eba441">
-                     <font>
-                        <Font name="Arial Black" size="26.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="90.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ListView prefHeight="389.0" prefWidth="318.0">
-                     <VBox.margin>
-                        <Insets left="90.0" right="90.0" />
-                     </VBox.margin>
-                  </ListView>
-                  <Button mnemonicParsing="false" prefHeight="56.0" prefWidth="328.0" text="SIGUIENTE">
-                     <VBox.margin>
-                        <Insets left="82.0" right="50.0" top="30.0" />
-                     </VBox.margin>
-                  </Button>
+                  <VBox layoutX="60.0" layoutY="71.0" opacity="0.7" prefHeight="574.0" prefWidth="366.0" style="-fx-background-color: black; -fx-background-radius: 20;">
+                     <children>
+                        <AnchorPane prefHeight="212.0" prefWidth="366.0">
+                           <children>
+                              <ImageView fitHeight="42.0" fitWidth="48.0" layoutX="65.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/carrito_compra.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="137.0" layoutY="63.0" text="TU CESTA" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Black" size="28.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <TableView layoutX="90.0" layoutY="178.0" opacity="0.78" prefHeight="427.0" prefWidth="305.0" style="-fx-background-radius: 20; -fx-background-color: black;">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="Producto" />
+                        <TableColumn prefWidth="75.0" text="Precio" />
+                        <TableColumn prefWidth="75.0" text="Cantidad" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="88.0" layoutY="86.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="309.0" text="Limpiar" />
+                  <Button fx:id="siguiente_button" layoutX="130.0" layoutY="673.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" text="PROCESAR COMPRA" />
                </children>
-            </VBox>
-         </right>
-      </BorderPane>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="923.0" layoutY="157.0">
-         <image>
-            <Image url="@../../../../../../../../../../../Desktop/Cine_Proyecto_Final%20copia/src/main/resources/org/example/cine_proyecto_final/icons/carrito_compra.png" />
-         </image>
-      </ImageView>
+            </AnchorPane>
+         </items>
+      </SplitPane>
    </children>
 </AnchorPane>

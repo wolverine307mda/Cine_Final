@@ -1,22 +1,16 @@
 package org.example.cine_proyecto_final.controllers
 
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.text.Text
-import javafx.stage.Modality
-import javafx.stage.Stage
-import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.GeneralComprarEntradaViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import java.io.IOException
 
 private val logger = logging()
 

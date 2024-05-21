@@ -103,7 +103,7 @@ object RoutesManager {
 
     // Abre la ventana de cambiar contraseña
     fun initCambiarContrasena() {
-        openNewStage(View.CAMBIAR_CONTRASEÑA, "Cambiar Contraseña", 400.0, 300.0)
+        openNewStage(View.CAMBIAR_CONTRASEÑA, "Cambiar Contraseña", 580.0, 320.0)
     }
 
     fun getResource(resource: String): URL {

@@ -10,10 +10,12 @@ import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.SesionInicioViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.lighthousegames.logging.logging
 
-class SesionInicioController: KoinComponent {
+private val logger = logging()
 
-    lateinit var dbClient: SqlDelightManager
+class SesionInicioController : KoinComponent {
+
     private val viewModel: SesionInicioViewModel by inject()
 
     @FXML
@@ -39,8 +41,20 @@ class SesionInicioController: KoinComponent {
 
     @FXML
     private fun initialize() {
-        iniciarSesion_Button.setOnAction {  }
-        registrate_button.setOnAction { RoutesManager.initRegistrarse() }
-        olvidoContraseña_button.setOnAction { RoutesManager.initCambiarContrasena() }
+        println("Initialize inicio de sesion")
+        iniciarSesion_Button.setOnAction {
+            logger.debug { "Iniciar Sesión Button clicked" }
+            val email = email_textField.text
+            val contraseña = contraseña_field.text
+            logger.debug { "Email: $email, Contraseña: $contraseña" }
+        }
+        registrate_button.setOnAction {
+            logger.debug{"Registrate Button clicked"}
+            RoutesManager.initRegistrarse()
+        }
+        olvidoContraseña_button.setOnAction {
+            logger.debug{ "Olvido Contraseña Button clicked" }
+            RoutesManager.initCambiarContrasena()
+        }
     }
 }

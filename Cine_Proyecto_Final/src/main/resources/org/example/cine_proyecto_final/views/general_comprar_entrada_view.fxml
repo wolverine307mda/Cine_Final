@@ -18,10 +18,10 @@
       </ImageView>
       <ImageView fitHeight="768.0" fitWidth="541.0" layoutX="60.0" layoutY="56.0" opacity="0.87" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/unnamed-8-removebg-preview%20(1).png" />
+            <Image url="@../images/unnamed-8-removebg-preview (1).png" />
          </image>
       </ImageView>
-      <Button fx:id="iniciar_sesion_button" layoutX="1044.0" layoutY="44.0" mnemonicParsing="false" opacity="0.73" prefHeight="66.0" prefWidth="213.0" style="-fx-background-color: trasparent; -fx-border-color: white;" text="  Iniciar Sesión   ">
+      <Button fx:id="iniciar_sesion_button" layoutX="1052.0" layoutY="14.0" mnemonicParsing="false" opacity="0.73" prefHeight="66.0" prefWidth="213.0" style="-fx-background-color: trasparent; -fx-border-color: white;" text="  Iniciar Sesión   ">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -30,7 +30,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="comprar_entrada_button" layoutX="937.0" layoutY="676.0" mnemonicParsing="false" text="COMPRAR ENTRADA" />
+      <Button fx:id="comprar_entrada_button" layoutX="937.0" layoutY="676.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" text="COMPRAR ENTRADA" />
       <Label fx:id="duracionLabel" layoutX="708.0" layoutY="276.0" text="DURACIÓN" textFill="#6b6b6b">
          <font>
             <Font name="Arial Black" size="24.0" />
