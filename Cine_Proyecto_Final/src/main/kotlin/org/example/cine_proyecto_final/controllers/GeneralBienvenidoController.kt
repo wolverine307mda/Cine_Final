@@ -17,7 +17,6 @@ private val logger = logging()
 
 class GeneralBienvenidoController : KoinComponent {
 
-    // Mantener dbClient como lateinit var para inyección manual
     lateinit var dbClient: SqlDelightManager
     private val viewModel: GeneralBienvenidoViewModel by inject()
 
@@ -30,24 +29,34 @@ class GeneralBienvenidoController : KoinComponent {
     }
 
     private fun handleContinuarButton() {
-        // Lógica que se ejecuta al presionar el botón continuar
         logger.debug { "Botón continuar presionado" }
         cambiarEscena()
     }
 
     private fun cambiarEscena() {
+        logger.debug { "Cambiando escena a GeneralComprarEntradaController" }
         try {
-            // Cargar la nueva vista
-            val loader = FXMLLoader(CineApplication::class.java.getResource("views/general_comprar_entrada_view.fxml"))
-            val newScene = Scene(loader.load())
+            val resource = CineApplication::class.java.getResource("views/general_comprar_entrada_view.fxml")
+            if (resource == null) {
+                logger.error { "No se pudo encontrar el recurso views/general_comprar_entrada_view.fxml" }
+                return
+            }
+            val loader = FXMLLoader(resource)
+            val root = loader.load<Any>()
 
-            // Obtener el escenario actual
+            // Obtener el controlador GeneralComprarEntradaController
+            val controller = loader.getController<GeneralComprarEntradaController>()
+
+            val newScene = Scene(root as javafx.scene.Parent)
+
             val currentStage = continuar_button.scene.window as Stage
-
-            // Establecer la nueva escena en el escenario
             currentStage.scene = newScene
+            currentStage.show()
+
+            logger.debug { "Escena cambiada a GeneralComprarEntradaController" }
         } catch (e: IOException) {
             logger.error(e) { "No se pudo cargar la nueva escena" }
         }
     }
+
 }

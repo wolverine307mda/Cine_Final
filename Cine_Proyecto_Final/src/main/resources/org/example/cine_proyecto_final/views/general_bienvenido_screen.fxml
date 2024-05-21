@@ -40,6 +40,7 @@
                   <Image url="@../icons/user_white.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
