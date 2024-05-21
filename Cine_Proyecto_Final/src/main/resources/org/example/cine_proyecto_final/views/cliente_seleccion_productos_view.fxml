@@ -12,18 +12,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="org.example.cine_proyecto_final.controllers.ClienteSeleccionProductosController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/fondo_seleccion_productos.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="82.0" fitWidth="82.0" layoutX="30.0" layoutY="10.0">
-         <image>
-            <Image url="@../../../../../../../../../../../Desktop/Cine_Proyecto_Final%20copia/src/main/resources/org/example/cine_proyecto_final/icons/icono_atras_blanco.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="atras_button" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="46.0" fitWidth="42.0" opacity="0.68" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/icono_atras_blanco.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
       <BorderPane prefHeight="800.0" prefWidth="1280.0">
          <top>
             <Label prefHeight="116.0" prefWidth="756.0" text="Añade los complementos deseados" textFill="WHITE" BorderPane.alignment="CENTER">

@@ -7,9 +7,11 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.text.Text
+import javafx.stage.Modality
 import javafx.stage.Stage
 import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.database.SqlDelightManager
+import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.GeneralComprarEntradaViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -22,7 +24,6 @@ class GeneralComprarEntradaController : KoinComponent {
 
     private val dbClient: SqlDelightManager by inject()
     private val viewModel: GeneralComprarEntradaViewModel by inject()
-
 
     @FXML
     private lateinit var duracionLabel: Label
@@ -52,9 +53,9 @@ class GeneralComprarEntradaController : KoinComponent {
     private fun initialize() {
         logger.debug { "iniciando pantalla general de comprar entrada" }
 
-        devolver_entrada_button.setOnAction { devolverEntrada() }
-        iniciar_sesion_button.setOnAction { inicioDeSesion() }
-        comprar_entrada_button.setOnAction { comprarEntrada() }
+        devolver_entrada_button.setOnAction {  }
+        iniciar_sesion_button.setOnAction { RoutesManager.initSesionInicio() }
+        comprar_entrada_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.SELECCION_BUTACAS) }
 
         configurarDatosPelicula()
     }
@@ -64,37 +65,5 @@ class GeneralComprarEntradaController : KoinComponent {
         directorLabel.text = "DIRECTOR/ES"
         actoresLabel.text = "ACTORES"
         sinopsisText.text = "Lobezno se recupera de sus heridas cuando se cruza con el bocazas, Deadpool, que ha viajado en el tiempo para curarlo con la esperanza de hacerse amigos y formar un equipo para acabar con un enemigo común."
-    }
-
-    private fun inicioDeSesion() {
-        logger.debug { "Botón inicio de sesion presionado" }
-        cambioDeEscena("sesion_inicio_screen.fxml", iniciar_sesion_button)
-    }
-
-    private fun devolverEntrada() {
-        // Lógica para devolver entrada
-    }
-
-    private fun comprarEntrada() {
-        logger.debug { "Botón comprar entrada presionado" }
-        cambioDeEscena("cliente_seleccion_butaca_view.fxml", comprar_entrada_button)
-    }
-
-
-    private fun cambioDeEscena(escena: String, button: Button) {
-        logger.debug { "Botón $button presionado" }
-        try {
-            val loader = FXMLLoader(CineApplication::class.java.getResource("views/$escena"))
-            val root = loader.load<Any>()
-            val newScene = Scene(root as javafx.scene.Parent)
-
-            val currentStage = button.scene.window as Stage
-            currentStage.scene = newScene
-            currentStage.show()
-
-            logger.debug { "Escena cambiada a $escena" }
-        } catch (e: IOException) {
-            logger.error(e) { "No se pudo cargar la nueva escena: $escena" }
-        }
     }
 }

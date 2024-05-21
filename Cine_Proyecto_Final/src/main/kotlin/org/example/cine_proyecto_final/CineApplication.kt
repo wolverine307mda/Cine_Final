@@ -7,6 +7,7 @@ import javafx.stage.Stage
 import org.example.cine_proyecto_final.config.AppConfig
 import org.example.cine_proyecto_final.controllers.GeneralBienvenidoController
 import org.example.cine_proyecto_final.database.SqlDelightManager
+import org.example.cine_proyecto_final.routes.RoutesManager
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -19,24 +20,15 @@ class CineApplication : Application() {
     override fun start(stage: Stage) {
         try {
             // Initialize application configuration and database client
-            initializeApp()
-
-            // Load JavaFX scene
-            val fxmlLoader = FXMLLoader(javaClass.getResource("views/general_bienvenido_screen.fxml"))
-            val scene = Scene(fxmlLoader.load(), 1280.0, 800.0)
-            stage.isResizable = false
-
-            // Get the controller and pass the database client
-            val controller = fxmlLoader.getController<GeneralBienvenidoController>()
+            RoutesManager.apply {
+                app = this@CineApplication
+            }.run {
+                // Iniciamos la aplicación, podiamos hacerlo con also!!
+                initMainStage(stage)
+            }
             
             dbClient = SqlDelightManager(AppConfig())
-            
-            controller.dbClient = dbClient
 
-            // Set up the stage
-            stage.title = "Hello!"
-            stage.scene = scene
-            stage.show()
         } catch (e: Exception) {
             e.printStackTrace()
             // Handle exception appropriately

@@ -21,7 +21,7 @@
             <Image url="@../images/unnamed-8-removebg-preview%20(1).png" />
          </image>
       </ImageView>
-      <Button fx:id="iniciar_sesion_button" layoutX="1050.0" layoutY="44.0" mnemonicParsing="false" opacity="0.73" prefHeight="68.0" prefWidth="208.0" style="-fx-background-color: trasparent; -fx-border-color: white;" text="  Iniciar Sesión   ">
+      <Button fx:id="iniciar_sesion_button" layoutX="1044.0" layoutY="44.0" mnemonicParsing="false" opacity="0.73" prefHeight="66.0" prefWidth="213.0" style="-fx-background-color: trasparent; -fx-border-color: white;" text="  Iniciar Sesión   ">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
