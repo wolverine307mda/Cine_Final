@@ -30,7 +30,7 @@ application {
     mainClass = 'org.example.cine_proyecto_final.CineApplication'
 }
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 javafx {
