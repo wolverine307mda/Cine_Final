@@ -4,9 +4,9 @@ import com.github.michaelbull.result.*
 import cuenta.errors.CuentaError
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
+import org.example.cine_proyecto_final.cuentas.service.cache.CuentaCache
 import org.example.cine_proyecto_final.cuentas.validator.CuentaValidator
 import org.lighthousegames.logging.logging
-import kotlin.onFailure
 
 private val logger = logging()
 
@@ -16,22 +16,25 @@ private val logger = logging()
  */
 class CuentaServicioImpl(
     private var cuentaRepository: CuentaRepository,
-    private var cuentaValidator: CuentaValidator
+    private var cuentaValidator: CuentaValidator,
+    private val cache : CuentaCache
 ): CuentaServicio {
 
     /**
      * Busca una cuenta de usuario por su identificador único.
-     * @param id El identificador único de la cuenta de usuario a buscar.
+     * @param email El identificador único de la cuenta de usuario a buscar.
      * @return un [Result] que contiene la cuenta de usuario encontrada o un error [CuentaError].
      */
     override fun findByEmail(email: String): Result<Cuenta, CuentaError> {
         logger.debug { "Buscando cuenta con email: $email" }
-        val cuenta = cuentaRepository.findById(email)
-        return if (cuenta != null) {
-            Ok(cuenta)
-        } else {
-            Err(CuentaError.CuentaNotFoundError("La cuenta con email $email no existe"))
+        cache.get(email)?.let {
+            cache.put(it.email,it)
+            return Ok(it)
+        } ?: cuentaRepository.findById(email)?.let {
+            cache.put(it.email,it)
+            return Ok(it)
         }
+        return Err(CuentaError.CuentaStorageError("No se pudo encontrar la cuenta con el email: $email"))
     }
 
     /**
@@ -43,6 +46,7 @@ class CuentaServicioImpl(
         logger.debug { "Guardando cuenta con email: ${cuenta.email}" }
         cuentaValidator.validate(cuenta).onSuccess{
             cuentaRepository.save(cuenta)?.let {
+                cache.put(it.email,it)
                 return Ok(it)
             }
         }
@@ -51,7 +55,13 @@ class CuentaServicioImpl(
 
     override fun update(email: String, cuenta: Cuenta): Result<Cuenta, CuentaError> {
         logger.debug { "Actualizando cuenta con email: ${cuenta.email}" }
-        TODO()
+        cuentaValidator.validate(cuenta).onSuccess{
+            cuentaRepository.update(email, cuenta)?.let {
+                cache.put(it.email,it)
+                return Ok(it)
+            }
+        }
+        return Err(CuentaError.CuentaStorageError("La cuenta con el email: ${cuenta.email} no se pudo actualizar"))
     }
 
 

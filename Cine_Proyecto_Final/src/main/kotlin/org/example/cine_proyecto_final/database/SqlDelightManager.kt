@@ -45,6 +45,7 @@ class SqlDelightManager(
     fun initialize() {
         if (databaseInitData) {
             removeAllData()
+
         }
     }
 

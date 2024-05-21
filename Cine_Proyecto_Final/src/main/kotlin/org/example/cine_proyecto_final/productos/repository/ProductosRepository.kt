@@ -9,5 +9,4 @@ interface ProductosRepository {
     fun save(producto: Producto, ignoreKey : Boolean = false): Producto?
     fun update(id: String, producto: Producto): Producto?
     fun delete(id: String): Producto?
-    fun findByIdAndDate(date: LocalDateTime, id: String) : Producto?
 }

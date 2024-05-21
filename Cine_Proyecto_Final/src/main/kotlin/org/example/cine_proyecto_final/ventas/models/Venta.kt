@@ -14,7 +14,7 @@ import java.util.UUID
  * @property updatedAt La fecha y hora de la última actualización de la venta.
  * @property isDeleted Indica si la venta ha sido eliminada.
  */
-class Venta(
+data class Venta(
     var id : String = UUID.randomUUID().toString(),
     var cliente : Cuenta,
     var butacas : List<Butaca>,

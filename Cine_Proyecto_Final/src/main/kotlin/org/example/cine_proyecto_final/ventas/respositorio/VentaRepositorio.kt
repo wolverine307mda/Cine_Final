@@ -9,6 +9,5 @@ interface VentaRepositorio {
     fun findById(id: String): Venta?
     fun save(venta: Venta, ignoreKey : Boolean = false): Venta?
     fun delete(id: String): Venta?
-    fun findAllByDate(date : LocalDateTime): List<Venta>
     fun deleteLineaVenta(lineaVenta: LineaVenta) : LineaVenta
 }

@@ -43,6 +43,7 @@ class AppConfig {
         readProperty("app.cache.size")?.toInt() ?: 10
     }
 
+
     init {
         logger.debug { "Cargando configuración de la aplicación" }
     }

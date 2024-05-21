@@ -78,15 +78,26 @@ class ProductoRepositoryImpl(
      */
     override fun update(id: String, producto: Producto): Producto? {
         logger.debug { "Actualizando el producto con id: $id"}
-        val nuevoProducto = producto.copy(
-            nombre = producto.nombre,
-            precio = producto.precio,
-            stock = producto.stock,
-            tipo = producto.tipo!!,
-            updatedAt = LocalDateTime.now(),
-            isDeleted = producto.isDeleted,
-        )
-        save(nuevoProducto, true)?.let { return nuevoProducto }
+        findById(id)?.let {
+            val date = LocalDateTime.now()
+            db.updateProducto(
+                id = id,
+                nombre = producto.nombre,
+                precio = producto.precio,
+                stock = producto.stock.toLong(),
+                tipo = producto.tipo.toString(),
+                updatedAt = date.toString(),
+                imagen = producto.image
+            )
+            return producto.copy(
+                nombre = producto.nombre,
+                precio = producto.precio,
+                stock = producto.stock,
+                tipo = producto.tipo,
+                updatedAt = date,
+                image = producto.image
+            )
+        }
         return null
     }
 
@@ -98,32 +109,9 @@ class ProductoRepositoryImpl(
     override fun delete(id: String): Producto? {
         logger.debug { "Borrando Producto con id: $id" }
         findById(id)?.let {
-            val nuevoProducto = it.copy(
-                nombre = it.nombre,
-                precio = it.precio,
-                stock = it.stock,
-                tipo = it.tipo!!,
-                updatedAt = LocalDateTime.now(),
-                isDeleted = true,
-            )
-            save(nuevoProducto,true)?.let { return it }
+            db.deleteProducto(id = id, updatedAt = LocalDateTime.now().toString())
             return null
         }
         return null
     }
-
-    /**
-     * Encuentra un producto por su ID y fecha.
-     * @param id El ID del producto a buscar.
-     * @param date La fecha que queremos buscar
-     * @return El producto encontrado o null si no se encontró ningún producto con el ID dado.
-     */
-    override fun findByIdAndDate(date: LocalDateTime, id: String): Producto? {
-        logger.debug { "Borrando Producto con id: $id en ${date.dayOfMonth}:${date.monthValue}:${date.year} " }
-        if (db.productoExists(id).executeAsOne()){
-            return db.findProductByIdAndDate(id = id, updatedAt = date.toString()).executeAsOne().toProducto()
-        }
-        return null
-    }
-
 }
