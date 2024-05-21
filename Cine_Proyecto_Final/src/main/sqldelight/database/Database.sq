@@ -216,3 +216,16 @@ UPDATE ProductoEntity SET updatedAt = ?, isDeleted = 1 WHERE id = ?;
 
 updateProducto:
 UPDATE ProductoEntity SET updatedAt = ?, tipo = ?, nombre = ?, imagen = ?, precio = ?, stock = ? WHERE id = ?;
+
+cuentaExists:
+SELECT COUNT(*) > 0 FROM CuentaEntity WHERE email = ?;
+
+getCuentaById:
+SELECT * FROM CuentaEntity WHERE email = ?;
+
+insertCuenta:
+    INSERT INTO CuentaEntity (email,password,createdAt,updatedAt,nombre,apellido,imagen,tipo)
+VALUES (?,?,?,?,?,?,?,?);
+
+updateCuenta:
+UPDATE CuentaEntity SET password = ?,updatedAt = ?,nombre = ?,apellido = ?,imagen = ?;

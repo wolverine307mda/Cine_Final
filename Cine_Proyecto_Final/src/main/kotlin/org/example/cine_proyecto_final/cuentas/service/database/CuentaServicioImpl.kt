@@ -53,6 +53,12 @@ class CuentaServicioImpl(
         return Err(CuentaError.CuentaStorageError("La cuenta con el email: ${cuenta.email} no se pudo guardar"))
     }
 
+    /**
+     * Actualiza una cuenta de usuario existente.
+     * @param email El identificador único de la cuenta de usuario a actualizar.
+     * @param cuenta La cuenta de usuario a actualizar.
+     * @return un [Result] que contiene la cuenta de usuario actualizada o un error [CuentaError].
+     */
     override fun update(email: String, cuenta: Cuenta): Result<Cuenta, CuentaError> {
         logger.debug { "Actualizando cuenta con email: ${cuenta.email}" }
         cuentaValidator.validate(cuenta).onSuccess{
