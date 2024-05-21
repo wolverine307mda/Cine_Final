@@ -184,7 +184,7 @@ WHERE id = ?;
 -- Eliminar (marcar como eliminada) una línea de venta
 deleteLineaVenta:
 UPDATE LineaVentaEntity
-SET isDeleted = 1
+SET isDeleted = 1, updatedAt = ?
 WHERE id = ?;
 
 -- Insertar nueva venta

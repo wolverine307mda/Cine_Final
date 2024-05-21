@@ -108,9 +108,10 @@ class ProductoRepositoryImpl(
      */
     override fun delete(id: String): Producto? {
         logger.debug { "Borrando Producto con id: $id" }
+        val date = LocalDateTime.now()
         findById(id)?.let {
-            db.deleteProducto(id = id, updatedAt = LocalDateTime.now().toString())
-            return null
+            db.deleteProducto(id = id, updatedAt = date.toString())
+            return it.copy(isDeleted = true, updatedAt = date)
         }
         return null
     }

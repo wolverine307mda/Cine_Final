@@ -123,7 +123,7 @@ class VentaRepositorioImpl(
         findById(id)?.let { //Si existe
             val date = LocalDateTime.now()
             db.deleteVenta(id = id, updatedAt = date.toString())
-            return it.copy(updatedAt = date)
+            return it.copy(updatedAt = date, isDeleted = true)
         }
         return null
     }
@@ -134,7 +134,9 @@ class VentaRepositorioImpl(
      * @return La línea de venta eliminada.
      */
     override fun deleteLineaVenta(lineaVenta: LineaVenta): LineaVenta {
-        db.deleteLineaVenta(lineaVenta.id)
-        return lineaVenta
+        logger.debug { "Borrando linea de venta con id: ${lineaVenta.id}" }
+        val date = LocalDateTime.now()
+        db.deleteLineaVenta(lineaVenta.id, date.toString())
+        return lineaVenta.copy(isDeleted = true, updatedAt = date)
     }
 }
