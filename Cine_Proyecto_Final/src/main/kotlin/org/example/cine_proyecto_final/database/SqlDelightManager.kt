@@ -3,7 +3,6 @@ package org.example.cine_proyecto_final.database
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import database.DatabaseQueries
 import org.cine.database.AppDatabase
-import org.example.cine_final.config.Config
 import org.example.cine_proyecto_final.config.AppConfig
 import org.lighthousegames.logging.logging
 

@@ -1,23 +1,19 @@
-package org.example.cine_final.productos.servicio.database
+package org.example.cine_proyecto_final.productos.servicio.database
 
 import com.github.michaelbull.result.*
 import org.example.productos.errors.ProductoError
-import org.example.cine_final.config.Config
 import org.example.cine_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
-import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
 import org.example.cine_proyecto_final.productos.validador.ProductoValidador
 
 /**
  * Implementación del service de productos.
  * @param productosRepositorio El repositorio de productos.
  * @param productoValidador El validador de productos.
- * @param config La configuración de la aplicación.
  */
 class ProductoServicioImpl(
     private var productosRepositorio: ProductosRepository,
     private var productoValidador: ProductoValidador,
-    private var config: Config
 ) : ProductoServicio {
 
     /**
