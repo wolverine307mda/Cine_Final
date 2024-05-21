@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.Button
 import javafx.stage.Stage
+import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.viewmodels.GeneralBienvenidoViewModel
 import org.koin.core.component.KoinComponent
@@ -37,7 +38,7 @@ class GeneralBienvenidoController : KoinComponent {
     private fun cambiarEscena() {
         try {
             // Cargar la nueva vista
-            val loader = FXMLLoader(GeneralBienvenidoController::class.java.getResource("views/general_comprar_entrada_view.fxml"))
+            val loader = FXMLLoader(CineApplication::class.java.getResource("views/general_comprar_entrada_view.fxml"))
             val newScene = Scene(loader.load())
 
             // Obtener el escenario actual
