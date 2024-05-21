@@ -4,22 +4,17 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.cine_proyecto_final.butacas.models.Butaca
-import org.example.cine_proyecto_final.database.logger
 import org.example.cine_proyecto_final.ventas.errors.VentaError
 import org.example.cine_proyecto_final.ventas.models.Venta
+import org.lighthousegames.logging.logging
 import java.io.File
-import java.nio.file.Files
-import java.nio.file.Paths
+
+private val logger = logging()
 
 /**
  * Implementación del almacenamiento de ventas desde y hacia archivos HTML.
  */
 class VentaStorageHtmlImpl : VentaStorageHtml {
-
-    init {
-        Files.createDirectories(Paths.get("data","ventas"))
-    }
-
     /**
      * Carga productos desde un archivo CSV.
      * @param venta la venta que quieres guardar.
