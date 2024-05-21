@@ -59,9 +59,9 @@ class GeneralComprarEntradaController : KoinComponent {
     }
 
     private fun configurarDatosPelicula() {
-        duracionLabel.text = "128 min"
-        directorLabel.text = "Shawn Levy"
-        actoresLabel.text = "Ryan Rodney Reynolds, Hugh Michael Jackman"
+        duracionLabel.text = "DURACION"
+        directorLabel.text = "DIRECTOR/ES"
+        actoresLabel.text = "ACTORES"
         sinopsisText.text = "Lobezno se recupera de sus heridas cuando se cruza con el bocazas, Deadpool, que ha viajado en el tiempo para curarlo con la esperanza de hacerse amigos y formar un equipo para acabar con un enemigo común."
     }
 

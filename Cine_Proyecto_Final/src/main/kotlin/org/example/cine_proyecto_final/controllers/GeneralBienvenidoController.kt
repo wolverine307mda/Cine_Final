@@ -24,36 +24,41 @@ class GeneralBienvenidoController : KoinComponent {
     lateinit var continuar_button: Button
 
     @FXML
+    lateinit var iniciar_sesion_button: Button
+
+    @FXML
     private fun initialize() {
         continuar_button.setOnAction { handleContinuarButton() }
+        iniciar_sesion_button.setOnAction { inicioDeSesion() }
     }
 
     private fun handleContinuarButton() {
         logger.debug { "Botón continuar presionado" }
-        cambiarEscena()
+        cambioDeEscena("general_comprar_entrada_view.fxml", continuar_button)
     }
 
-    private fun cambiarEscena() {
-        logger.debug { "Cambiando escena a GeneralComprarEntradaController" }
-        try {
-            val resource = CineApplication::class.java.getResource("views/general_comprar_entrada_view.fxml")
-            if (resource == null) {
-                logger.error { "No se pudo encontrar el recurso views/general_comprar_entrada_view.fxml" }
-                return
-            }
-            val loader = FXMLLoader(resource)
-            val root = loader.load<Any>()
+    private fun inicioDeSesion() {
+        logger.debug { "Botón inicio de sesion presionado" }
+        cambioDeEscena("sesion_inicio_screen.fxml", iniciar_sesion_button)
+    }
 
+    private fun cambioDeEscena(escena: String, button: Button) {
+        logger.debug { "Botón $button entrada presionado" }
+        try {
+            val loader = FXMLLoader(CineApplication::class.java.getResource("views/$escena"))
+            val root = loader.load<Any>()
             val newScene = Scene(root as javafx.scene.Parent)
 
-            val currentStage = continuar_button.scene.window as Stage
+            val currentStage = button.scene.window as Stage
             currentStage.scene = newScene
             currentStage.show()
 
-            logger.debug { "Escena cambiada a GeneralComprarEntradaController" }
+            logger.debug { "Escena cambiada a $escena" }
         } catch (e: IOException) {
-            logger.error(e) { "No se pudo cargar la nueva escena" }
+            logger.error(e) { "No se pudo cargar la nueva escena: $escena" }
         }
     }
+
+
 
 }
