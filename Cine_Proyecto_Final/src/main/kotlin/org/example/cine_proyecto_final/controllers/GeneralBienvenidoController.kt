@@ -44,9 +44,6 @@ class GeneralBienvenidoController : KoinComponent {
             val loader = FXMLLoader(resource)
             val root = loader.load<Any>()
 
-            // Obtener el controlador GeneralComprarEntradaController
-            val controller = loader.getController<GeneralComprarEntradaController>()
-
             val newScene = Scene(root as javafx.scene.Parent)
 
             val currentStage = continuar_button.scene.window as Stage
