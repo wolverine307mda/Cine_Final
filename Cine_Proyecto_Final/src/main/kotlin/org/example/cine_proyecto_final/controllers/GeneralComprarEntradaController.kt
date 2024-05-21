@@ -23,6 +23,7 @@ class GeneralComprarEntradaController : KoinComponent {
     private val dbClient: SqlDelightManager by inject()
     private val viewModel: GeneralComprarEntradaViewModel by inject()
 
+
     @FXML
     private lateinit var duracionLabel: Label
 
@@ -52,7 +53,7 @@ class GeneralComprarEntradaController : KoinComponent {
         logger.debug { "iniciando pantalla general de comprar entrada" }
 
         devolver_entrada_button.setOnAction { devolverEntrada() }
-        iniciar_sesion_button.setOnAction { iniciarSesion() }
+        iniciar_sesion_button.setOnAction { inicioDeSesion() }
         comprar_entrada_button.setOnAction { comprarEntrada() }
 
         configurarDatosPelicula()
@@ -65,8 +66,9 @@ class GeneralComprarEntradaController : KoinComponent {
         sinopsisText.text = "Lobezno se recupera de sus heridas cuando se cruza con el bocazas, Deadpool, que ha viajado en el tiempo para curarlo con la esperanza de hacerse amigos y formar un equipo para acabar con un enemigo común."
     }
 
-    private fun iniciarSesion() {
-        // Lógica para iniciar sesión
+    private fun inicioDeSesion() {
+        logger.debug { "Botón inicio de sesion presionado" }
+        cambioDeEscena("sesion_inicio_screen.fxml", iniciar_sesion_button)
     }
 
     private fun devolverEntrada() {
@@ -75,18 +77,24 @@ class GeneralComprarEntradaController : KoinComponent {
 
     private fun comprarEntrada() {
         logger.debug { "Botón comprar entrada presionado" }
+        cambioDeEscena("cliente_seleccion_butaca_view.fxml", comprar_entrada_button)
+    }
+
+
+    private fun cambioDeEscena(escena: String, button: Button) {
+        logger.debug { "Botón $button presionado" }
         try {
-            val loader = FXMLLoader(CineApplication::class.java.getResource("views/cliente_seleccion_butaca_view.fxml"))
+            val loader = FXMLLoader(CineApplication::class.java.getResource("views/$escena"))
             val root = loader.load<Any>()
             val newScene = Scene(root as javafx.scene.Parent)
 
-            val currentStage = comprar_entrada_button.scene.window as Stage
+            val currentStage = button.scene.window as Stage
             currentStage.scene = newScene
             currentStage.show()
 
-            logger.debug { "Escena cambiada a cliente_seleccion_butaca_view.fxml" }
+            logger.debug { "Escena cambiada a $escena" }
         } catch (e: IOException) {
-            logger.error(e) { "No se pudo cargar la nueva escena" }
+            logger.error(e) { "No se pudo cargar la nueva escena: $escena" }
         }
     }
 }
