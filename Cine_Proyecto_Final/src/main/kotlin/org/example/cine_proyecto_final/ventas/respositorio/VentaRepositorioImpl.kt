@@ -2,7 +2,7 @@ package org.example.cine_proyecto_final.ventas.respositorio
 
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepository
 import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.example.cuenta.mappers.toLong
+import org.example.cine_proyecto_final.cuentas.mappers.toLong
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.ventas.mappers.toLineaVenta
@@ -121,46 +121,11 @@ class VentaRepositorioImpl(
     override fun delete(id: String): Venta? {
         logger.debug { "Borrando venta con id: $id" }
         findById(id)?.let { //Si existe
-            val nuevaVenta = Venta(
-                cliente = it.cliente,
-                isDeleted = true,
-                createdAt = it.createdAt,
-                updatedAt = LocalDateTime.now(),
-                id = id,
-                lineasVenta = it.lineasVenta,
-                butacas = it.butacas
-            )
-            save(nuevaVenta, true)
-                ?.let {
-                    it.lineasVenta.forEach {
-                        deleteLineaVenta(it)
-                    }
-                    return nuevaVenta
-                }
-            return null
+            val date = LocalDateTime.now()
+            db.deleteVenta(id = id, updatedAt = date.toString())
+            return it.copy(updatedAt = date, isDeleted = true)
         }
         return null
-    }
-
-    /**
-     * Obtiene todas las ventas realizadas en una fecha específica.
-     * @param date Fecha para la cual buscar las ventas.
-     * @return Lista de ventas realizadas en la fecha especificada.
-     */
-    override fun findAllByDate(date: LocalDateTime): List<Venta> {
-        logger.debug { "Buscando las ventas en: ${date.dayOfMonth}/${date.monthValue}/${date.year} ${date.hour}:${date.minute}:${date.second}" }
-        if (db.countVentasByDate(date.toString()).executeAsOne() > 0){
-            return db
-                .getVentasByDate(date.toString())
-                .executeAsList()
-                .map {
-                    val lineas = getAllLineasByVentaIdAndDate(it.id,date)
-                    val cliente = clienteRepositorio.findById(it.id_socio)
-                    val butacas = butacaRepository.getAllByVentaId(it.id)
-                    it.toVenta(lineas = lineas, cliente = cliente!!, butacas = butacas)
-                }
-        }
-        return emptyList()
     }
 
     /**
@@ -169,27 +134,9 @@ class VentaRepositorioImpl(
      * @return La línea de venta eliminada.
      */
     override fun deleteLineaVenta(lineaVenta: LineaVenta): LineaVenta {
-        db.deleteLineaVenta(lineaVenta.id,lineaVenta.id)
-        return lineaVenta
+        logger.debug { "Borrando linea de venta con id: ${lineaVenta.id}" }
+        val date = LocalDateTime.now()
+        db.deleteLineaVenta(lineaVenta.id, date.toString())
+        return lineaVenta.copy(isDeleted = true, updatedAt = date)
     }
-
-    /**
-     * Obtiene todas las líneas de venta asociadas a una venta y a una fecha específica.
-     * @param id Identificador único de la venta.
-     * @param date Fecha para la cual buscar las líneas de venta.
-     * @return Lista de líneas de venta asociadas a la venta y fecha especificadas.
-     */
-    private fun getAllLineasByVentaIdAndDate(id : String, date: LocalDateTime) : List<LineaVenta>{
-        if (db.countLineaVentaByVentaIdAndDate(id_venta = id, updatedAt = date.toString()).executeAsOne() > 0){
-            return db.getLineaVentaByVentaIdAndDate(id_venta = id, updatedAt = date.toString())
-                .executeAsList()
-                .map {
-                    val producto = productosRepositorio.findByIdAndDate(id = it.id_producto, date = date)
-                    it.toLineaVenta(producto!!)
-                }
-        }
-        return emptyList()
-    }
-
-
 }

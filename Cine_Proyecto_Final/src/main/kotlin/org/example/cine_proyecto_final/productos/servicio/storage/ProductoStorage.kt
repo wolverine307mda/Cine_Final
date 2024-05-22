@@ -7,19 +7,8 @@ import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoSt
 import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoStorageJson
 import java.io.File
 
-class ProductoStorage(
-    private val productoStorageCSV: ProductoStorageCSV,
-    private val productoStorageJson: ProductoStorageJson,
-) {
-    fun exportToJson(productos : List<Producto>, file : File) : Result<Unit,ProductoError>{
-        return productoStorageJson.export(file, productos)
-    }
-
-    fun importFromJson(file : File) : Result<List<Producto>,ProductoError>{
-        return productoStorageJson.import(file)
-    }
-
-    fun importFromCSV(file : File) : Result<List<Producto>,ProductoError>{
-        return productoStorageCSV.import(file)
-    }
+interface ProductoStorage{
+        fun exportToJson(productos : List<Producto>, file : File) : Result<Unit,ProductoError>
+        fun importFromJson(file : File) : Result<List<Producto>,ProductoError>
+        fun importFromCSV(file : File) : Result<List<Producto>,ProductoError>
 }

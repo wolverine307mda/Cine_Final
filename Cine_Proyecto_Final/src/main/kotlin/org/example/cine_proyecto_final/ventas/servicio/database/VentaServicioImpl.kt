@@ -5,6 +5,7 @@ import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorage
 import org.example.cine_proyecto_final.ventas.errors.VentaError
 import org.example.cine_proyecto_final.ventas.models.Venta
 import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorio
+import org.example.cine_proyecto_final.ventas.validator.VentaValidator
 import java.time.LocalDateTime
 
 /**
@@ -13,6 +14,7 @@ import java.time.LocalDateTime
  */
 class VentaServicioImpl (
     private var ventaRepositorio: VentaRepositorio,
+    private val ventaValidator: VentaValidator
 ) : VentaServicio {
 
 
@@ -22,8 +24,10 @@ class VentaServicioImpl (
      * @return [Result] que contiene la venta guardada en caso de éxito, o un [VentaError] en caso de error.
      */
     override fun save(venta: Venta): Result<Venta, VentaError> {
-        ventaRepositorio.save(venta)?.let {
-            return Ok(it)
+        ventaValidator.validate(venta).onSuccess {
+            ventaRepositorio.save(venta)?.let {
+                return Ok(it)
+            }
         }
         return Err(VentaError.VentaStorageError("No se ha podido guardar la venta con id: ${venta.id}"))
     }
@@ -46,24 +50,6 @@ class VentaServicioImpl (
             return Ok(it)
         }
         return Err(VentaError.VentaStorageError("No existe ninguna venta con el id: $id en la base de datos"))
-    }
-
-    /**
-     * Obtiene todas las ventas realizadas en una fecha específica.
-     * @param date Fecha para la cual buscar las ventas.
-     * @return [Result] que contiene la lista de ventas encontradas en caso de éxito, o un [VentaError] en caso de error.
-     */
-    override fun findAllByDate(date: LocalDateTime): Result<List<Venta>, VentaError> {
-        return Ok(ventaRepositorio.findAllByDate(date))
-    }
-
-    /**
-     * Obtiene todas las ventas realizadas en una fecha específica.
-     * @param date Fecha para la cual buscar las ventas.
-     * @return [Result] que contiene la lista de ventas encontradas en caso de éxito, o un [VentaError] en caso de error.
-     */
-    override fun getAllVentasByDate(date : LocalDateTime): Result<List<Venta>, VentaError> {
-        return Ok(ventaRepositorio.findAllByDate(date))
     }
 
     /**

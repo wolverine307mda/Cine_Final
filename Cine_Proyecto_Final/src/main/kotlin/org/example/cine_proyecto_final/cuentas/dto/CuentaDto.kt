@@ -1,4 +1,4 @@
-package org.example.cine_final.cuentas.dto
+package org.example.cine_proyecto_final.cuentas.dto
 
 import kotlinx.serialization.Serializable
 
@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @property updatedAt La fecha y hora en que se actualizó el usuario por última vez..
  */
 @Serializable
-data class CuentaDTO(
+data class CuentaDto(
     var email: String,
     var nombre: String,
     var apellido: String,

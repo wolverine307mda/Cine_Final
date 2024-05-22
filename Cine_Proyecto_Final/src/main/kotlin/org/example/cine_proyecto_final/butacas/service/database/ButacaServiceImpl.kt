@@ -6,8 +6,8 @@ import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepository
 import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
 import org.example.cine_proyecto_final.config.AppConfig
+import org.example.cine_proyecto_final.ventas.models.Venta
 import org.lighthousegames.logging.logging
-import java.time.LocalDateTime
 
 private val logger = logging()
 
@@ -23,6 +23,20 @@ class ButacaServiceImpl(
     private var butacaValidator: ButacaValidator,
     private val config : AppConfig
 ) : ButacaService {
+    /**
+     * Crea una butaca en la base de datos.
+     *
+     * @param butaca La butaca a crear.
+     */
+    override fun save(butaca: Butaca): Result<Butaca, ButacaError> {
+        logger.debug { "Guardando la butaca con id: ${butaca.id}" }
+        butacaValidator.validate(butaca).onSuccess {
+            butacaRepositorio.save(butaca)?.let {
+                return Ok(it)
+            }
+        }
+        return Err(ButacaError.ButacaStorageError("La butaca con el id: ${butaca.id} no se pudo guardar"))
+    }
 
     /**
      * Busca y devuelve todas las butacas en la base de datos.
@@ -32,9 +46,7 @@ class ButacaServiceImpl(
      */
     override fun findAll(): Result<List<Butaca>, ButacaError> {
         logger.debug { "Buscando todas las butacas en la base de datos" }
-        val result = butacaRepositorio.findAll()
-        if (result.isNotEmpty()) return Ok(result)
-        else return Err(ButacaError.ButacaStorageError("No hay ninguna butaca en la base de datos"))
+        return Ok(butacaRepositorio.findAll())
     }
 
 
@@ -54,32 +66,19 @@ class ButacaServiceImpl(
 
 
     /**
-     * Crea una butaca en la base de datos.
+     * Actualiza una butaca en la base de datos.
      *
-     * @param butaca La butaca a crear.
+     * @param butaca La butaca a actualizar.
      */
-    override fun update(id: String, butaca: Butaca): Result<Butaca, ButacaError> {
+    override fun update(id: String, butaca: Butaca, venta: Venta?): Result<Butaca, ButacaError> {
         logger.debug { "Actualizando la butaca con id= $id en la base de datos" }
         butacaValidator.validate(butaca).onSuccess {
-            butacaRepositorio.update(id = id, butaca = butaca)?.let {
+            butacaRepositorio.update(id = id, butaca = butaca, venta)?.let {
                 return Ok(it)
             }
         }.onFailure {
             return Err(ButacaError.ButacaInvalida("La butaca con id= ${butaca.id} no es válida"))
         }
         return Err(ButacaError.ButacaStorageError("La butaca con id: ${butaca.id} no se pudo guardar"))
-    }
-
-    /**
-     * Busca y devuelve todas las butacas en la base de datos basandose en la fecha.
-     *
-     * @return Un resultado que contiene una lista de objetos Butaca si la operación tiene éxito,
-     * o un error de ButacaError si no se encuentran butacas.
-     */
-    override fun findAllByDate(date: LocalDateTime): Result<List<Butaca>, ButacaError> {
-        logger.debug { "Buscando todas las butacas en la base de datos antes de ${date.dayOfMonth}/${date.monthValue}/${date.year}" }
-        val result = butacaRepositorio.findAllBasedOnDate(date)
-        if (result.isNotEmpty()) return Ok(result)
-        else return Err(ButacaError.ButacaStorageError("No hay ninguna butaca en la base de datos"))
     }
 }

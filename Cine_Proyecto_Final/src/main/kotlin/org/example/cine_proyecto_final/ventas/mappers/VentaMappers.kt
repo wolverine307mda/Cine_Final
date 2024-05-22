@@ -13,8 +13,8 @@ import org.example.cine_proyecto_final.ventas.dto.LineaVentaDto
 import org.example.cine_proyecto_final.ventas.dto.VentaDto
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.cine_proyecto_final.ventas.models.Venta
-import org.example.cuenta.mappers.toCuenta
-import org.example.cuenta.mappers.toDto
+import org.example.cine_proyecto_final.cuentas.mappers.toCuenta
+import org.example.cine_proyecto_final.cuentas.mappers.toDto
 import java.time.LocalDateTime
 
 /**

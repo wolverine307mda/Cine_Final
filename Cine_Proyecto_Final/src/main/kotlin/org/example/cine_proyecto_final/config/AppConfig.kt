@@ -17,6 +17,11 @@ class AppConfig {
 
     private val APP_PATH: String = System.getProperty("user.dir")
 
+    // Propiedad que define si la base de datos es en memoria o no
+    val databaseInMemory: Boolean by lazy {
+        readProperty("app.database.inmemory")?.toBoolean()?: false
+    }
+
     // Directorio de imágenes
     val imagesDirectory: String by lazy {
         val path = readProperty("app.images") ?: "imagenes"
@@ -42,6 +47,7 @@ class AppConfig {
     val cacheSize: Int by lazy {
         readProperty("app.cache.size")?.toInt() ?: 10
     }
+
 
     init {
         logger.debug { "Cargando configuración de la aplicación" }
