@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
+import javafx.scene.image.Image
 import javafx.scene.layout.Pane
 import javafx.stage.Modality
 import javafx.stage.Stage
@@ -37,9 +38,9 @@ object RoutesManager {
         SESION_INICIO("views/sesion_inicio_screen.fxml"),
         REGISTRARSE("views/sesion_registrarse_screen.fxml"),
         CAMBIAR_CONTRASEÑA("views/sesion_cambio_contraseña_view.fxml"),
-        ADMIN_INICIO("views/admnistrador_inicio_screen.fxml"),
-        ADMIN_PRODUCTOS("views/administrador_gestion_productos_view.fxml"),
-        ADMIN_BUTACAS("views/administrador_gestion_butacas_view.fxml")
+        ADMIN_INICIO("views/administrador_inicio_sesion.fxml"),
+        ADMIN_PRODUCTOS("views/administrador_gestion_de_productos.fxml"),
+        ADMIN_BUTACAS("views/administrador_gestion_de_productos.fxml")
     }
 
     init {
@@ -56,7 +57,7 @@ object RoutesManager {
         val scene = Scene(parentRoot, 1280.0, 800.0)
         stage.title = "CineVerso"
         stage.isResizable = false
-        //stage.icons.add(Image(getResourceAsStream("icons/app-icon.png")))
+        stage.icons.add(Image(getResourceAsStream("icons/logo.png")))
         stage.setOnCloseRequest { onAppExit(event = it) }
         stage.scene = scene
         mainStage = stage

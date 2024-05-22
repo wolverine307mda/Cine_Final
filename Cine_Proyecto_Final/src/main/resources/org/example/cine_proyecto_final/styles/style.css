@@ -40,7 +40,7 @@
 }
 
 .button:hover {
-    -fx-background-color: #661C1D; /* Color de fondo al pasar el ratón */
+    -fx-background-color: #8f0a0b; /* Color de fondo al pasar el ratón */
 }
 
 .button:pressed {
@@ -53,4 +53,45 @@
     -fx-border-radius: 20; /* Borde redondeado */
     -fx-padding: 5; /* Espaciado interno */
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Sombra */
+}
+
+
+
+
+
+
+
+
+/* Estilos para el ToggleButton */
+.toggle-button {
+    -fx-background-color: transparent;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #6c0606;
+    -fx-border-color: #c02a2a;
+    -fx-text-fill: black;
+}
+
+.toggle-button:hover {
+    /*-fx-background-color: rgba(255, 255, 255, 0.1);*/
+    -fx-background-color: #770568;
+}
+
+.toggle-button:pressed {
+    -fx-background-color: #ff0000;
+    -fx-border-color: #ff0000;
+    -fx-text-fill: white;
+}
+
+.toggle-button .graphic {
+    -fx-background-color: transparent;
 }

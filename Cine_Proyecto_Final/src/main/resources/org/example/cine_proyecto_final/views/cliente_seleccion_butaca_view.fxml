@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ToggleButton?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #100E12;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.ClienteSeleccionButacaController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
@@ -58,7 +59,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="butaca_a1" mnemonicParsing="false" GridPane.columnIndex="1">
+            <ToggleButton fx:id="butaca_a1" mnemonicParsing="false" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,8 +67,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_a3" mnemonicParsing="false" GridPane.columnIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_a3" mnemonicParsing="false" GridPane.columnIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -75,8 +76,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_b4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_b4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -84,8 +85,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_c5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_c5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -93,8 +94,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_b5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_b5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -102,8 +103,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_a4" mnemonicParsing="false" GridPane.columnIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_a4" mnemonicParsing="false" GridPane.columnIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -111,8 +112,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_a5" mnemonicParsing="false" GridPane.columnIndex="5">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_a5" mnemonicParsing="false" GridPane.columnIndex="5">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -120,8 +121,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_a6" mnemonicParsing="false" GridPane.columnIndex="6">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_a6" mnemonicParsing="false" GridPane.columnIndex="6">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -129,8 +130,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_b1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_b1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -138,8 +139,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_b3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_b3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -147,8 +148,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_c1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_c1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -156,8 +157,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_c2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_c2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -165,8 +166,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_c3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_c3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -174,8 +175,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_c4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_c4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -183,8 +184,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_a7" mnemonicParsing="false" GridPane.columnIndex="7">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_a7" mnemonicParsing="false" GridPane.columnIndex="7">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -192,8 +193,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_b6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_b6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -201,8 +202,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_d1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_d1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -210,8 +211,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_e1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_e1" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -219,8 +220,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_b7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="1">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_b7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -228,8 +229,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_c7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_c7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -237,8 +238,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_d7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_d7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -246,8 +247,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_c6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_c6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -255,8 +256,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_e7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_e7" mnemonicParsing="false" GridPane.columnIndex="7" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -264,8 +265,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_d6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_d6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -273,8 +274,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_d2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_d2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -282,8 +283,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_e2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_e2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -291,8 +292,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_e6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_e6" mnemonicParsing="false" GridPane.columnIndex="6" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -300,8 +301,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_e5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_e5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -309,8 +310,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_d4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_d4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -318,8 +319,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_d5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_d5" mnemonicParsing="false" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -327,8 +328,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_d3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_d3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -336,8 +337,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_e3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_e3" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -345,8 +346,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_e4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_e4" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -354,8 +355,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_a2" mnemonicParsing="false" GridPane.columnIndex="2">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_a2" mnemonicParsing="false" GridPane.columnIndex="2">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -363,8 +364,8 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
-            <Button fx:id="butaca_b2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            </ToggleButton>
+            <ToggleButton fx:id="butaca_b2" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="42.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -372,7 +373,7 @@
                      </image>
                   </ImageView>
                </graphic>
-            </Button>
+            </ToggleButton>
             <Label contentDisplay="CENTER" layoutX="10.0" layoutY="23.0" opacity="0.66" prefHeight="31.0" prefWidth="97.0" text="   A" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Arial Black" size="21.0" />

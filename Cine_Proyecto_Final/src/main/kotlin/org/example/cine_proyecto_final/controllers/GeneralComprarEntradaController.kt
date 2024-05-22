@@ -50,7 +50,7 @@ class GeneralComprarEntradaController : KoinComponent {
     private fun initialize() {
         logger.debug { "iniciando pantalla general de comprar entrada" }
 
-        devolver_entrada_button.setOnAction {  }
+        devolver_entrada_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.ADMIN_INICIO) }
         iniciar_sesion_button.setOnAction { RoutesManager.initSesionInicio() }
         comprar_entrada_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.SELECCION_BUTACAS) }
         atras_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.MAIN) }
