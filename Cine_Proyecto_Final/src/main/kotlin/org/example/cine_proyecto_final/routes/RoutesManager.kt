@@ -40,7 +40,7 @@ object RoutesManager {
         CAMBIAR_CONTRASEÑA("views/sesion_cambio_contraseña_view.fxml"),
         ADMIN_INICIO("views/administrador_inicio_sesion.fxml"),
         ADMIN_PRODUCTOS("views/administrador_gestion_de_productos.fxml"),
-        ADMIN_BUTACAS("views/administrador_gestion_de_productos.fxml")
+        ADMIN_BUTACAS("views/administrador_gestion_de_butacas.fxml")
     }
 
     init {

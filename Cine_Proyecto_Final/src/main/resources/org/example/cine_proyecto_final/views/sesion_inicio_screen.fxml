@@ -31,11 +31,11 @@
       </Label>
       <Label layoutX="246.0" layoutY="151.0" text="Contraseña" textFill="WHITE" />
       <Button fx:id="iniciarSesion_Button" layoutX="185.0" layoutY="232.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="291.0" style="-fx-font-family: arial; -fx-font-size: 25;" text="Iniciar Sesión" />
-      <Button fx:id="olvidoContraseña_button" layoutX="339.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 12;" text="has olvidado tu contraseña?" />
+      <Button fx:id="olvidoContraseña_button" layoutX="338.0" layoutY="197.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 12;" text="has olvidado tu contraseña?" />
       <Label layoutX="323.0" layoutY="283.0" text="No tienes cuenta?" textFill="WHITE">
          <font>
             <Font name="Berlin Sans FB" size="11.0" />
          </font></Label>
-      <Button fx:id="registrate_button" layoutX="404.0" layoutY="278.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 10;" text="Registrate" />
+      <Button fx:id="registrate_button" layoutX="392.0" layoutY="273.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 10;" text="Registrate" />
    </children>
 </AnchorPane>
