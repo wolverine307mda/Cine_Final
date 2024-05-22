@@ -44,12 +44,16 @@ class GeneralComprarEntradaController : KoinComponent {
     private lateinit var comprar_entrada_button: Button
 
     @FXML
+    private lateinit var atras_button: Button
+
+    @FXML
     private fun initialize() {
         logger.debug { "iniciando pantalla general de comprar entrada" }
 
         devolver_entrada_button.setOnAction {  }
         iniciar_sesion_button.setOnAction { RoutesManager.initSesionInicio() }
         comprar_entrada_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.SELECCION_BUTACAS) }
+        atras_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.MAIN) }
 
         configurarDatosPelicula()
     }

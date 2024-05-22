@@ -31,7 +31,8 @@
                   <Image url="@../icons/icono_atras_blanco.png" />
                </image>
             </ImageView>
-         </graphic></Button>
+         </graphic>
+      </Button>
       <ImageView fitHeight="276.0" fitWidth="783.0" layoutX="252.0" layoutY="90.0" opacity="0.76" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/icono_pantalla.png" />

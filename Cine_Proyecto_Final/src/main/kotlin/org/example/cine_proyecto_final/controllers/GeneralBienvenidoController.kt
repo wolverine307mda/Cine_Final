@@ -24,6 +24,8 @@ class GeneralBienvenidoController : KoinComponent {
 
     @FXML
     private fun initialize() {
+        logger.debug { "iniciando General Bienvenido" }
+
         continuar_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA) }
         iniciar_sesion_button.setOnAction { RoutesManager.initSesionInicio() }
     }
