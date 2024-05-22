@@ -98,8 +98,8 @@ class ProductoRepositoryImplTest {
     }
 
     @Test
-    fun guardarGuardaUnProductoNuevo() {
-        // Given
+    fun guardarGuardaUnProductoNuevoQueNoExiste() {
+        // Arrange
         val newProduct = Producto(
             id = "3",
             nombre = "Product 3",
@@ -112,23 +112,94 @@ class ProductoRepositoryImplTest {
             isDeleted = false
         )
 
-        // When
+        // Act
         repository.save(newProduct)
 
-        // Then
+        // Assert
         val result = repository.findById("3")
         assertNotNull(result)
         assertEquals("3", result?.id)
     }
 
     @Test
+    fun guardarGuardaUnProductoNuevoQueSiExiste() {
+        // Arrange
+        val newProduct = Producto(
+            id = "1",
+            nombre = "Product 3",
+            precio = 30.0,
+            stock = 20,
+            tipo = TipoProducto.BEBIDA,
+            image = "image3.jpg",
+            createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            isDeleted = false
+        )
+
+        // Act & Assert
+        assertNull(repository.save(newProduct))
+    }
+
+    @Test
     fun deleteMarcaElProductoComoBorrado() {
-        // When
+        // Act
         repository.delete("1")
 
-        // Then
+        // Assert
         val result = repository.findById("1")
         assertNotNull(result)
         assertTrue(result!!.isDeleted)
+    }
+
+    @Test
+    fun updateActualizaElProductoQueSiExiste() {
+        // Arrange
+        val newProduct = Producto(
+            id = "1",
+            nombre = "Product Actualizado",
+            precio = 30.0,
+            stock = 20,
+            tipo = TipoProducto.BEBIDA,
+            image = "image3.jpg",
+            createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            isDeleted = false
+        )
+
+        // Act
+        repository.update(newProduct.id,newProduct)
+
+        // Assert
+        val result = repository.findById("1")
+        assertNotNull(result)
+        assertEquals("Product Actualizado", result?.nombre)
+        assertEquals(30.0, result?.precio)
+        assertEquals(20, result?.stock)
+        assertEquals(TipoProducto.BEBIDA, result?.tipo)
+        assertEquals("image3.jpg", result?.image)
+        assertFalse(result!!.isDeleted)
+    }
+
+    @Test
+    fun updateNoActualizaElProductoQueNoExiste() {
+        // Arrange
+        val newProduct = Producto(
+            id = "8",
+            nombre = "Product Actualizado",
+            precio = 30.0,
+            stock = 20,
+            tipo = TipoProducto.BEBIDA,
+            image = "image3.jpg",
+            createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            isDeleted = false
+        )
+
+        // Act
+        repository.update(newProduct.id,newProduct)
+
+        // Assert
+        val result = repository.findById("8")
+        assertNull(result)
     }
 }
