@@ -2,7 +2,7 @@ package org.example.cine_proyecto_final.cuentas.repository
 
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.example.cuenta.mappers.toCuenta
+import org.example.cine_proyecto_final.cuentas.mappers.toCuenta
 import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
 

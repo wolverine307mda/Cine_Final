@@ -2,7 +2,7 @@ package org.example.cine_proyecto_final.ventas.respositorio
 
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepository
 import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.example.cuenta.mappers.toLong
+import org.example.cine_proyecto_final.cuentas.mappers.toLong
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.ventas.mappers.toLineaVenta

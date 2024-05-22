@@ -1,7 +1,7 @@
-package org.example.cuenta.mappers
+package org.example.cine_proyecto_final.cuentas.mappers
 
 import database.CuentaEntity
-import org.example.cine_final.cuentas.dto.CuentaDTO
+import org.example.cine_proyecto_final.cuentas.dto.CuentaDto
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.cuentas.models.TipoCuenta
 import java.time.LocalDateTime
@@ -10,7 +10,7 @@ import java.time.LocalDateTime
  * Convierte un objeto [CuentaDTO] en un objeto [Cuenta].
  * @return el objeto [Cuenta] resultante.
  */
-fun CuentaDTO.toCuenta() : Cuenta {
+fun CuentaDto.toCuenta() : Cuenta {
     return Cuenta(
         email = this.email,
         password =  this.password,
@@ -27,8 +27,8 @@ fun CuentaDTO.toCuenta() : Cuenta {
  * Convierte un objeto [Cuenta] en un objeto [CuentaDTO].
  * @return el objeto [CuentaDTO] resultante.
  */
-fun Cuenta.toDto() : CuentaDTO {
-    return CuentaDTO(
+fun Cuenta.toDto() : CuentaDto {
+    return CuentaDto(
         email = this.email,
         createdAt = this.toString(),
         updatedAt = this.toString(),
