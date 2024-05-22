@@ -13,7 +13,8 @@ class SqlDelightManager(
 ) {
     private val databaseUrl: String = config.databaseUrl
     private val databaseInitData: Boolean = config.databaseInit
-    val databaseQueries: DatabaseQueries = initQueries()
+    private val databaseInMemory: Boolean = config.databaseInMemory
+    var databaseQueries: DatabaseQueries = initQueries()
 
     init {
         logger.debug { "Inicializando el gestor de Bases de Datos con SQLDelight" }
@@ -28,14 +29,18 @@ class SqlDelightManager(
      */
     private fun initQueries(): DatabaseQueries {
 
-        logger.debug { "SqlDeLightClient - File: ${databaseUrl}" }
-        return JdbcSqliteDriver(databaseUrl).let { driver ->
+        return if (databaseInMemory) {
+            logger.debug { "SqlDeLightClient - InMemory" }
+            JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        } else {
+            logger.debug { "SqlDeLightClient - File: ${databaseUrl}" }
+            JdbcSqliteDriver(databaseUrl)
+        }.let { driver ->
             // Creamos la base de datos
             logger.debug { "Creando Tablas (si es necesario)" }
             AppDatabase.Schema.create(driver)
             AppDatabase(driver)
         }.databaseQueries
-
     }
 
     /**

@@ -31,11 +31,11 @@ class ProductoStorageCSVImpl : ProductoStorageCSV {
                         val producto = it.split(',')
                         Producto(
                             id = UUID.randomUUID().toString(),
-                            nombre = producto[0],
-                            stock = producto[1].toInt(),
-                            tipo = elegirTipoProducto(producto[2]),
-                            image = producto[3],
-                            precio = producto[4].toDouble(),
+                            nombre = producto[1],
+                            stock = producto[3].toInt(),
+                            tipo = elegirTipoProducto(producto[4]),
+                            image = producto[5],
+                            precio = producto[2].toDouble(),
                             isDeleted = false,
                             updatedAt = LocalDateTime.now(),
                             createdAt = LocalDateTime.now()

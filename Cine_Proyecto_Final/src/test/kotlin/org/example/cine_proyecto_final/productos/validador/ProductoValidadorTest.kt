@@ -13,7 +13,7 @@ class ProductoValidadorTest {
     private val validador = ProductoValidador()
 
     @Test
-    fun `validate should return Ok when producto is valid`() {
+    fun okCuandoProductoEsValido() {
         val producto = Producto(
             nombre = "CocaCola",
             tipo = TipoProducto.BEBIDA,
@@ -28,7 +28,7 @@ class ProductoValidadorTest {
     }
 
     @Test
-    fun `validate should return Err when producto tipo is null`() {
+    fun errorCuandoTipoEsNulo() {
         val producto = Producto(
             nombre = "CocaCola",
             tipo = null,
@@ -44,7 +44,7 @@ class ProductoValidadorTest {
     }
 
     @Test
-    fun `validate should return Err when producto stock is less than 0`() {
+    fun errorCuandoStockMenosDeCero() {
         val producto = Producto(
             nombre = "CocaCola",
             tipo = TipoProducto.BEBIDA,
@@ -60,7 +60,7 @@ class ProductoValidadorTest {
     }
 
     @Test
-    fun `validate should return Err when producto precio is less than 0`() {
+    fun errorCuandoPrecioMenosDeCero() {
         val producto = Producto(
             nombre = "CocaCola",
             tipo = TipoProducto.BEBIDA,
@@ -76,7 +76,7 @@ class ProductoValidadorTest {
     }
 
     @Test
-    fun `validate should return Err when producto precio and stock are less than 0`() {
+    fun errorCuandoVariasPropiedadesSonInvalidas() {
         val producto = Producto(
             nombre = "CocaCola",
             tipo = null,

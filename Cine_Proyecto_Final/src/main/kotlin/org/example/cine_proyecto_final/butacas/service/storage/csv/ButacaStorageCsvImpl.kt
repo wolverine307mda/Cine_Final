@@ -30,9 +30,9 @@ class ButacaStorageCsvImpl : ButacaStorageCsv {
                         val butaca = it.split(',')
                         Butaca(
                             id = butaca[0],
-                            estado = elegirEstado(butaca[1]),
-                            precio = butaca[2].toDouble(),
-                            tipo = elegirTipo(butaca[3]),
+                            estado = elegirEstado(butaca[2]),
+                            precio = butaca[4].toDouble(),
+                            tipo = elegirTipo(butaca[1]),
                             updatedAt = LocalDateTime.now(),
                             createdAt = LocalDateTime.now()
                         )
