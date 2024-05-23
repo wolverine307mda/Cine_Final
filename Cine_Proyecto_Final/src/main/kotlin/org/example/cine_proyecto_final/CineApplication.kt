@@ -1,11 +1,8 @@
 package org.example.cine_proyecto_final
 
 import javafx.application.Application
-import javafx.fxml.FXMLLoader
-import javafx.scene.Scene
 import javafx.stage.Stage
 import org.example.cine_proyecto_final.config.AppConfig
-import org.example.cine_proyecto_final.controllers.GeneralBienvenidoController
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.lighthousegames.logging.logging

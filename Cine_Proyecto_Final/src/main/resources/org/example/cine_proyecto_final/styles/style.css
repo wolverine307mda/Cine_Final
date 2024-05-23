@@ -55,14 +55,6 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Sombra */
 }
 
-
-
-
-
-
-
-
-/* Estilos para el ToggleButton */
 .toggle-button {
     -fx-background-color: transparent;
     -fx-border-color: white;
@@ -82,7 +74,6 @@
 }
 
 .toggle-button:hover {
-    /*-fx-background-color: rgba(255, 255, 255, 0.1);*/
     -fx-background-color: #770568;
 }
 

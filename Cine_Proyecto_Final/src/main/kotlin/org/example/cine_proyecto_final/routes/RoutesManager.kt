@@ -68,7 +68,6 @@ object RoutesManager {
     // Cambia la escena en la ventana principal
     fun changeScene(view: View) {
         logger.debug { "Cambiando a la escena ${view.fxml}" }
-
         val fxmlLoader = FXMLLoader(getResource(view.fxml))
         val newRoot = fxmlLoader.load<Pane>()
         val scene = activeStage.scene

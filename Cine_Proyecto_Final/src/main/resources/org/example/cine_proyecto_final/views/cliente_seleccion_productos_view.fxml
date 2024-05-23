@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.ClienteSeleccionProductosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.cliente.ClienteSeleccionProductosController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -42,9 +42,9 @@
                   <VBox layoutX="101.0" layoutY="145.0" opacity="0.3" prefHeight="616.0" prefWidth="610.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
                   <ButtonBar buttonMinWidth="150.0" layoutX="55.0" layoutY="154.0" prefHeight="58.0" prefWidth="631.0">
                      <buttons>
-                        <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="241.0" text="COMIDA" />
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="241.0" text="BEBIDAS" />
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="241.0" text="OTROS" />
+                        <Button fx:id="comida_button" mnemonicParsing="false" prefHeight="40.0" prefWidth="241.0" text="COMIDA" />
+                        <Button fx:id="bibida_button" mnemonicParsing="false" prefHeight="42.0" prefWidth="241.0" text="BEBIDAS" />
+                        <Button fx:id="otros_button" mnemonicParsing="false" prefHeight="42.0" prefWidth="241.0" text="OTROS" />
                      </buttons>
                      <padding>
                         <Insets left="50.0" />
@@ -52,8 +52,8 @@
                   </ButtonBar>
                   <TableView layoutX="124.0" layoutY="220.0" opacity="0.78" prefHeight="519.0" prefWidth="564.0" style="-fx-background-color: black; -fx-background-radius: 20;">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Nombre" />
-                      <TableColumn prefWidth="75.0" text="precio" />
+                      <TableColumn prefWidth="402.39996337890625" text="Nombre" />
+                      <TableColumn minWidth="0.0" prefWidth="159.2000732421875" text="Precio" />
                     </columns>
                   </TableView>
                </children>
@@ -63,12 +63,12 @@
                   <VBox layoutX="60.0" layoutY="64.0" opacity="0.3" prefHeight="570.0" prefWidth="358.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
                   <TableView layoutX="90.0" layoutY="178.0" opacity="0.78" prefHeight="427.0" prefWidth="305.0" style="-fx-background-radius: 20; -fx-background-color: black;">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Producto" />
-                        <TableColumn prefWidth="75.0" text="Precio" />
-                        <TableColumn prefWidth="75.0" text="Cantidad" />
+                        <TableColumn prefWidth="174.39989471435547" text="Producto" />
+                        <TableColumn prefWidth="58.400146484375" text="Precio" />
+                        <TableColumn prefWidth="70.4000244140625" text="Cantidad" />
                      </columns>
                   </TableView>
-                  <Button layoutX="88.0" layoutY="86.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="309.0" text="Limpiar" />
+                  <Button fx:id="limpiarCesta_button" layoutX="88.0" layoutY="86.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="309.0" text="Limpiar" />
                   <Button fx:id="siguiente_button" layoutX="117.0" layoutY="676.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" text="PROCESAR COMPRA" />
                   <ImageView fitHeight="38.0" fitWidth="38.0" layoutX="117.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                      <image>

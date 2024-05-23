@@ -1,13 +1,20 @@
-package org.example.cine_proyecto_final.controllers
+package org.example.cine_proyecto_final.controllers.administrador
 
 import javafx.fxml.FXML
 import javafx.scene.control.Button
+import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val looger = logging()
 
-class AdministradorGestionButacasController {
+class AdministradorGestionProductosController: KoinComponent {
+
+    private val dbClient: SqlDelightManager by inject()
+    private val viewModel: AdministradorGestionProductosController by inject()
+
     @FXML
     private lateinit var atras_button: Button
 

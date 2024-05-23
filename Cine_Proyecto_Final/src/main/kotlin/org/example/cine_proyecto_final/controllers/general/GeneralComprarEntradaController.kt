@@ -1,23 +1,17 @@
-package org.example.cine_proyecto_final.controllers
+package org.example.cine_proyecto_final.controllers.general
 
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.text.Text
-import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
-import org.example.cine_proyecto_final.viewmodels.GeneralComprarEntradaViewModel
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
 class GeneralComprarEntradaController : KoinComponent {
-
-    private val dbClient: SqlDelightManager by inject()
-    private val viewModel: GeneralComprarEntradaViewModel by inject()
 
     @FXML
     private lateinit var duracionLabel: Label

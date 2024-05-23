@@ -12,11 +12,24 @@ module org.example.cine_proyecto_final {
     requires kotlinx.serialization.json;
     requires koin.core.jvm;
 
-
     opens org.example.cine_proyecto_final to javafx.fxml;
     exports org.example.cine_proyecto_final;
 
     // Controllers
-    opens org.example.cine_proyecto_final.controllers to javafx.fxml;
-    exports org.example.cine_proyecto_final.controllers;
+    opens org.example.cine_proyecto_final.controllers.general to javafx.fxml;
+    exports org.example.cine_proyecto_final.controllers.general;
+
+    // Administrador Controllers
+    opens org.example.cine_proyecto_final.controllers.administrador to javafx.fxml;
+    exports org.example.cine_proyecto_final.controllers.administrador;
+
+    // Cliente Controllers
+    opens org.example.cine_proyecto_final.controllers.cliente to javafx.fxml;
+    exports org.example.cine_proyecto_final.controllers.cliente;
+
+    // Sesión Controllers
+    opens org.example.cine_proyecto_final.controllers.sesion to javafx.fxml;
+    exports org.example.cine_proyecto_final.controllers.sesion;
+
+
 }
