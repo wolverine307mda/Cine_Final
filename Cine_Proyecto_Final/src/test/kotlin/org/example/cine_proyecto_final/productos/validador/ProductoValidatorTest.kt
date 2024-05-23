@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-class ProductoValidadorTest {
+class ProductoValidatorTest {
 
-    private val validador = ProductoValidador()
+    private val validador = ProductoValidator()
 
     @Test
     fun okCuandoProductoEsValido() {

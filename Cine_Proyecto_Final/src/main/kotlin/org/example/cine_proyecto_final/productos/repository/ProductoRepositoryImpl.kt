@@ -51,9 +51,9 @@ class ProductoRepositoryImpl(
      * @param ignoreKey Indica si se debe ignorar el ID del producto.
      * @return El producto guardado o null si no se pudo guardar.
      */
-    override fun save(producto: Producto, ignoreKey : Boolean) : Producto? {
+    override fun save(producto: Producto) : Producto? {
         logger.debug { "Añadiendo el producto: '${producto.nombre}' al inventario" }
-        if (ignoreKey || findById(producto.id) == null){
+        if (findById(producto.id) == null){
             db.insertProducto(
                 id = producto.id,
                 nombre = producto.nombre,

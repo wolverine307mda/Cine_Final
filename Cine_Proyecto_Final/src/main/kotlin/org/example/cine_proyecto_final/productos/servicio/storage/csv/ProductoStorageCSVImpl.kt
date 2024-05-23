@@ -25,17 +25,17 @@ class ProductoStorageCSVImpl : ProductoStorageCSV {
     override fun import(file: File): Result<List<Producto>, ProductoError> {
         try {
             return Ok(
-                file.readLines()
-                    .drop(1)
+            file.readLines()
+                .drop(1)
                     .map {
                         val producto = it.split(',')
                         Producto(
                             id = UUID.randomUUID().toString(),
-                            nombre = producto[1],
-                            stock = producto[3].toInt(),
-                            tipo = elegirTipoProducto(producto[4]),
-                            image = producto[5],
-                            precio = producto[2].toDouble(),
+                            nombre = producto[0],
+                            precio = producto[1].toDouble(),
+                            stock = producto[2].toInt(),
+                            tipo = elegirTipoProducto(producto[3]),
+                            image = producto[4],
                             isDeleted = false,
                             updatedAt = LocalDateTime.now(),
                             createdAt = LocalDateTime.now()
@@ -43,7 +43,7 @@ class ProductoStorageCSVImpl : ProductoStorageCSV {
                     }
             )
         }catch (e : Exception){
-            logger.debug { "Hubo un error al cargar las butacas del archivo ${file.name}" }
+            logger.debug { "Hubo un error al cargar los productos del archivo ${file.name}" }
             return Err(ProductoError.ProductoStorageError("Hubo un error al cargar los productos del archivo ${file.name}"))
         }
     }
