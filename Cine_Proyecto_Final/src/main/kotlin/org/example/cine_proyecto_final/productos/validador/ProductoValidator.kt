@@ -9,7 +9,7 @@ import org.example.cine_final.productos.models.Producto
 /**
  * Clase encargada de validar la integridad de los objetos Producto.
  */
-class ProductoValidador (){
+class ProductoValidator (){
     /**
      * Valida un producto.
      * @param producto El producto a validar.

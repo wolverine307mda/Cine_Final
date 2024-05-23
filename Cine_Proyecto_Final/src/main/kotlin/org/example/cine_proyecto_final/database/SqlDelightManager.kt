@@ -50,7 +50,7 @@ class SqlDelightManager(
     fun initialize() {
         if (databaseInitData) {
             removeAllData()
-
+            databaseQueries.insertAdmin()
         }
     }
 

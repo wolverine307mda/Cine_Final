@@ -4,7 +4,7 @@ import com.github.michaelbull.result.*
 import org.example.productos.errors.ProductoError
 import org.example.cine_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
-import org.example.cine_proyecto_final.productos.validador.ProductoValidador
+import org.example.cine_proyecto_final.productos.validador.ProductoValidator
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -16,7 +16,7 @@ private val logger = logging()
  */
 class ProductoServicioImpl(
     private var productosRepositorio: ProductosRepository,
-    private var productoValidador: ProductoValidador,
+    private var productoValidador: ProductoValidator,
 ) : ProductoServicio {
 
     /**
@@ -31,7 +31,6 @@ class ProductoServicioImpl(
                 productosRepositorio.save(producto)?.let {
                     return Ok(producto)
                 }
-                return Err(ProductoError.ProductoStorageError("El producto no se pudo guardar en la base de datos"))
             }
         return Err(ProductoError.ProductoStorageError("No se pudo guardar el producto con id: ${producto.id}"))
     }

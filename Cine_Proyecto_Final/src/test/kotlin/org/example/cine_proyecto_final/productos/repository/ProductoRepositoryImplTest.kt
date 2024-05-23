@@ -7,7 +7,9 @@ import org.example.cine_proyecto_final.config.AppConfig
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.TestMethodOrder
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
@@ -26,6 +28,7 @@ class ProductoRepositoryImplTest {
     private lateinit var db: SqlDelightManager
     private lateinit var databaseQueries: DatabaseQueries
     private lateinit var repository: ProductoRepositoryImpl
+
 
     @BeforeEach
     fun setUp() {
