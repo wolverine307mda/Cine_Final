@@ -24,13 +24,13 @@ class CuentaRepositoryImpl(
 
     /**
      * Busca una cuenta de usuario por su identificador único.
-     * @param id El identificador único de la cuenta de usuario a buscar.
+     * @param email El identificador único de la cuenta de usuario a buscar.
      * @return la cuenta de usuario encontrada, o null si no se encontró ninguna cuenta con el identificador proporcionado o si ocurrió un error.
      */
-    override fun findById(id: String): Cuenta? {
-        logger.debug { "Buscando una cuenta con id: $id" }
-        if (db.cuentaExists(id).executeAsOne()){
-            return db.getCuentaById(id).executeAsOne().toCuenta()
+    override fun findById(email: String): Cuenta? {
+        logger.debug { "Buscando una cuenta con id: $email" }
+        if (db.cuentaExists(email).executeAsOne()){
+            return db.getCuentaById(email).executeAsOne().toCuenta()
         }
         return null
     }

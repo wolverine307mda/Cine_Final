@@ -12,6 +12,9 @@ module org.example.cine_proyecto_final {
     requires kotlinx.serialization.json;
     requires koin.core.jvm;
 
+    // Agrega el módulo kotlin.test
+    requires kotlin.test;
+
     opens org.example.cine_proyecto_final to javafx.fxml;
     exports org.example.cine_proyecto_final;
 
@@ -31,5 +34,6 @@ module org.example.cine_proyecto_final {
     opens org.example.cine_proyecto_final.controllers.sesion to javafx.fxml;
     exports org.example.cine_proyecto_final.controllers.sesion;
 
-
+    // Abre el paquete de pruebas para kotlin.test
+    opens org.example.cine_proyecto_final.cuentas.repository;
 }

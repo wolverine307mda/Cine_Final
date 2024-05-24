@@ -86,3 +86,16 @@
 .toggle-button .graphic {
     -fx-background-color: transparent;
 }
+
+/* Estilos específicos para los estados de las butacas */
+.butaca-libre {
+    -fx-background-color: green;
+}
+
+.butaca-ocupada {
+    -fx-background-color: blue;
+}
+
+.butaca-fuera-de-servicio {
+    -fx-background-color: gray;
+}

@@ -23,7 +23,7 @@ class CineApplication : Application() {
                 // Iniciamos la aplicación, podiamos hacerlo con also!!
                 initMainStage(stage)
             }
-            
+
             dbClient = SqlDelightManager(AppConfig())
 
         } catch (e: Exception) {
@@ -46,3 +46,4 @@ class CineApplication : Application() {
 fun main() {
     Application.launch(CineApplication::class.java)
 }
+

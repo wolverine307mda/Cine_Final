@@ -14,12 +14,12 @@ private val logger = logging()
 /**
  * Implementación de los servicios relacionados con las butacas.
  *
- * @property butacaRepositorio El repositorio de butacas para acceder a la base de datos.
+ * @property butacaRepository El repositorio de butacas para acceder a la base de datos.
  * @property butacaValidator El validador de butacas para validar los datos importados.
  * @property config La configuración de la aplicación.
  */
 class ButacaServiceImpl(
-    private var butacaRepositorio: ButacaRepository,
+    private var butacaRepository: ButacaRepository,
     private var butacaValidator: ButacaValidator,
     private val config : AppConfig
 ) : ButacaService {
@@ -31,7 +31,7 @@ class ButacaServiceImpl(
     override fun save(butaca: Butaca): Result<Butaca, ButacaError> {
         logger.debug { "Guardando la butaca con id: ${butaca.id}" }
         butacaValidator.validate(butaca).onSuccess {
-            butacaRepositorio.save(butaca)?.let {
+            butacaRepository.save(butaca)?.let {
                 return Ok(it)
             }
         }
@@ -44,9 +44,9 @@ class ButacaServiceImpl(
      * @return Un resultado que contiene una lista de objetos Butaca si la operación tiene éxito,
      * o un error de ButacaError si no se encuentran butacas.
      */
-    override fun findAll(): Result<List<Butaca>, ButacaError> {
+    override fun findAll(): Result<List<Butaca>, Nothing> {
         logger.debug { "Buscando todas las butacas en la base de datos" }
-        return Ok(butacaRepositorio.findAll())
+        return Ok(butacaRepository.findAll())
     }
 
 
@@ -58,7 +58,7 @@ class ButacaServiceImpl(
      */
     override fun findById(id: String): Result<Butaca, ButacaError> {
         logger.debug { "Buscando una butaca con id= $id en la base de datos" }
-        butacaRepositorio.findById(id)?.let {
+        butacaRepository.findById(id)?.let {
             return Ok(it)
         }
         return Err(ButacaError.ButacaNotFoundError("La butaca con ID $id no existe"))
@@ -73,7 +73,7 @@ class ButacaServiceImpl(
     override fun update(id: String, butaca: Butaca, venta: Venta?): Result<Butaca, ButacaError> {
         logger.debug { "Actualizando la butaca con id= $id en la base de datos" }
         butacaValidator.validate(butaca).onSuccess {
-            butacaRepositorio.update(id = id, butaca = butaca, venta)?.let {
+            butacaRepository.update(id = id, butaca = butaca, venta)?.let {
                 return Ok(it)
             }
         }.onFailure {
