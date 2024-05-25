@@ -18,7 +18,7 @@
    <children>
       <ImageView fitHeight="800.0" fitWidth="1280.0" opacity="0.42" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/fondo_seleccion_productos.jpg" />
+            <Image url="@../images/fondo_gestion_productos.jpg" />
          </image>
       </ImageView>
       <SplitPane dividerPositions="0.6380224578914535" prefHeight="802.0" prefWidth="1284.0" style="-fx-background-color: transparent;">

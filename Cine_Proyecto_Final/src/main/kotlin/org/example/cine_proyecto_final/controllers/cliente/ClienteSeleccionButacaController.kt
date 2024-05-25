@@ -18,17 +18,12 @@ class ClienteSeleccionButacaController : KoinComponent {
     private val viewModel: ClienteSeleccionButacaViewModel by inject()
 
     @FXML
-    private lateinit var email_textField: TextField
-
-    @FXML
-    private lateinit var contrasenia_field: PasswordField
-
-    @FXML
     private lateinit var atras_button: Button
 
     @FXML
     private lateinit var siguiente_button: Button
 
+    // Fila A
     @FXML
     private lateinit var butaca_a1: ToggleButton
     @FXML
@@ -43,6 +38,8 @@ class ClienteSeleccionButacaController : KoinComponent {
     private lateinit var butaca_a6: ToggleButton
     @FXML
     private lateinit var butaca_a7: ToggleButton
+
+    // Fila B
     @FXML
     private lateinit var butaca_b1: ToggleButton
     @FXML
@@ -57,6 +54,8 @@ class ClienteSeleccionButacaController : KoinComponent {
     private lateinit var butaca_b6: ToggleButton
     @FXML
     private lateinit var butaca_b7: ToggleButton
+
+    // Fila C
     @FXML
     private lateinit var butaca_c1: ToggleButton
     @FXML
@@ -71,6 +70,8 @@ class ClienteSeleccionButacaController : KoinComponent {
     private lateinit var butaca_c6: ToggleButton
     @FXML
     private lateinit var butaca_c7: ToggleButton
+
+    // Fila D
     @FXML
     private lateinit var butaca_d1: ToggleButton
     @FXML
@@ -85,6 +86,8 @@ class ClienteSeleccionButacaController : KoinComponent {
     private lateinit var butaca_d6: ToggleButton
     @FXML
     private lateinit var butaca_d7: ToggleButton
+
+    // Fila E
     @FXML
     private lateinit var butaca_e1: ToggleButton
     @FXML

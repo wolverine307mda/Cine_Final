@@ -3,6 +3,8 @@ package org.example.cine_proyecto_final.viewmodels.cliente
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import javafx.application.Platform
+import javafx.beans.property.SimpleListProperty
+import javafx.collections.FXCollections
 import javafx.scene.control.ToggleButton
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.models.Estado
@@ -22,13 +24,13 @@ class ClienteSeleccionButacaViewModel : KoinComponent {
     private val config: AppConfig by inject()
     private val butacaServicio = ButacaServiceImpl(ButacaRepositoryImpl(dbClient), butacaValidator, config)
     private val logger = logging()
-    var butacas: List<Butaca>? = null
-        private set
+
+    val butacas = SimpleListProperty<Butaca>(FXCollections.observableArrayList())
 
     fun buscarButacas(onSuccess: () -> Unit, onFailure: () -> Unit) {
         val findAllResult = butacaServicio.findAll()
         findAllResult.onSuccess {
-            butacas = it
+            butacas.setAll(it)
             onSuccess()
         }.onFailure {
             logger.debug { "Error al obtener las butacas" }
@@ -38,7 +40,7 @@ class ClienteSeleccionButacaViewModel : KoinComponent {
 
     fun actualizarEstadoButacas(obtenerToggleButtonPorId: (String) -> ToggleButton?) {
         Platform.runLater {
-            butacas?.forEach { butaca ->
+            butacas.forEach { butaca ->
                 val toggleButton = obtenerToggleButtonPorId(butaca.id)
                 when (butaca.estado) {
                     Estado.OCUPADA -> {
