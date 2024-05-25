@@ -45,6 +45,7 @@ class CuentaServicioImpl(
     override fun save(cuenta: Cuenta): Result<Cuenta, CuentaError> {
         logger.debug { "Guardando cuenta con email: ${cuenta.email}" }
         cuentaValidator.validate(cuenta).onSuccess{
+            cache.get(cuenta.email) ?:
             cuentaRepository.save(cuenta)?.let {
                 cache.put(it.email,it)
                 return Ok(it)
@@ -61,8 +62,12 @@ class CuentaServicioImpl(
      */
     override fun update(email: String, cuenta: Cuenta): Result<Cuenta, CuentaError> {
         logger.debug { "Actualizando cuenta con email: ${cuenta.email}" }
-        cuentaValidator.validate(cuenta).onSuccess{
-            cuentaRepository.update(email, cuenta)?.let {
+        cuentaValidator.validate(cuenta).onSuccess {
+            cache.get(email)?.let {
+                cache.put(it.email, cuenta)
+                cuentaRepository.update(email, cuenta)
+                return Ok(it)
+            } ?: cuentaRepository.update(email, cuenta)?.let {
                 cache.put(it.email,it)
                 return Ok(it)
             }

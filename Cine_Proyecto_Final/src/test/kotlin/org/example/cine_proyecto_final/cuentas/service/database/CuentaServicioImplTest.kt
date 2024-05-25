@@ -6,12 +6,15 @@ import cuenta.errors.CuentaError
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.cuentas.models.TipoCuenta
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
+import org.example.cine_proyecto_final.cuentas.service.cache.CuentaCache
 import org.example.cine_proyecto_final.cuentas.validator.CuentaValidator
 import org.example.cine_proyecto_final.database.logger
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.junit.jupiter.MockitoSettings
@@ -30,10 +33,14 @@ class CuentaServicioImplTest {
     private lateinit var validador: CuentaValidator
 
     @Mock
-    private lateinit var servicio: CuentaServicio
+    private lateinit var cache: CuentaCache
+
+    @InjectMocks
+    private lateinit var servicio: CuentaServicioImpl
+
 
     @Test
-    fun GuardaUnaCuentaNuevaQueNoExiste() {
+    fun guardaUnaCuentaNuevaQueNoExisteyEsValida() {
         // Arrange
         val cuenta = Cuenta(
             email = "admin@admin.com",
@@ -47,13 +54,13 @@ class CuentaServicioImplTest {
         )
         whenever(repository.save(cuenta)).thenReturn(cuenta)
         whenever(validador.validate(cuenta)).thenReturn(Ok(cuenta))
-        logger.debug { "repository ${repository.save(cuenta)}" }
-        logger.debug { "validador ${validador.validate(cuenta)}" }
+        whenever(cache.get(cuenta.email)).thenReturn(null)
+
         // Act
         val result = servicio.save(cuenta)
-        logger.debug { "result = $result" }
+
         // Assert
-        assertEquals(cuenta, result)
+        assertEquals(cuenta, result.value)
     }
 
     @Test
@@ -71,6 +78,7 @@ class CuentaServicioImplTest {
         )
         whenever(repository.save(cuenta)).thenReturn(cuenta)
         whenever(validador.validate(cuenta)).thenReturn(Err(CuentaError.CuentaStorageError("\"No se pudo guardar la cuenta con email: ${cuenta.email}")))
+        whenever(cache.get(cuenta.email)).thenReturn(null)
 
         // Act
         val result = servicio.save(cuenta)
@@ -80,7 +88,7 @@ class CuentaServicioImplTest {
     }
 
     @Test
-    fun guardarCuentaQueYaExistePeroEsValida() {
+    fun guardarCuentaQueYaExisteEnLaCachePeroEsValida() {
         // Arrange
         val cuenta = Cuenta(
             email = "admin@admin.com",
@@ -94,6 +102,7 @@ class CuentaServicioImplTest {
         )
         whenever(repository.save(cuenta)).thenReturn(null)
         whenever(validador.validate(cuenta)).thenReturn(Ok(cuenta))
+        whenever(cache.get(cuenta.email)).thenReturn(cuenta)
 
         // Act
         val result = servicio.save(cuenta)
@@ -103,7 +112,31 @@ class CuentaServicioImplTest {
     }
 
     @Test
-    fun findByEmailDevuelveUnaCuentaExistente() {
+    fun guardarCuentaQueNoExisteEnLaCachePeroSiEnLaBDyEsValida() {
+        // Arrange
+        val cuenta = Cuenta(
+            email = "admin@admin.com",
+            nombre = "admin",
+            apellido = "admin",
+            imagen = "admin.jpg",
+            password = "password",
+            tipo = TipoCuenta.ADMINISTRADOR,
+            createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000")
+        )
+        whenever(repository.save(cuenta)).thenReturn(null)
+        whenever(validador.validate(cuenta)).thenReturn(Ok(cuenta))
+        whenever(cache.get(cuenta.email)).thenReturn(null)
+
+        // Act
+        val result = servicio.save(cuenta)
+
+        // Assert
+        assertTrue(result.isErr)
+    }
+
+    @Test
+    fun findByEmailDevuelveUnaCuentaExistenteQueEstaEnLaCache() {
         // Arrange
         val cuenta = Cuenta(
             email = "admin@admin.com",
@@ -117,6 +150,7 @@ class CuentaServicioImplTest {
         )
         whenever(repository.findById(cuenta.email)).thenReturn(cuenta)
         whenever(validador.validate(cuenta)).thenReturn(Ok(cuenta))
+        whenever(cache.get(cuenta.email)).thenReturn(cuenta)
 
         // Act
         val result = servicio.findByEmail(cuenta.email).value
@@ -126,7 +160,53 @@ class CuentaServicioImplTest {
     }
 
     @Test
-    fun ActualizaUnaCuentaExistente() {
+    fun findByEmailDevuelveUnaCuentaExistenteQueNoEstaEnLaCache() {
+        // Arrange
+        val cuenta = Cuenta(
+            email = "admin@admin.com",
+            nombre = "admin",
+            apellido = "admin",
+            imagen = "admin.jpg",
+            password = "password",
+            tipo = TipoCuenta.ADMINISTRADOR,
+            createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000")
+        )
+        whenever(repository.findById(cuenta.email)).thenReturn(cuenta)
+        whenever(cache.get(cuenta.email)).thenReturn(null)
+
+        // Act
+        val result = servicio.findByEmail(cuenta.email).value
+
+        // Assert
+        assertEquals(cuenta, result)
+    }
+
+    @Test
+    fun findByEmailDevuelveUnaCuentaQueNoExiste() {
+        // Arrange
+        val cuenta = Cuenta(
+            email = "admin@admin.com",
+            nombre = "admin",
+            apellido = "admin",
+            imagen = "admin.jpg",
+            password = "password",
+            tipo = TipoCuenta.ADMINISTRADOR,
+            createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000")
+        )
+        whenever(repository.findById(cuenta.email)).thenReturn(null)
+        whenever(cache.get(cuenta.email)).thenReturn(null)
+
+        // Act
+        val result = servicio.findByEmail(cuenta.email)
+
+        // Assert
+        assertTrue(result.isErr)
+    }
+
+    @Test
+    fun updateActualizaUnaCuentaExistenteQueEstaEnLaCache() {
         // Arrange
         val cuenta = Cuenta(
             email = "user@user.com",
@@ -141,13 +221,38 @@ class CuentaServicioImplTest {
         whenever(repository.findById(cuenta.email)).thenReturn(cuenta)
         whenever(repository.update(cuenta.email, cuenta)).thenReturn(cuenta)
         whenever(validador.validate(cuenta)).thenReturn(Ok(cuenta))
+        whenever(cache.get(cuenta.email)).thenReturn(cuenta)
 
         // Act
         val result = servicio.update(cuenta.email, cuenta)
 
         // Assert
-        assertTrue(result.isErr)
+        assertTrue(result.isOk)
+    }
 
+    @Test
+    fun updateActualizaUnaCuentaExistenteQueNoEstaEnLaCache() {
+        // Arrange
+        val cuenta = Cuenta(
+            email = "user@user.com",
+            nombre = "User",
+            apellido = "uno",
+            imagen = "user.jpg",
+            password = "password",
+            tipo = TipoCuenta.USUARIO,
+            createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
+            updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000")
+        )
+        whenever(repository.findById(cuenta.email)).thenReturn(cuenta)
+        whenever(repository.update(cuenta.email, cuenta)).thenReturn(cuenta)
+        whenever(validador.validate(cuenta)).thenReturn(Ok(cuenta))
+        whenever(cache.get(cuenta.email)).thenReturn(null)
+
+        // Act
+        val result = servicio.update(cuenta.email, cuenta)
+
+        // Assert
+        assertTrue(result.isOk)
     }
 
     @Test
