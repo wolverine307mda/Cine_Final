@@ -102,7 +102,7 @@ class ButacaRepositoryImpl (
      * @return las Butacas que forman parte de esa venta o una lista vacía si no pudo encontrar ninguna
      */
     override fun getAllByVentaId(id: String): List<Butaca>{
-        logger.debug { "Buscanndo las butacas que pertenecen a la venta con id= $id" }
+        logger.debug { "Buscando las butacas que pertenecen a la venta con id: $id" }
         if (db.countButacasByVentaId(id).executeAsOne() > 0){
             return db.getButacasByVentaId(id).executeAsList().map { it.toButaca() }
         }

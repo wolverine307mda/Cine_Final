@@ -11,6 +11,7 @@ module org.example.cine_proyecto_final {
     requires java.sql;
     requires kotlinx.serialization.json;
     requires koin.core.jvm;
+    requires java.desktop;
 
     // Agrega el módulo kotlin.test
     requires kotlin.test;

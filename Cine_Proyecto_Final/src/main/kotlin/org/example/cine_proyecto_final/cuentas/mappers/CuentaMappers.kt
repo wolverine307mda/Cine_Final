@@ -30,8 +30,8 @@ fun CuentaDto.toCuenta() : Cuenta {
 fun Cuenta.toDto() : CuentaDto {
     return CuentaDto(
         email = this.email,
-        createdAt = this.toString(),
-        updatedAt = this.toString(),
+        createdAt = this.createdAt.toString(),
+        updatedAt = this.updatedAt.toString(),
         apellido = this.apellido,
         password =  this.password,
         tipo = this.tipo!!.name,
