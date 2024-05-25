@@ -1,20 +1,10 @@
 package org.example.cine_proyecto_final.controllers.cliente
 
-import com.github.michaelbull.result.onFailure
-import com.github.michaelbull.result.onSuccess
-import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.control.ToggleButton
-import org.example.cine_proyecto_final.butacas.models.Butaca
-import org.example.cine_proyecto_final.butacas.models.Estado
-import org.example.cine_proyecto_final.butacas.repository.ButacaRepositoryImpl
-import org.example.cine_proyecto_final.butacas.service.database.ButacaServiceImpl
-import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
-import org.example.cine_proyecto_final.config.AppConfig
-import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.koin.core.component.KoinComponent
@@ -25,13 +15,7 @@ private val logger = logging()
 
 class ClienteSeleccionButacaController : KoinComponent {
 
-    private val dbClient: SqlDelightManager by inject()
     private val viewModel: ClienteSeleccionButacaViewModel by inject()
-    /*private val butacaValidator: ButacaValidator by inject()
-    private val config: AppConfig by inject()
-    private lateinit var butacaServicio: ButacaServiceImpl
-
-    private var butacas: List<Butaca>? = null*/
 
     @FXML
     private lateinit var email_textField: TextField
@@ -45,87 +29,84 @@ class ClienteSeleccionButacaController : KoinComponent {
     @FXML
     private lateinit var siguiente_button: Button
 
-    // butacas
-    /*@FXML
-    private var butaca_a1: ToggleButton? = null
     @FXML
-    private var butaca_a2: ToggleButton? = null
+    private lateinit var butaca_a1: ToggleButton
     @FXML
-    private var butaca_a3: ToggleButton? = null
+    private lateinit var butaca_a2: ToggleButton
     @FXML
-    private var butaca_a4: ToggleButton? = null
+    private lateinit var butaca_a3: ToggleButton
     @FXML
-    private var butaca_a5: ToggleButton? = null
+    private lateinit var butaca_a4: ToggleButton
     @FXML
-    private var butaca_a6: ToggleButton? = null
+    private lateinit var butaca_a5: ToggleButton
     @FXML
-    private var butaca_a7: ToggleButton? = null
+    private lateinit var butaca_a6: ToggleButton
     @FXML
-    private var butaca_b1: ToggleButton? = null
+    private lateinit var butaca_a7: ToggleButton
     @FXML
-    private var butaca_b2: ToggleButton? = null
+    private lateinit var butaca_b1: ToggleButton
     @FXML
-    private var butaca_b3: ToggleButton? = null
+    private lateinit var butaca_b2: ToggleButton
     @FXML
-    private var butaca_b4: ToggleButton? = null
+    private lateinit var butaca_b3: ToggleButton
     @FXML
-    private var butaca_b5: ToggleButton? = null
+    private lateinit var butaca_b4: ToggleButton
     @FXML
-    private var butaca_b6: ToggleButton? = null
+    private lateinit var butaca_b5: ToggleButton
     @FXML
-    private var butaca_b7: ToggleButton? = null
+    private lateinit var butaca_b6: ToggleButton
     @FXML
-    private var butaca_c1: ToggleButton? = null
+    private lateinit var butaca_b7: ToggleButton
     @FXML
-    private var butaca_c2: ToggleButton? = null
+    private lateinit var butaca_c1: ToggleButton
     @FXML
-    private var butaca_c3: ToggleButton? = null
+    private lateinit var butaca_c2: ToggleButton
     @FXML
-    private var butaca_c4: ToggleButton? = null
+    private lateinit var butaca_c3: ToggleButton
     @FXML
-    private var butaca_c5: ToggleButton? = null
+    private lateinit var butaca_c4: ToggleButton
     @FXML
-    private var butaca_c6: ToggleButton? = null
+    private lateinit var butaca_c5: ToggleButton
     @FXML
-    private var butaca_c7: ToggleButton? = null
+    private lateinit var butaca_c6: ToggleButton
     @FXML
-    private var butaca_d1: ToggleButton? = null
+    private lateinit var butaca_c7: ToggleButton
     @FXML
-    private var butaca_d2: ToggleButton? = null
+    private lateinit var butaca_d1: ToggleButton
     @FXML
-    private var butaca_d3: ToggleButton? = null
+    private lateinit var butaca_d2: ToggleButton
     @FXML
-    private var butaca_d4: ToggleButton? = null
+    private lateinit var butaca_d3: ToggleButton
     @FXML
-    private var butaca_d5: ToggleButton? = null
+    private lateinit var butaca_d4: ToggleButton
     @FXML
-    private var butaca_d6: ToggleButton? = null
+    private lateinit var butaca_d5: ToggleButton
     @FXML
-    private var butaca_d7: ToggleButton? = null
+    private lateinit var butaca_d6: ToggleButton
     @FXML
-    private var butaca_e1: ToggleButton? = null
+    private lateinit var butaca_d7: ToggleButton
     @FXML
-    private var butaca_e2: ToggleButton? = null
+    private lateinit var butaca_e1: ToggleButton
     @FXML
-    private var butaca_e3: ToggleButton? = null
+    private lateinit var butaca_e2: ToggleButton
     @FXML
-    private var butaca_e4: ToggleButton? = null
+    private lateinit var butaca_e3: ToggleButton
     @FXML
-    private var butaca_e5: ToggleButton? = null
+    private lateinit var butaca_e4: ToggleButton
     @FXML
-    private var butaca_e6: ToggleButton? = null
+    private lateinit var butaca_e5: ToggleButton
     @FXML
-    private var butaca_e7: ToggleButton? = null*/
+    private lateinit var butaca_e6: ToggleButton
+    @FXML
+    private lateinit var butaca_e7: ToggleButton
 
     @FXML
     fun initialize() {
         logger.debug { "Iniciando pantalla general de Selección de Butacas" }
-        /*butacaServicio = ButacaServiceImpl(
-            ButacaRepositoryImpl(dbClient),
-            butacaValidator,
-            config
-        )*/
-        //buscarButacas()
+        viewModel.buscarButacas(
+            onSuccess = { viewModel.actualizarEstadoButacas(::obtenerToggleButtonPorId) },
+            onFailure = { logger.debug { "Error al buscar butacas" } }
+        )
         atras_button.setOnAction {
             logger.debug { "Botón 'Atrás' presionado" }
             RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA)
@@ -133,27 +114,6 @@ class ClienteSeleccionButacaController : KoinComponent {
         siguiente_button.setOnAction {
             logger.debug { "Botón 'Siguiente' presionado" }
             RoutesManager.changeScene(RoutesManager.View.SELECCION_PRODUCTOS)
-        }
-    }
-
-    /*private fun buscarButacas() {
-        val findAllResult = butacaServicio.findAll()
-        findAllResult.onSuccess { butacas = it }
-            .onFailure { logger.debug { "Error al obtener las butacas" } }
-        actualizarEstadoButacas()
-    }
-
-    private fun actualizarEstadoButacas() {
-        Platform.runLater {
-            butacas?.forEach { butaca ->
-                val toggleButton = obtenerToggleButtonPorId(butaca.id)
-                when (butaca.estado) {
-                    Estado.OCUPADA -> toggleButton?.style = "-fx-background-color: blue;"
-                    Estado.LIBRE -> toggleButton?.style = "-fx-background-color: green;"
-                    Estado.FUERA_DE_SERVICIO -> toggleButton?.style = "-fx-background-color: gray;"
-                    else -> toggleButton?.style = "-fx-background-color: red;"
-                }
-            }
         }
     }
 
@@ -196,5 +156,5 @@ class ClienteSeleccionButacaController : KoinComponent {
             "E7" -> butaca_e7
             else -> null
         }
-    }*/
+    }
 }
