@@ -72,7 +72,7 @@ class VentaRepositorioImpl(
         logger.debug { "Buscando la venta con id : $id" }
         if (db.existsVenta(id).executeAsOne()){
             val ventaEntity = db.getVentaById(id).executeAsOne()
-            val lineas = getAllLineasByVentaId(ventaEntity.id).filter { !it.isDeleted }
+            val lineas = getAllLineasByVentaId(ventaEntity.id)
             val cliente = clienteRepositorio.findById(ventaEntity.id_socio)
             val butacas = butacaRepository.getAllByVentaId(id)
             return ventaEntity.toVenta(cliente = cliente!!, lineas = lineas, butacas = butacas)
@@ -120,10 +120,17 @@ class VentaRepositorioImpl(
      */
     override fun delete(id: String): Venta? {
         logger.debug { "Borrando venta con id: $id" }
-        findById(id)?.let { //Si existe
+        findById(id)?.let { venta ->
+            //Para la venta
             val date = LocalDateTime.now()
             db.deleteVenta(id = id, updatedAt = date.toString())
-            return it.copy(updatedAt = date, isDeleted = true)
+            //Para las lineas de venta
+            val lineas = mutableListOf<LineaVenta>()
+            venta.lineasVenta.forEach { linea ->
+                deleteLineaVenta(linea)
+                lineas.add(linea)
+            }
+            return venta.copy(updatedAt = date, isDeleted = true, lineasVenta = lineas)
         }
         return null
     }
@@ -133,7 +140,7 @@ class VentaRepositorioImpl(
      * @param lineaVenta La línea de venta a eliminar.
      * @return La línea de venta eliminada.
      */
-    override fun deleteLineaVenta(lineaVenta: LineaVenta): LineaVenta {
+    private fun deleteLineaVenta(lineaVenta: LineaVenta): LineaVenta {
         logger.debug { "Borrando linea de venta con id: ${lineaVenta.id}" }
         val date = LocalDateTime.now()
         db.deleteLineaVenta(lineaVenta.id, date.toString())

@@ -4,6 +4,8 @@ import org.example.cine_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoStorageJsonImplTest
 import org.jetbrains.dokka.InternalDokkaApi
 import org.jetbrains.dokka.utilities.ServiceLocator.toFile
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -16,6 +18,11 @@ class ProductoStorageCSVImplTest {
 
     private val file = Files.createTempFile("", ".csv")
     private var productoStorageCSV = ProductoStorageCSVImpl()
+
+    @AfterEach
+    fun tearDown() {
+        Files.deleteIfExists(file)
+    }
 
     @BeforeEach
     fun setUp() {
