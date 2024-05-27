@@ -8,10 +8,8 @@ import org.example.cine_proyecto_final.cuentas.models.TipoCuenta
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
 import org.example.cine_proyecto_final.cuentas.service.cache.CuentaCache
 import org.example.cine_proyecto_final.cuentas.validator.CuentaValidator
-import org.example.cine_proyecto_final.database.logger
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks

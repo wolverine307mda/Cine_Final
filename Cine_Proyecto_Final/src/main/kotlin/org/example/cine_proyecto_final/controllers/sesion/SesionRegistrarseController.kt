@@ -15,6 +15,7 @@ import org.example.cine_proyecto_final.viewmodels.sesion.SesionRegistrarseViewMo
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import kotlin.system.exitProcess
 
 private val logger = logging()
 
@@ -22,8 +23,8 @@ class SesionRegistrarseController: KoinComponent {
 
     private val viewModel: SesionRegistrarseViewModel by inject()
 
-    @FXML
-    private lateinit var imagen_button: Button
+    //@FXML
+    //private lateinit var imagen_button: Button
 
     @FXML
     private lateinit var nombre_field: TextField
@@ -60,10 +61,10 @@ class SesionRegistrarseController: KoinComponent {
         }
         volver_inicio_sesion_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.SESION_INICIO) }
 
-        imagen_button.setOnAction { onImageAction() }
+        //imagen_button.setOnAction { onImageAction() }
     }
 
-    private fun onImageAction() {
+    /*private fun onImageAction() {
         logger.debug { "onImageAction" }
         FileChooser().run {
             title = "Selecciona una imagen"
@@ -71,7 +72,7 @@ class SesionRegistrarseController: KoinComponent {
             showOpenDialog(RoutesManager.activeStage)
         }?.let {
         }
-    }
+    }*/
 
     fun registrarUsuarioCuenta(nombre: String, apellido: String, email: String, contrasenia: String, repita_contrasenia: String) {
         if (contrasenia != repita_contrasenia) {
@@ -102,7 +103,7 @@ class SesionRegistrarseController: KoinComponent {
             }
     }
     private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
-        val alert = javafx.scene.control.Alert(alerta)
+        val alert = Alert(alerta)
         alert.title = title
         alert.headerText = null
         alert.contentText = mensaje
