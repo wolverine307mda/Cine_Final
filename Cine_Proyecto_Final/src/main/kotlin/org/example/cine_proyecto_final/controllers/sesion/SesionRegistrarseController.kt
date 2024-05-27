@@ -5,6 +5,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.DatePicker
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
+import javafx.stage.FileChooser
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionRegistrarseViewModel
@@ -17,7 +18,7 @@ private val logger = logging()
 class SesionRegistrarseController: KoinComponent {
 
     private val viewModel: SesionRegistrarseViewModel by inject()
-    private val dbClient: SqlDelightManager by inject()
+    //private val dbClient: SqlDelightManager by inject()
 
     @FXML
     private lateinit var imagen_button: Button
@@ -43,8 +44,25 @@ class SesionRegistrarseController: KoinComponent {
     @FXML
     private fun initialize(){
         logger.debug { "iniciando pantalla de registro" }
+        val nombre = nombre_field.text
+        val email = email_field.text
+        val contrasenia = contrasenia_field.text
+        val repita_contrasenia = repita_contrasenia_field.text
         volver_inicio_sesion_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.SESION_INICIO) }
+
     }
 
+    private fun onImageAction() {
+        logger.debug { "onImageAction" }
+        // Abrimos un diálogo para seleccionar una imagen, esta vez lo he hecho más compacto!!!
+        // Comparalo con los de Json!!!
+        FileChooser().run {
+            title = "Selecciona una imagen"
+            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+            //viewModel.updateImageAlumnoOperacion(it)
+        }
 
+    }
 }

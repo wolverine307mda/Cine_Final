@@ -15,6 +15,7 @@ module org.example.cine_proyecto_final {
 
     // Agrega el módulo kotlin.test
     requires kotlin.test;
+    requires koin.test.jvm;
 
     opens org.example.cine_proyecto_final to javafx.fxml;
     exports org.example.cine_proyecto_final;
