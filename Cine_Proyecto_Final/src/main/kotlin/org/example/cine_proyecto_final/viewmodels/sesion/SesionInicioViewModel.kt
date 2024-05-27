@@ -10,6 +10,7 @@ import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.cuentas.models.TipoCuenta
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepositoryImpl
 import org.example.cine_proyecto_final.cuentas.service.cache.CuentaCacheImpl
+import org.example.cine_proyecto_final.cuentas.service.database.CuentaServicio
 import org.example.cine_proyecto_final.cuentas.service.database.CuentaServicioImpl
 import org.example.cine_proyecto_final.cuentas.validator.CuentaValidator
 import org.example.cine_proyecto_final.database.SqlDelightManager
@@ -17,14 +18,26 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class SesionInicioViewModel : KoinComponent {
+    
+    var usuario: Cuenta? = null
+    private val service : CuentaServicio by inject()
+    
+    //private val dbClient: SqlDelightManager by inject()
+    //private val validador: CuentaValidator by inject()
+    //private val cache: CuentaCacheImpl by inject()
+    //private val repository = CuentaRepositoryImpl(dbClient)
+    
 
-    private val dbClient: SqlDelightManager by inject()
-    private var usuario: Cuenta? = null
-    private val validador: CuentaValidator by inject()
-    private val cache: CuentaCacheImpl by inject()
-    private val repository = CuentaRepositoryImpl(dbClient)
-    private val service = CuentaServicioImpl(repository, validador, cache)
-
+    fun iniciarSesion(email: String, contraseña: String) {
+        service.findByEmail(email)
+            .onSuccess {
+                if (it.email == email && it.password == contraseña) {
+                    usuario = it
+                }
+            }
+    }
+    
+    /*
     fun iniciarSesion(email: String, contraseña: String, callback: (Boolean, String, String) -> Unit) {
         val result: Result<Cuenta, CuentaError> = service.findByEmail(email)
 
@@ -49,4 +62,5 @@ class SesionInicioViewModel : KoinComponent {
             callback(false, "", "Error al iniciar sesión: ${error.message}")
         }
     }
+    */
 }

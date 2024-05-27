@@ -67,7 +67,9 @@ CREATE TABLE IF NOT EXISTS CuentaEntity (
 -- Insertar cuenta de administrador
 insertAdmin:
 INSERT INTO CuentaEntity (email, nombre, apellido, imagen, password, tipo, createdAt, updatedAt)
-VALUES ('administrador@dev.com', 'Administrador', '1', 'sin_imagen.jpg', '1234', 'ADMINISTRADOR', '2024-05-15', '2024-05-15');
+VALUES ('administrador@dev.com', 'Administrador', '1', 'sin_imagen.jpg', '1234', 'ADMIN', '2024-05-15T10:30', '2024-05-15T10:30'),
+('user@gmail.com', 'User', '1', 'sin_imagen.jpg', '1234', 'USUARIO', '2024-05-15T10:30', '2024-05-15T10:30')
+;
 
 -- Consultas
 -- Obtener producto por ID y fecha
