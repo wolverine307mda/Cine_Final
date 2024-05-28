@@ -8,8 +8,7 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
-import org.example.cine_proyecto_final.routes.RoutesManager
-import org.example.cine_proyecto_final.viewmodels.sesion.SesionCambioContraseñaViewModel
+import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -21,7 +20,7 @@ private val logger = logging()
  */
 class SesionCambioContraseñaController : KoinComponent {
 
-    private val viewModel: SesionCambioContraseñaViewModel by inject()
+    private val viewModel: SesionViewModel by inject()
 
     @FXML
     private lateinit var email_field: TextField
@@ -39,7 +38,7 @@ class SesionCambioContraseñaController : KoinComponent {
      * Método de inicialización para configurar el botón de guardar y su acción.
      */
     @FXML
-    private fun initialize() {
+    fun initialize() {
         guardar_button.setOnAction {
             logger.debug { "Guardar Button clicked" }
             val email = email_field.text
@@ -56,7 +55,7 @@ class SesionCambioContraseñaController : KoinComponent {
      * @param contraseña La nueva contraseña.
      * @param repitaContraseña La confirmación de la nueva contraseña.
      */
-    private fun cambiarContraseña(email: String, contraseña: String, repitaContraseña: String) {
+    fun cambiarContraseña(email: String, contraseña: String, repitaContraseña: String) {
         if (contraseña != repitaContraseña) {
             showAlert("Error de cambio de contraseña", "Las contraseñas no coinciden", Alert.AlertType.ERROR)
             logger.error { "Las contraseñas no coinciden" }
@@ -86,7 +85,7 @@ class SesionCambioContraseñaController : KoinComponent {
      * @param mensaje El mensaje de la alerta.
      * @param alerta El tipo de alerta.
      */
-    private fun showAlert(title: String, mensaje: String, alerta: Alert.AlertType) {
+    fun showAlert(title: String, mensaje: String, alerta: Alert.AlertType) {
         val alert = Alert(alerta)
         alert.title = title
         alert.headerText = null

@@ -3,16 +3,12 @@ package org.example.cine_proyecto_final.controllers.sesion
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import javafx.fxml.FXML
-import javafx.scene.control.Alert
-import javafx.scene.control.Button
-import javafx.scene.control.DatePicker
-import javafx.scene.control.PasswordField
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.stage.FileChooser
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.cuentas.models.TipoCuenta
 import org.example.cine_proyecto_final.routes.RoutesManager
-import org.example.cine_proyecto_final.viewmodels.sesion.SesionRegistrarseViewModel
+import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -26,7 +22,7 @@ private val logger = logging()
  */
 class SesionRegistrarseController: KoinComponent {
 
-    private val viewModel: SesionRegistrarseViewModel by inject()
+    private val viewModel: SesionViewModel by inject()
 
     @FXML
     private lateinit var imagen_button: Button

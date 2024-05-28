@@ -175,7 +175,7 @@
                   </GridPane>
                   <HBox alignment="CENTER" layoutX="14.0" layoutY="697.0" prefHeight="46.0" prefWidth="294.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="17.199999999999932">
                      <children>
-                        <Button fx:id="btnEditar" mnemonicParsing="false" text="   Editar">
+                        <Button fx:id="editarButton" mnemonicParsing="false" text="   Editar">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>

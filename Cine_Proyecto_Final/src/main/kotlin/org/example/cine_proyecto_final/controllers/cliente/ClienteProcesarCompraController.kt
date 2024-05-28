@@ -71,6 +71,8 @@ class ClienteProcesarCompraController: KoinComponent {
 
     private fun finalizarCompra() {
 
+
+
     }
 
     private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {

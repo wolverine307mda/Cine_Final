@@ -40,7 +40,9 @@ object RoutesManager {
         CAMBIAR_CONTRASEÑA("views/sesion_cambio_contraseña_view.fxml"),
         ADMIN_INICIO("views/administrador_inicio_sesion.fxml"),
         ADMIN_PRODUCTOS("views/administrador_gestion_de_productos.fxml"),
-        ADMIN_BUTACAS("views/administrador_gestion_de_butacas.fxml")
+        ADMIN_BUTACAS("views/administrador_gestion_de_butacas.fxml"),
+        DETALLE_BUTACA("views/detalle/detalle_butaca.fxml"),
+        DETALLE_PRODUCTO("views/detalle/detalle_producto.fxml")
     }
 
     init {
@@ -94,6 +96,10 @@ object RoutesManager {
     // Abre la ventana de inicio de sesión
     fun initSesionInicio() {
         openNewStage(View.SESION_INICIO, "Inicio de Sesión", 580.0, 320.0)
+    }
+
+    fun initDetalle(vista: View, titulo: String){
+        openNewStage(vista, titulo, 380.0, 560.0)
     }
 
     // Abre la ventana de registro
