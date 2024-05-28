@@ -67,6 +67,10 @@ class SesionInicioController : KoinComponent {
      * @param contraseña La contraseña del usuario.
      */
     private fun iniciarSesion(email: String, contraseña: String) {
+        if (email.isBlank() || contraseña.isBlank()) {
+            showAlertOperacion(AlertType.ERROR,"Error de registro", "Todos los campos deben estar completos")
+            return
+        }
         if (viewModel.usuario == null) {
             viewModel.iniciarSesion(email, contraseña)
             if (viewModel.usuario == null) {
