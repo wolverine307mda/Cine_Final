@@ -20,8 +20,12 @@ class AdministradorGestionButacasController: KoinComponent {
     private lateinit var atras_button: Button
 
     @FXML
+    private lateinit var editarButton: Button
+
+    @FXML
     private fun initialize() {
         looger.debug { "iniciando pantalla de gestion de butacas" }
         atras_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.ADMIN_INICIO) }
+        editarButton.setOnAction { RoutesManager.initDetalle(RoutesManager.View.DETALLE_BUTACA,"Editar Butaca") }
     }
 }

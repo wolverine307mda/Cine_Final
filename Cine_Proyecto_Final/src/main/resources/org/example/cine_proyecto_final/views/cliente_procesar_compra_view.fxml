@@ -41,6 +41,8 @@
          </font>
       </Label>
       <TextField fx:id="tarjet_credito_field" layoutX="170.0" layoutY="567.0" prefHeight="38.0" prefWidth="464.0" />
+      <TextField fx:id="fxCaducidad" layoutX="291.0" layoutY="633.0" prefHeight="33.0" prefWidth="86.0" />
+      <TextField fx:id="cvvField" layoutX="429.0" layoutY="633.0" prefHeight="34.0" prefWidth="85.0" />
       <Button layoutX="28.0" layoutY="74.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
       <Label layoutX="148.0" layoutY="112.0" text="Confirma tu compra" textFill="WHITE">
          <font>
@@ -95,7 +97,6 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <TextField fx:id="cvvField" layoutX="429.0" layoutY="633.0" prefHeight="34.0" prefWidth="85.0" />
       <Label layoutX="301.0" layoutY="616.0" text="Caducidad" textFill="WHITE">
          <font>
             <Font size="14.0" />
@@ -106,7 +107,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="fxCaducidad" layoutX="291.0" layoutY="633.0" prefHeight="33.0" prefWidth="86.0" />
    </children>
    <stylesheets>
       <URL value="@Cine_Proyecto_Final%20copia/src/main/resources/org/example/cine_proyecto_final/styles/style.css" />

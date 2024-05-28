@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="380.0" style="-fx-background-color: black;" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="380.0" style="-fx-background-color: black;" stylesheets="@../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.administrador.DetalleProductoController">
    <children>
       <ImageView fitHeight="560.0" fitWidth="380.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/fondo_detalle_producto.jpg" />
          </image>
       </ImageView>
-      <VBox layoutX="25.0" layoutY="188.0" opacity="0.49" prefHeight="299.0" prefWidth="338.0" style="-fx-background-color: black; -fx-background-radius: 20;" />
-      <GridPane layoutX="49.0" layoutY="194.0" prefHeight="254.0" prefWidth="290.0">
+      <VBox layoutX="20.0" layoutY="196.0" opacity="0.49" prefHeight="286.0" prefWidth="338.0" style="-fx-background-color: black; -fx-background-radius: 20;" />
+      <GridPane layoutX="43.0" layoutY="198.0" prefHeight="254.0" prefWidth="290.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="80.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="204.0" />
@@ -49,9 +49,9 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="textAlumnoNumero" editable="false" prefHeight="26.0" prefWidth="156.0" text="021" GridPane.columnIndex="1" />
-            <TextField fx:id="textAlumnoNombre" editable="false" text="9 $" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="textAlumnoEmail" editable="false" prefHeight="28.0" prefWidth="208.0" text="120" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="idField" editable="false" prefHeight="26.0" prefWidth="156.0" text="021" GridPane.columnIndex="1" />
+            <TextField fx:id="precioField" text="9 $" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="stockField" prefHeight="28.0" prefWidth="208.0" text="120" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label style="-fx-font-family: &quot;arial black&quot;;" text="Tipo:" textFill="WHITE" GridPane.rowIndex="4">
                <font>
                   <Font size="16.0" />
@@ -62,8 +62,8 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField fx:id="textAlumnoApellidos" editable="false" text="Pizza" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox fx:id="comboTipo1" prefHeight="42.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="nombreField" text="Pizza" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="tipoCombo" editable="true" prefHeight="42.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="114.0" layoutY="33.0" opacity="0.78" pickOnBounds="true" preserveRatio="true">
@@ -71,6 +71,6 @@
             <Image url="@../../icons/productos_icon.png" />
          </image>
       </ImageView>
-      <Button layoutX="153.0" layoutY="498.0" mnemonicParsing="false" text="SAVE" />
+      <Button fx:id="guardarButton" layoutX="153.0" layoutY="498.0" mnemonicParsing="false" text="SAVE" />
    </children>
 </AnchorPane>

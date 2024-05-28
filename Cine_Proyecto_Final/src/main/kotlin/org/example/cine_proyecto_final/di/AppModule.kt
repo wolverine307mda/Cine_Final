@@ -18,10 +18,8 @@ import org.example.cine_proyecto_final.cuentas.service.database.CuentaServicioIm
 import org.example.cine_proyecto_final.cuentas.service.storage.CuentaStorageImpl
 import org.example.cine_proyecto_final.cuentas.service.storage.json.CuentaStorageJsonImpl
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
-import org.example.cine_proyecto_final.viewmodels.sesion.SesionInicioViewModel
-import org.example.cine_proyecto_final.viewmodels.sesion.SesionRegistrarseViewModel
+import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.module.dsl.bind
-import org.koin.dsl.bind
 
 val appModule = module {
     singleOf(::AppConfig)
@@ -34,9 +32,7 @@ val appModule = module {
 
     singleOf(::CuentaValidator)
 
-    singleOf(::SesionInicioViewModel)
-
-    singleOf(::SesionRegistrarseViewModel)
+    singleOf(::SesionViewModel)
 
     singleOf(::ClienteSeleccionButacaViewModel)
 

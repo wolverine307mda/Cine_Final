@@ -52,7 +52,7 @@ class AdministradorInicioController: KoinComponent {
         looger.debug { "restaurarAction" }
         FileChooser().run {
             title = "Selecciona un archivo"
-            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
+            extensionFilters.addAll(FileChooser.ExtensionFilter("ZIP","*.zip"))
             showOpenDialog(RoutesManager.activeStage)
         }?.let {
         }

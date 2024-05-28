@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import org.example.cine_proyecto_final.cuentas.models.TipoCuenta
 import org.example.cine_proyecto_final.routes.RoutesManager
-import org.example.cine_proyecto_final.viewmodels.sesion.SesionInicioViewModel
+import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -20,8 +20,7 @@ private val logger = logging()
  */
 class SesionInicioController : KoinComponent {
 
-    private val viewModel: SesionInicioViewModel by inject()
-    private val sesionViewModel: SesionInicioViewModel by inject()
+    private val viewModel: SesionViewModel by inject()
 
     @FXML
     private lateinit var email_textField: TextField
@@ -68,16 +67,16 @@ class SesionInicioController : KoinComponent {
      * @param contraseña La contraseña del usuario.
      */
     private fun iniciarSesion(email: String, contraseña: String) {
-        if (sesionViewModel.usuario == null) {
-            sesionViewModel.iniciarSesion(email, contraseña)
-            if (sesionViewModel.usuario == null) {
+        if (viewModel.usuario == null) {
+            viewModel.iniciarSesion(email, contraseña)
+            if (viewModel.usuario == null) {
                 println("Error al iniciar sesión")
                 showAlertOperacion(
                     title = "Error al iniciar sesión",
                     mensaje = "La cuenta que ha introducido no corresponde con una cuenta"
                 )
             } else {
-                if (sesionViewModel.usuario!!.tipo == TipoCuenta.ADMINISTRADOR) {
+                if (viewModel.usuario!!.tipo == TipoCuenta.ADMINISTRADOR) {
                     RoutesManager.changeScene(RoutesManager.View.ADMIN_INICIO)
                 }
                 email_textField.scene.window.hide()

@@ -87,7 +87,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="textNumAprobados" editable="false" prefHeight="26.0" prefWidth="90.0">
+                              <TextField editable="false" prefHeight="26.0" prefWidth="90.0">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
@@ -156,7 +156,7 @@
                   </GridPane>
                   <HBox alignment="CENTER" layoutX="15.0" layoutY="701.0" prefHeight="46.0" prefWidth="294.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.400000000000091">
                      <children>
-                        <Button fx:id="btnNuevo" mnemonicParsing="false" text="   Nuevo" HBox.hgrow="SOMETIMES">
+                        <Button fx:id="nuevoButton" mnemonicParsing="false" text="   Nuevo" HBox.hgrow="SOMETIMES">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -168,7 +168,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnEditar" mnemonicParsing="false" text="   Editar">
+                        <Button fx:id="editarButton" mnemonicParsing="false" text="   Editar">
                            <HBox.margin>
                               <Insets left="5.0" right="5.0" />
                            </HBox.margin>
@@ -180,7 +180,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnEliminar" mnemonicParsing="false" text="   Eliminar">
+                        <Button fx:id="eliminarButton" mnemonicParsing="false" text="   Eliminar">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
