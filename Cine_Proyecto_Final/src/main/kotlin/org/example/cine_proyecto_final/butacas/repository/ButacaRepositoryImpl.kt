@@ -62,7 +62,7 @@ class ButacaRepositoryImpl (
                 estado = butaca.estado!!.name,
                 createdAt = butaca.createdAt.toString(),
                 updatedAt = butaca.updatedAt.toString(),
-                precio = butaca.precio.toLong(),
+                precio = butaca.precio,
                 id_venta = venta?.id
             )
             return butaca

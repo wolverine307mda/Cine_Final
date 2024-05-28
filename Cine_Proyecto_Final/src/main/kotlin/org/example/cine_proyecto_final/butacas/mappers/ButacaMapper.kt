@@ -33,7 +33,7 @@ fun Butaca.toButacaEntity(venta : Venta?): ButacaEntity {
         tipo = this.tipo.toString(),
         estado = this.estado.toString(),
         id_venta = venta?.id,
-        precio = this.precio.toLong(),
+        precio = this.precio,
         createdAt = this.createdAt.toString(),
         updatedAt = this.updatedAt.toString()
     )

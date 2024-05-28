@@ -2,7 +2,7 @@ package org.example.cine_proyecto_final.productos.servicio.database
 
 import com.github.michaelbull.result.*
 import org.example.productos.errors.ProductoError
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
 import org.lighthousegames.logging.logging
@@ -41,9 +41,7 @@ class ProductoServicioImpl(
      */
     override fun findAll(): Result<List<Producto>, ProductoError> {
         logger.debug { "Obteniendo todos los productos" }
-        val result = productosRepositorio.findAll()
-        if (result.isNotEmpty()) return Ok(result)
-        else return Err(ProductoError.ProductoStorageError("No hay ningún producto en la base de datos"))
+        return Ok(productosRepositorio.findAll())
     }
 
     /**

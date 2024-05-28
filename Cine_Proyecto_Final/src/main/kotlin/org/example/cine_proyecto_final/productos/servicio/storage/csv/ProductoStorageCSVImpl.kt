@@ -5,7 +5,7 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.cine_final.productos.mappers.elegirTipoProducto
 import org.example.productos.errors.ProductoError
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 import org.lighthousegames.logging.logging
 import java.io.File
 import java.time.LocalDateTime

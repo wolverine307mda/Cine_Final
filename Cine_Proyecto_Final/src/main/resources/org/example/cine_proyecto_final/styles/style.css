@@ -65,12 +65,13 @@
     -fx-padding: 10px;
     -fx-background-radius: 5px;
     -fx-cursor: hand;
+    -fx-font-family: "Arial Black";
 }
 
 .toggle-button:selected {
     -fx-background-color: #6c0606;
     -fx-border-color: #c02a2a;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .toggle-button:hover {

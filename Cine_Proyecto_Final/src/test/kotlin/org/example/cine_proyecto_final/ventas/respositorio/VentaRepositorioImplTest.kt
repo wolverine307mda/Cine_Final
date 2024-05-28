@@ -1,8 +1,8 @@
 package org.example.cine_proyecto_final.ventas.respositorio
 
 import database.DatabaseQueries
-import org.example.cine_final.productos.models.Producto
-import org.example.cine_final.productos.models.TipoProducto
+import org.example.cine_proyecto_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.models.Estado
 import org.example.cine_proyecto_final.butacas.models.Tipo

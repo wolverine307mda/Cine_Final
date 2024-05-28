@@ -1,7 +1,6 @@
 package org.example.cine_proyecto_final.productos.repository
 
-import org.example.cine_final.productos.models.Producto
-import java.time.LocalDateTime
+import org.example.cine_proyecto_final.productos.models.Producto
 
 interface ProductosRepository {
     fun findAll(): List<Producto>

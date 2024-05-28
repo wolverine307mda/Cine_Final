@@ -1,8 +1,8 @@
 package org.example.cine_proyecto_final.productos.validador
 
 import com.github.michaelbull.result.Ok
-import org.example.cine_final.productos.models.Producto
-import org.example.cine_final.productos.models.TipoProducto
+import org.example.cine_proyecto_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.productos.errors.ProductoError
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue

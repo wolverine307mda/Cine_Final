@@ -1,8 +1,8 @@
 package org.example.cine_proyecto_final.productos.repository
 
 import database.DatabaseQueries
-import org.example.cine_final.productos.models.Producto
-import org.example.cine_final.productos.models.TipoProducto
+import org.example.cine_proyecto_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.config.AppConfig
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.junit.jupiter.api.Assertions.*

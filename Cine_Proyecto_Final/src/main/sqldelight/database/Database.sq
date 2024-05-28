@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS ButacaEntity (
    tipo TEXT NOT NULL, -- Normal o VIP
    estado TEXT NOT NULL, -- Libre, ocupada o fuera de servicio
    id_venta TEXT,
-   precio INTEGER NOT NULL,
+   precio REAL NOT NULL,
    createdAt TEXT NOT NULL,
    updatedAt TEXT NOT NULL,
    PRIMARY KEY(id, updatedAt),
