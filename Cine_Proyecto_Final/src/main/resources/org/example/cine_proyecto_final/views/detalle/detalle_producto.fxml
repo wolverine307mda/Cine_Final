@@ -66,11 +66,15 @@
             <ComboBox fx:id="tipoCombo" editable="true" prefHeight="42.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="114.0" layoutY="33.0" opacity="0.78" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../icons/productos_icon.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="imagen_button" layoutX="99.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="200.0" opacity="0.78" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../icons/productos_icon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
       <Button fx:id="guardarButton" layoutX="153.0" layoutY="498.0" mnemonicParsing="false" text="SAVE" />
    </children>
 </AnchorPane>

@@ -8,6 +8,8 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
+import org.example.cine_proyecto_final.cuentas.models.Cuenta
+import org.example.cine_proyecto_final.cuentas.validator.CuentaValidator
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -21,6 +23,8 @@ private val logger = logging()
 class SesionCambioContraseñaController : KoinComponent {
 
     private val viewModel: SesionViewModel by inject()
+    private val validador: CuentaValidator by inject()
+
 
     @FXML
     private lateinit var email_field: TextField
@@ -56,8 +60,20 @@ class SesionCambioContraseñaController : KoinComponent {
      * @param repitaContraseña La confirmación de la nueva contraseña.
      */
     fun cambiarContraseña(email: String, contraseña: String, repitaContraseña: String) {
+        if (email.isEmpty() || contraseña.isEmpty() || repitaContraseña.isEmpty()) {
+            showAlertOperacion("Error de cambio de contraseña", "Todos los campos deben estar llenos", Alert.AlertType.ERROR)
+            logger.error { "Todos los campos deben estar llenos" }
+            return
+        }
+
+        if (!validador.emailIsValid(email)) {
+            showAlertOperacion("Error de cambio de contraseña", "El correo electrónico no es válido", Alert.AlertType.ERROR)
+            logger.error { "El correo electrónico no es válido" }
+            return
+        }
+
         if (contraseña != repitaContraseña) {
-            showAlert("Error de cambio de contraseña", "Las contraseñas no coinciden", Alert.AlertType.ERROR)
+            showAlertOperacion("Error de cambio de contraseña", "Las contraseñas no coinciden", Alert.AlertType.ERROR)
             logger.error { "Las contraseñas no coinciden" }
             return
         }
@@ -65,7 +81,7 @@ class SesionCambioContraseñaController : KoinComponent {
         viewModel.actualizarContraseña(email, contraseña)
             .onSuccess {
                 logger.debug { "Cambio de contraseña exitoso" }
-                showAlert("Cambio de contraseña exitoso", "La contraseña ha sido cambiada con éxito", Alert.AlertType.INFORMATION)
+                showAlertOperacion("Cambio de contraseña exitoso", "La contraseña ha sido cambiada con éxito", Alert.AlertType.INFORMATION)
                 guardar_button.scene.window.hide()
             }
             .onFailure { error ->
@@ -74,18 +90,18 @@ class SesionCambioContraseñaController : KoinComponent {
                     is CuentaError.CuentaNotFoundError -> "No se encontró ninguna cuenta con el email proporcionado"
                     else -> "Hubo un problema al cambiar la contraseña: $error"
                 }
-                showAlert("Error de cambio de contraseña", mensaje, Alert.AlertType.ERROR)
+                showAlertOperacion("Error de cambio de contraseña", mensaje, Alert.AlertType.ERROR)
             }
     }
 
     /**
-     * Muestra una alerta con un mensaje específico.
+     * Muestra una alerta con el resultado de la operación.
      *
      * @param title El título de la alerta.
      * @param mensaje El mensaje de la alerta.
-     * @param alerta El tipo de alerta.
+     * @param alerta El tipo de alerta (por defecto, Alert.AlertType.INFORMATION).
      */
-    fun showAlert(title: String, mensaje: String, alerta: Alert.AlertType) {
+    private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
         val alert = Alert(alerta)
         alert.title = title
         alert.headerText = null

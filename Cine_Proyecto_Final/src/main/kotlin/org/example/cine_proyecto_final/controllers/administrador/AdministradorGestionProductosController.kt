@@ -33,6 +33,6 @@ class AdministradorGestionProductosController: KoinComponent {
         looger.debug { "iniciando pantalla de gestion de butacas" }
         atras_button.setOnAction { RoutesManager.changeScene(View.ADMIN_INICIO) }
         editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Editar Producto") }
-        nuevoButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO,"Nueva Producto") }
+        nuevoButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO,"Nuevo Producto") }
     }
 }

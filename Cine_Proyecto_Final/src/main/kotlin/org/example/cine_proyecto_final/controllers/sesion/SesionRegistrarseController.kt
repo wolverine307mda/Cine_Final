@@ -7,6 +7,7 @@ import javafx.scene.control.*
 import javafx.stage.FileChooser
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.cuentas.models.TipoCuenta
+import org.example.cine_proyecto_final.cuentas.validator.CuentaValidator
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.component.KoinComponent
@@ -20,9 +21,10 @@ private val logger = logging()
 /**
  * Controlador para la pantalla de registro de usuario.
  */
-class SesionRegistrarseController: KoinComponent {
+class SesionRegistrarseController : KoinComponent {
 
     private val viewModel: SesionViewModel by inject()
+    private val validador: CuentaValidator by inject()
 
     @FXML
     private lateinit var imagen_button: Button
@@ -55,8 +57,12 @@ class SesionRegistrarseController: KoinComponent {
      * Inicializa la pantalla de registro.
      */
     @FXML
-    private fun initialize(){
+    private fun initialize() {
         logger.debug { "iniciando pantalla de registro" }
+
+        // Establecer la fecha de nacimiento por defecto como el día de hoy
+        fechaNacimiento.value = LocalDate.now()
+
         registrarse_button.setOnAction {
             val nombre = nombre_field.text
             val apellido = apellido_field.text
@@ -83,6 +89,7 @@ class SesionRegistrarseController: KoinComponent {
             extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
             showOpenDialog(RoutesManager.activeStage)
         }?.let {
+            // Código para manejar la imagen seleccionada
         }
     }
 
@@ -99,6 +106,12 @@ class SesionRegistrarseController: KoinComponent {
     fun registrarUsuarioCuenta(nombre: String, apellido: String, email: String, contrasenia: String, repita_contrasenia: String, fechaNacimiento: LocalDate) {
         if (nombre.isBlank() || apellido.isBlank() || email.isBlank() || contrasenia.isBlank() || repita_contrasenia.isBlank() || fechaNacimiento == null) {
             showAlertOperacion("Error de registro", "Todos los campos deben estar completos", Alert.AlertType.ERROR)
+            return
+        }
+
+        if (!validador.emailIsValid(email)) {
+            showAlertOperacion("Error de registro", "El correo electrónico no es válido", Alert.AlertType.ERROR)
+            logger.error { "El correo electrónico no es válido" }
             return
         }
 

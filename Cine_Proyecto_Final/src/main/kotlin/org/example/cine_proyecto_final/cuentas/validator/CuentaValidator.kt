@@ -10,7 +10,7 @@ class CuentaValidator {
 
     fun validate(cuenta: Cuenta): Result<Cuenta, CuentaError> {
         when{
-            !emailIsValid(cuenta) -> return Err(CuentaError.CuentaInvalida("El email ${cuenta.email} no es válido"))
+            !emailIsValid(cuenta.email) -> return Err(CuentaError.CuentaInvalida("El email ${cuenta.email} no es válido"))
             cuenta.nombre.isEmpty() -> return Err(CuentaError.CuentaInvalida("El nombre no puede estar vacío"))
             cuenta.apellido.isEmpty() -> return Err(CuentaError.CuentaInvalida("Los apellidos no pueden estar vacíos"))
             cuenta.password.isEmpty() -> return Err(CuentaError.CuentaInvalida("La contraseña no puede estar vacía"))
@@ -24,9 +24,9 @@ class CuentaValidator {
      *
      * Esta función utiliza una expresión regular para comprobar si la dirección de correo es válida.
      */
-    private fun emailIsValid(cuenta: Cuenta): Boolean {
+    fun emailIsValid(email: String): Boolean {
         val emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}".toRegex()
-        if (cuenta.email.matches(emailRegex)) return true
+        if (email.matches(emailRegex)) return true
         else return false
     }
 }
