@@ -15,11 +15,13 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Controlador para la pantalla de inicio de sesión.
+ */
 class SesionInicioController : KoinComponent {
 
     private val viewModel: SesionInicioViewModel by inject()
-
-    private val sesionViewModel : SesionInicioViewModel by inject()
+    private val sesionViewModel: SesionInicioViewModel by inject()
 
     @FXML
     private lateinit var email_textField: TextField
@@ -36,14 +38,9 @@ class SesionInicioController : KoinComponent {
     @FXML
     private lateinit var olvidoContraseña_button: Button
 
-    //private var stage: Stage? = null
-
-    /*
-    fun setStage(stage: Stage) {
-        this.stage = stage
-    }
-    */
-
+    /**
+     * Método de inicialización para configurar los botones y sus acciones.
+     */
     @FXML
     private fun initialize() {
         println("Initialize inicio de sesion")
@@ -64,51 +61,41 @@ class SesionInicioController : KoinComponent {
         }
     }
 
+    /**
+     * Inicia sesión con los datos proporcionados.
+     *
+     * @param email El correo electrónico del usuario.
+     * @param contraseña La contraseña del usuario.
+     */
     private fun iniciarSesion(email: String, contraseña: String) {
-        /*
-        viewModel.iniciarSesion(email, contraseña) { success, tipo, message ->
-            if (success) {
-                when (tipo) {
-                    "A" -> {
-                        logger.debug { "Administrador logged in" }
-                        RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA)
-                    }
-                    "U" -> {
-                        logger.debug { "Usuario logged in" }
-                        RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA)
-                    }
-                    else -> {
-                        logger.debug { "Unknown account type: $tipo" }
-                        println("Error: Tipo de cuenta no válido")
-                    }
-                }
-            } else {
-                logger.debug { "Login failed: $message" }
-                println("Error: $message")
-            }
-        }
-        */
-        if (sesionViewModel.usuario == null){
+        if (sesionViewModel.usuario == null) {
             sesionViewModel.iniciarSesion(email, contraseña)
-            if (sesionViewModel.usuario == null){
+            if (sesionViewModel.usuario == null) {
                 println("Error al iniciar sesión")
                 showAlertOperacion(
                     title = "Error al iniciar sesión",
                     mensaje = "La cuenta que ha introducido no corresponde con una cuenta"
                 )
-            }else {
-                if (sesionViewModel.usuario!!.tipo == TipoCuenta.ADMINISTRADOR){
+            } else {
+                if (sesionViewModel.usuario!!.tipo == TipoCuenta.ADMINISTRADOR) {
                     RoutesManager.changeScene(RoutesManager.View.ADMIN_INICIO)
                 }
                 email_textField.scene.window.hide()
             }
-        }else showAlertOperacion( //Estp esta mal
+        } else showAlertOperacion(
             alerta = AlertType.CONFIRMATION,
             title = "¿Desea cerrar sesión?",
-            mensaje = "Está inciado sesión como ${viewModel.usuario!!.email}, ¿desea cerrar sesión?"
+            mensaje = "Está iniciado sesión como ${viewModel.usuario!!.email}, ¿desea cerrar sesión?"
         )
     }
 
+    /**
+     * Muestra una alerta con la operación realizada.
+     *
+     * @param alerta El tipo de alerta.
+     * @param title El título de la alerta.
+     * @param mensaje El mensaje de la alerta.
+     */
     private fun showAlertOperacion(
         alerta: AlertType = AlertType.ERROR,
         title: String = "",

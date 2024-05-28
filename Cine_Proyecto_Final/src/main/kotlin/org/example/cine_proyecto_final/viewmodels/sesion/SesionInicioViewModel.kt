@@ -17,17 +17,21 @@ import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
+/**
+ * ViewModel para gestionar el inicio de sesión de un usuario.
+ */
 class SesionInicioViewModel : KoinComponent {
-    
-    var usuario: Cuenta? = null
-    private val service : CuentaServicio by inject()
-    
-    //private val dbClient: SqlDelightManager by inject()
-    //private val validador: CuentaValidator by inject()
-    //private val cache: CuentaCacheImpl by inject()
-    //private val repository = CuentaRepositoryImpl(dbClient)
-    
 
+    var usuario: Cuenta? = null
+    private val service: CuentaServicio by inject()
+
+    /**
+     * Inicia sesión para un usuario basado en su email y contraseña.
+     *
+     * @param email El correo electrónico del usuario.
+     * @param contraseña La contraseña del usuario.
+     * @see CuentaServicio.findByEmail
+     */
     fun iniciarSesion(email: String, contraseña: String) {
         service.findByEmail(email)
             .onSuccess {
@@ -36,31 +40,4 @@ class SesionInicioViewModel : KoinComponent {
                 }
             }
     }
-    
-    /*
-    fun iniciarSesion(email: String, contraseña: String, callback: (Boolean, String, String) -> Unit) {
-        val result: Result<Cuenta, CuentaError> = service.findByEmail(email)
-
-        result.onSuccess { cuenta ->
-            if (cuenta.password == contraseña) {
-                val tipoCuenta = cuenta.tipo
-                when (tipoCuenta) {
-                    TipoCuenta.ADMINISTRADOR -> {
-                        callback(true, "A", "Inicio de sesión exitoso")
-                    }
-                    TipoCuenta.USUARIO -> {
-                        callback(true, "U", "Inicio de sesión exitoso")
-                    }
-                    else -> {
-                        callback(false, "", "Tipo de cuenta no válido")
-                    }
-                }
-            } else {
-                callback(false, "", "Email o contraseña incorrectos")
-            }
-        }.onFailure { error ->
-            callback(false, "", "Error al iniciar sesión: ${error.message}")
-        }
-    }
-    */
 }

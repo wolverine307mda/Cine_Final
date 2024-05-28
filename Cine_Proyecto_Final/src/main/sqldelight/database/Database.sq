@@ -68,7 +68,8 @@ CREATE TABLE IF NOT EXISTS CuentaEntity (
 insertAdmin:
 INSERT INTO CuentaEntity (email, nombre, apellido, imagen, password, tipo, createdAt, updatedAt)
 VALUES ('administrador@dev.com', 'Administrador', '1', 'sin_imagen.jpg', '1234', 'ADMIN', '2024-05-15T10:30', '2024-05-15T10:30'),
-('user@gmail.com', 'User', '1', 'sin_imagen.jpg', '1234', 'USUARIO', '2024-05-15T10:30', '2024-05-15T10:30')
+('user@gmail.com', 'User', '1', 'sin_imagen.jpg', '1234', 'USUARIO', '2024-05-15T10:30', '2024-05-15T10:30'),
+('mario@gmail.com', 'User', '1', 'sin_imagen.jpg', '0000', 'USUARIO', '2024-05-15T10:30', '2024-05-15T10:30')
 ;
 
 -- Consultas

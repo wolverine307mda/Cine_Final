@@ -1,7 +1,9 @@
 package org.example.cine_proyecto_final.controllers.administrador
 
 import javafx.fxml.FXML
+import javafx.scene.control.Alert
 import javafx.scene.control.Button
+import javafx.stage.FileChooser
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.koin.core.component.KoinComponent
@@ -42,7 +44,39 @@ class AdministradorInicioController: KoinComponent {
         salir_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.MAIN) }
 
         ver_recaudacion_button.setOnAction {  }
-        restaurar_button.setOnAction {  }
+        restaurar_button.setOnAction { restaurarEstado() }
         exportar_estado_button.setOnAction {  }
+    }
+
+    private fun restaurarEstado(){
+        looger.debug { "restaurarAction" }
+        FileChooser().run {
+            title = "Selecciona un archivo"
+            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+        }
+    }
+
+    private fun exportarEstado(){
+        looger.debug { "exportarAction" }
+    }
+
+    private fun verRecaudacion(){
+        looger.debug { "verRecaudaciónAction" }
+        calcularRecaudacion()
+        showAlertOperacion("Recaudación", "La recaudación Total es de: ")
+    }
+
+    private fun calcularRecaudacion() {
+        TODO("Not yet implemented")
+    }
+
+    private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
+        val alert = Alert(alerta)
+        alert.title = title
+        alert.headerText = null
+        alert.contentText = mensaje
+        alert.showAndWait()
     }
 }
