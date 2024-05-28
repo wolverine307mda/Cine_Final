@@ -2,19 +2,17 @@ package org.example.cine_proyecto_final.productos.servicio.database
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
-import org.example.cine_final.productos.models.Producto
-import org.example.cine_final.productos.models.TipoProducto
+import org.example.cine_proyecto_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
 import org.example.productos.errors.ProductoError
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.junit.jupiter.MockitoSettings
 import org.mockito.kotlin.whenever
@@ -132,7 +130,8 @@ class ProductoServicioImplTest {
             createdAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
             updatedAt = LocalDateTime.parse("2023-01-01T00:00:00.000"),
             isDeleted = false
-        ))
+        )
+        )
         whenever(repo.findAll()).thenReturn(list)
 
         //Act

@@ -16,9 +16,18 @@ module org.example.cine_proyecto_final {
     // Agrega el módulo kotlin.test
     requires kotlin.test;
     requires koin.test.jvm;
+    requires dokka.core;
 
     opens org.example.cine_proyecto_final to javafx.fxml;
     exports org.example.cine_proyecto_final;
+
+    //Models
+    opens org.example.cine_proyecto_final.productos.models to javafx.fxml;
+    exports org.example.cine_proyecto_final.productos.models;
+
+    // Cliente Controllers
+    opens org.example.cine_proyecto_final.controllers.listCell to javafx.fxml;
+    exports org.example.cine_proyecto_final.controllers.listCell;
 
     // Controllers
     opens org.example.cine_proyecto_final.controllers.general to javafx.fxml;
