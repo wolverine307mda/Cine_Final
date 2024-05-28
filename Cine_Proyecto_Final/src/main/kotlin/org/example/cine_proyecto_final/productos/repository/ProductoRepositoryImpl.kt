@@ -3,7 +3,7 @@ package org.example.cine_proyecto_final.productos.repository
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.cuentas.mappers.toLong
 import org.example.cine_final.productos.mappers.toProducto
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
 

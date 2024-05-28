@@ -4,7 +4,7 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.productos.errors.ProductoError
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 
 /**
  * Clase encargada de validar la integridad de los objetos Producto.

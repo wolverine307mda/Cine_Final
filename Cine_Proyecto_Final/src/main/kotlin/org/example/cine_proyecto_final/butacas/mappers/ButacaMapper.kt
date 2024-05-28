@@ -19,7 +19,7 @@ fun ButacaEntity.toButaca(): Butaca {
         tipo = elegirTipo(this.tipo),
         createdAt = LocalDateTime.parse(this.createdAt),
         updatedAt = LocalDateTime.parse(this.updatedAt),
-        precio = this.precio.toDouble()
+        precio = this.precio
     )
 }
 
@@ -33,7 +33,7 @@ fun Butaca.toButacaEntity(venta : Venta?): ButacaEntity {
         tipo = this.tipo.toString(),
         estado = this.estado.toString(),
         id_venta = venta?.id,
-        precio = this.precio.toLong(),
+        precio = this.precio,
         createdAt = this.createdAt.toString(),
         updatedAt = this.updatedAt.toString()
     )

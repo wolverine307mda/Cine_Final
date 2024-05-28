@@ -2,15 +2,15 @@ package org.example.cine_final.productos.mappers
 
 import database.ProductoEntity
 import org.example.cine_proyecto_final.productos.dto.ProductoDto
-import org.example.cine_final.productos.models.Producto
-import org.example.cine_final.productos.models.TipoProducto
+import org.example.cine_proyecto_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.TipoProducto
 import java.time.LocalDateTime
 
 /**
  * Convierte un objeto productoDto a producto
  * @return El productoDto convertido
  */
-fun ProductoDto.toProducto() : Producto{
+fun ProductoDto.toProducto() : Producto {
     return Producto(
         id = this.id,
         nombre = this.nombre,

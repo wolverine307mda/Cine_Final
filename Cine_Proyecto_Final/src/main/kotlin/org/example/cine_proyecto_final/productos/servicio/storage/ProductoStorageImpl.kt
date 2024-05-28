@@ -1,7 +1,7 @@
 package org.example.cine_proyecto_final.productos.servicio.storage
 
 import com.github.michaelbull.result.Result
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_final.productos.servicio.storage.ProductoStorage
 import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoStorageCSV
 import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoStorageJson

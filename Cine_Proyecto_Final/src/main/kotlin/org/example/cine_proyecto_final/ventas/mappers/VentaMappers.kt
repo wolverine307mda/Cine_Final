@@ -4,7 +4,7 @@ import database.LineaVentaEntity
 import database.VentaEntity
 import org.example.cine_final.productos.mappers.toDto
 import org.example.cine_final.productos.mappers.toProducto
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.butacas.mappers.toButaca
 import org.example.cine_proyecto_final.butacas.mappers.toDto
 import org.example.cine_proyecto_final.butacas.models.Butaca

@@ -2,7 +2,7 @@ package org.example.cine_proyecto_final.productos.servicio.database
 
 import com.github.michaelbull.result.Result
 import org.example.productos.errors.ProductoError
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 
 interface ProductoServicio {
     fun save(producto: Producto) : Result<Producto, ProductoError>

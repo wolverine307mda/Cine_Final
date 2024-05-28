@@ -7,7 +7,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.example.cine_final.productos.mappers.toDto
 import org.example.cine_final.productos.mappers.toProducto
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.dto.ProductoDto
 import org.example.productos.errors.ProductoError
 import org.lighthousegames.logging.logging

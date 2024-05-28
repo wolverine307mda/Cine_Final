@@ -1,4 +1,4 @@
-package org.example.cine_final.productos.models
+package org.example.cine_proyecto_final.productos.models
 
 import java.time.LocalDateTime
 import java.util.UUID
