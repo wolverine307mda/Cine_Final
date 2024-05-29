@@ -1,7 +1,6 @@
 package org.example.cine_proyecto_final.viewmodels.administrador
 
 import com.github.michaelbull.result.Result
-import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import cuenta.errors.CuentaError
@@ -12,7 +11,6 @@ import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
 import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoStorageCSV
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
-import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.productos.errors.ProductoError
 import org.jetbrains.dokka.InternalDokkaApi
 import org.jetbrains.dokka.utilities.ServiceLocator.toFile
@@ -47,7 +45,6 @@ class AdministradorGestorProductosViewModel : KoinComponent {
         }
     }
 
-
     /**
      * Crea un nuevo usuario en el sistema.
      *
@@ -62,15 +59,15 @@ class AdministradorGestorProductosViewModel : KoinComponent {
         return validador.validate(producto)
             .onSuccess {
                 productoService.save(producto)
-                logger.debug { "Usuario creado con éxito" }
-                state.value.copy(
-                    productos = state.value.productos + producto
-                )
+                logger.debug { "Producto creado con éxito" }
+                val updatedProductos = state.value.productos + producto
+                state.set(state.value.copy(productos = updatedProductos))
             }
             .onFailure {
-                logger.debug { "Error al crear usuario: $it" }
+                logger.debug { "Error al crear producto: $it" }
             }
     }
+
 
     /**
      * El objeto observable que contiene las lineas y los productos

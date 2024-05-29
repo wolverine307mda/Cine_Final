@@ -111,7 +111,7 @@ class DetalleProductoController : KoinComponent {
         viewModel.nuevoProducto(producto)
             .onSuccess {
                 logger.debug { "Producto agregado con exito" }
-                showAlertOperacion("Producto agregado con exito", "El producto ha sido guardado con éxito", Alert.AlertType.INFORMATION)
+                showAlertOperacion("Producto agregado con éxito", "El producto ha sido guardado con éxito", Alert.AlertType.INFORMATION)
                 guardarButton.scene.window.hide()
             }
             .onFailure { error ->
@@ -119,6 +119,7 @@ class DetalleProductoController : KoinComponent {
                 showAlertOperacion("Error de registro", "Hubo un problema al registrar el producto: $error", Alert.AlertType.ERROR)
             }
     }
+
 
     private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
         val alert = Alert(alerta)
