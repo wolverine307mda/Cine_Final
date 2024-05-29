@@ -16,18 +16,26 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * ViewModel para gestionar la selección de productos por parte del cliente.
+ */
 @OptIn(InternalDokkaApi::class)
-class ClienteSeleccionProductosViewModel : KoinComponent{
+class ClienteSeleccionProductosViewModel : KoinComponent {
 
-    private val productoService : ProductoServicio by inject()
-    private val productoCsv : ProductoStorageCSV by inject()
+    // Inyección de dependencias para ProductoServicio y ProductoStorageCSV
+    private val productoService: ProductoServicio by inject()
+    private val productoCsv: ProductoStorageCSV by inject()
+
+    // Propiedad de estado que contiene el estado actual de la selección de productos
     val state: SimpleObjectProperty<ProductSelectionState> = SimpleObjectProperty(ProductSelectionState())
 
     /*
      * Inicializamos los datos de los productos con un fichero que deberia estar en el producto
      */
     init {
-        logger.debug { "Inicializando ExpedientesViewModel" }
+        logger.debug { "Inicializando ClienteSeleccionProductosViewModel" }
+
+        // Cargar productos desde un archivo CSV y guardarlos en la base de datos
         val file = CineApplication::class.java.getResource("data/productos.csv")
         if (file != null) {
             productoCsv.import(file.toFile())
@@ -59,19 +67,20 @@ class ClienteSeleccionProductosViewModel : KoinComponent{
      * Borra todas las lineas de venta
      */
     fun clearList() {
-        state.value = state.value.copy (
+        state.value = state.value.copy(
             lineas = listOf()
         )
     }
 
     /**
-     * Borra una linea de venta de la lista de lineas de venta
-     * @param linea la linea de venta que se quiere borrar
+     * Elimina un elemento específico de la lista de elementos seleccionados.
+     *
+     * @param linea El elemento a eliminar
      */
     fun removeLinea(linea: LineaVenta) {
         val index = state.value.lineas.indexOf(linea)
-        if (index != -1){
-            state.value = state.value.copy (
+        if (index != -1) {
+            state.value = state.value.copy(
                 lineas = state.value.lineas.filter { it.id != linea.id }
             )
         }
@@ -112,6 +121,5 @@ class ClienteSeleccionProductosViewModel : KoinComponent{
     data class ProductSelectionState(
         var allProductos: List<Producto> = emptyList(),
         var lineas: List<LineaVenta> = mutableListOf(),
-        var productos: List<Producto> = emptyList(),
     )
 }

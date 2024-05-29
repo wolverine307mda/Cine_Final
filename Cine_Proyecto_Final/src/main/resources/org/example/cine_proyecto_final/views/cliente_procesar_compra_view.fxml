@@ -21,32 +21,32 @@
          </image>
       </ImageView>
       <VBox layoutX="114.0" layoutY="516.0" opacity="0.3" prefHeight="171.0" prefWidth="575.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
-      <VBox layoutX="114.0" layoutY="88.0" opacity="0.3" prefHeight="402.0" prefWidth="575.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
-      <VBox layoutX="171.0" layoutY="385.0" opacity="0.3" prefHeight="72.0" prefWidth="476.0" style="-fx-background-color: black; -fx-background-radius: 20;" />
-      <Label layoutX="171.0" layoutY="209.0" text="Nombre" textFill="WHITE">
+      <VBox layoutX="114.0" layoutY="88.0" opacity="0.3" prefHeight="404.0" prefWidth="575.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
+      <VBox layoutX="164.0" layoutY="382.0" opacity="0.3" prefHeight="72.0" prefWidth="476.0" style="-fx-background-color: black; -fx-background-radius: 20;" />
+      <Label layoutX="163.0" layoutY="182.0" text="Nombre" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="nombre_field" editable="false" layoutX="171.0" layoutY="232.0" prefHeight="30.0" prefWidth="476.0" stylesheets="@../styles/style.css" />
-      <Label layoutX="171.0" layoutY="283.0" text="E-mail" textFill="WHITE">
+      <TextField fx:id="nombre_field" editable="false" layoutX="164.0" layoutY="209.0" opacity="0.75" prefHeight="30.0" prefWidth="476.0" stylesheets="@../styles/style.css" />
+      <Label layoutX="162.0" layoutY="272.0" text="E-mail" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="email_field" editable="false" layoutX="171.0" layoutY="306.0" prefHeight="30.0" prefWidth="476.0" stylesheets="@../styles/style.css" />
+      <TextField fx:id="email_field" editable="false" layoutX="164.0" layoutY="299.0" opacity="0.75" prefHeight="30.0" prefWidth="476.0" stylesheets="@../styles/style.css" />
       <Label layoutX="162.0" layoutY="540.0" text="TARJETA DE CRÉDITO" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="tarjet_credito_field" layoutX="170.0" layoutY="567.0" prefHeight="38.0" prefWidth="464.0" />
-      <TextField fx:id="fxCaducidad" layoutX="291.0" layoutY="633.0" prefHeight="33.0" prefWidth="86.0" />
-      <TextField fx:id="cvvField" layoutX="429.0" layoutY="633.0" prefHeight="34.0" prefWidth="85.0" />
+      <TextField fx:id="tarjet_credito_field" layoutX="170.0" layoutY="567.0" opacity="0.75" prefHeight="38.0" prefWidth="464.0" />
+      <TextField fx:id="fxCaducidad" layoutX="291.0" layoutY="633.0" opacity="0.75" prefHeight="33.0" prefWidth="86.0" />
+      <TextField fx:id="cvvField" layoutX="429.0" layoutY="633.0" opacity="0.75" prefHeight="34.0" prefWidth="85.0" />
       <Button layoutX="28.0" layoutY="74.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
       <Label layoutX="148.0" layoutY="112.0" text="Confirma tu compra" textFill="WHITE">
          <font>
-            <Font name="Berlin Sans FB" size="44.0" />
+            <Font name="Berlin Sans FB" size="48.0" />
          </font>
       </Label>
       <Button fx:id="atras_button" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
@@ -58,13 +58,13 @@
             </ImageView>
          </graphic></Button>
       <Button fx:id="finalizar_compra_button" layoutX="937.0" layoutY="676.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" style="-fx-font-size: 16;" stylesheets="@../styles/style.css" text="FINALIZAR COMPRA" />
-      <Label layoutX="171.0" layoutY="359.0" text="Información de la Compra:" textFill="WHITE">
+      <Label layoutX="162.0" layoutY="356.0" text="Información de la Compra:" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
       <VBox layoutX="799.0" layoutY="132.0" opacity="0.3" prefHeight="454.0" prefWidth="386.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
-      <TextField fx:id="precio_total_field" editable="false" layoutX="1068.0" layoutY="526.0" prefHeight="23.0" prefWidth="69.0" />
+      <TextField fx:id="precio_total_field" editable="false" layoutX="1068.0" layoutY="526.0" opacity="0.75" prefHeight="23.0" prefWidth="69.0" />
       <Label layoutX="1007.0" layoutY="529.0" prefHeight="28.0" prefWidth="50.0" text="Total:" textFill="WHITE">
          <font>
             <Font size="19.0" />
@@ -85,14 +85,14 @@
             <Image url="@../icons/carrito_compra.png" />
          </image>
       </ImageView>
-      <TableView layoutX="843.0" layoutY="196.0" opacity="0.78" prefHeight="320.0" prefWidth="291.0" style="-fx-background-radius: 20; -fx-background-color: #1B222C;">
+      <TableView layoutX="843.0" layoutY="196.0" opacity="0.75" prefHeight="320.0" prefWidth="291.0" style="-fx-background-radius: 20; -fx-background-color: #1B222C;">
         <columns>
           <TableColumn prefWidth="147.20001220703125" text="Producto" />
           <TableColumn prefWidth="72.79998779296875" text="Precio" />
             <TableColumn prefWidth="71.2000732421875" text="Cantidad" />
         </columns>
       </TableView>
-      <Text fx:id="textInfo" fill="WHITE" layoutX="183.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="451.99999999999994">
+      <Text fx:id="textInfo" fill="WHITE" layoutX="176.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="451.99999999999994">
          <font>
             <Font size="14.0" />
          </font>
