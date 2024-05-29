@@ -1,18 +1,18 @@
 package org.example.cine_proyecto_final.viewmodels.cliente
 
 import com.github.michaelbull.result.onSuccess
-import javafx.beans.property.SimpleObjectProperty
 import org.example.cine_proyecto_final.productos.models.Producto
-import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
 import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoStorageCSV
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
+import org.lighthousegames.logging.logging
+import javafx.beans.property.SimpleObjectProperty
+import org.example.cine_proyecto_final.CineApplication
 import org.jetbrains.dokka.InternalDokkaApi
 import org.jetbrains.dokka.utilities.ServiceLocator.toFile
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.lighthousegames.logging.logging
 
 private val logger = logging()
 

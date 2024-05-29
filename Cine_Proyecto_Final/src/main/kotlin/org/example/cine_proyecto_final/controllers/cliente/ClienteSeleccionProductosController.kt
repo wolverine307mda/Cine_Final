@@ -45,7 +45,7 @@ class ClienteSeleccionProductosController : KoinComponent {
     private lateinit var productoTable : TableView<Producto>
 
     @FXML
-    private lateinit var productoCantidad : TableColumn<Int,Producto>
+    private lateinit var productoCantidad : TableColumn<Int, Producto>
 
     @FXML
     private lateinit var productoNombre : TableColumn<String,Producto>
