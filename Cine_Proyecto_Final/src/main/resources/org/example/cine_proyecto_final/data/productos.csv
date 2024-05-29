@@ -9,10 +9,15 @@ Cerveza,2.99,90,BEBIDA,cerveza.jpg
 Vino,12.99,40,BEBIDA,vino.jpg
 Galletas,3.49,110,COMIDA,galletas.jpg
 Agua,0.99,150,BEBIDA,agua.jpg
-Refresco de Limón,1.75,70,BEBIDA,refresco_limón.jpg
+Refresco de Limón,1.75,70,BEBIDA,refresco_limon.jpg
 Patatas Fritas,2.49,80,COMIDA,patatas_fritas.jpg
 Helado,4.99,60,COMIDA,helado.jpg
 Jugo de Naranja,2.25,100,BEBIDA,jugo_naranja.jpg
 Pizza Pepperoni,9.99,40,COMIDA,pizza_pepperoni.jpg
-Refresco de Manzana,1.75,90,BEBIDA,refresco_manzana.jpg
-Palomitas de Maíz,3.99,120,COMIDA,palomitas_maíz.jpg
+Zumo de Manzana,1.75,90,BEBIDA,refresco_manzana.jpg
+Palomitas de Maíz,3.99,120,COMIDA,palomitas_maiz.jpg
+Camiseta,15.00,30,OTROS,camiseta_cine.jpg
+Gorra,12.00,25,OTROS,gorra_cine.jpg
+Llaveros,5.00,50,OTROS,llavero_cine.jpg
+Taza,8.00,20,OTROS,taza_cine.jpg
+Póster de Película,10.00,40,OTROS,poster_pelicula.jpg

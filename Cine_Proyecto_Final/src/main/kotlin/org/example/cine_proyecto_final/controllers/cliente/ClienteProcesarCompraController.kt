@@ -3,7 +3,6 @@ package org.example.cine_proyecto_final.controllers.cliente
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
-import javafx.scene.control.DatePicker
 import javafx.scene.control.TextField
 import javafx.scene.text.Text
 import org.example.cine_proyecto_final.database.SqlDelightManager
@@ -12,8 +11,8 @@ import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraV
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -114,14 +113,17 @@ class ClienteProcesarCompraController: KoinComponent {
     }
 
     private fun validarFechaCaducidad(fecha: String): Boolean {
-        try {
-            // Intenta parsear la fecha en el formato MM/YY
+        return try {
+            // Define el formato de la fecha MM/yy
             val formatter = DateTimeFormatter.ofPattern("MM/yy")
-            val fechaCaducidad = formatter.parse(fecha)
-            // Comprueba si la fecha es válida (no está en el pasado)
-            return !LocalDate.from(fechaCaducidad).isBefore(LocalDate.now())
+            // Parsea la fecha de caducidad
+            val fechaCaducidad = YearMonth.parse(fecha, formatter)
+            // Define la fecha de referencia 05/24
+            val fechaReferencia = YearMonth.of(2024, 5)
+            // Comprueba si la fecha de caducidad es posterior a 05/24
+            fechaCaducidad.isAfter(fechaReferencia)
         } catch (e: Exception) {
-            return false
+            false
         }
     }
 

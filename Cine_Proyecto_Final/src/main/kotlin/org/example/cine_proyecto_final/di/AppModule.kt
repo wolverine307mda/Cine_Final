@@ -8,6 +8,7 @@ import org.example.cine_proyecto_final.butacas.service.database.ButacaService
 import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorage
 import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorageImpl
 import org.example.cine_proyecto_final.butacas.service.storage.csv.ButacaStorageCsv
+import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJson
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import org.example.cine_proyecto_final.config.AppConfig
@@ -27,6 +28,7 @@ import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButaca
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
+import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorButacasViewModel
 import org.example.cine_proyecto_final.productos.repository.ProductoRepositoryImpl
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
@@ -43,6 +45,12 @@ import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorag
 import org.example.cine_proyecto_final.butacas.service.database.ButacaServiceImpl
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepositoryImpl
 import org.koin.core.module.dsl.bind
+import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorageImpl
+import org.example.cine_proyecto_final.butacas.service.storage.csv.ButacaStorageCsvImpl
+import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJsonImpl
+import org.example.cine_proyecto_final.butacas.repository.ButacaRepositoryImpl
+import org.example.cine_proyecto_final.butacas.service.database.ButacaServiceImpl
+
 
 val appModule = module {
     singleOf(::AppConfig)
@@ -68,6 +76,8 @@ val appModule = module {
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
     }
+    
+    singleOf(::AdministradorGestorButacasViewModel)
 
     singleOf(::ProductoRepositoryImpl) {
         bind<ProductosRepository>()
@@ -125,4 +135,23 @@ val appModule = module {
         bind<CuentaStorageJson>()
     }
 
+    singleOf(::ButacaRepositoryImpl) {
+        bind<ButacaRepository>()
+    }
+
+    singleOf(::ButacaServiceImpl) {
+        bind<ButacaService>()
+    }
+
+    singleOf(::ButacaStorageCsvImpl) {
+        bind<ButacaStorageCsv>()
+    }
+
+    singleOf(::ButacaStorageJsonImpl) {
+        bind<ButacaStorageJson>()
+    }
+
+    singleOf(::ButacaStorageImpl) {
+        bind<ButacaStorage>()
+    }
 }

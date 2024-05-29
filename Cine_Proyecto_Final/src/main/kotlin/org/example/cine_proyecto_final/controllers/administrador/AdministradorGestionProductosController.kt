@@ -1,13 +1,11 @@
 package org.example.cine_proyecto_final.controllers.administrador
 
 import javafx.collections.FXCollections
+import javafx.collections.transformation.FilteredList
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.control.ComboBox
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.text.Text
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.routes.RoutesManager
@@ -35,7 +33,9 @@ class AdministradorGestionProductosController : KoinComponent {
     @FXML
     private lateinit var filtrarTipoCombobox: ComboBox<String>
 
-    //info del producto seleccionado
+    // info del producto seleccionado
+    @FXML
+    private lateinit var labelnombreProducto: Text
     @FXML
     private lateinit var ProductoSeleccionadoTipoComboBox: ComboBox<String>
     @FXML
@@ -66,22 +66,27 @@ class AdministradorGestionProductosController : KoinComponent {
     @FXML
     private lateinit var productoTipo: TableColumn<Producto, String>
 
+    private lateinit var filteredData: FilteredList<Producto>
+
     @FXML
     private fun initialize() {
         logger.debug { "Iniciando pantalla de gestión de productos" }
 
         // Configuración de acciones de botones
         atrasButton.setOnAction { RoutesManager.changeScene(View.ADMIN_INICIO) }
-        editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Editar Producto") }
         nuevoButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Nuevo Producto") }
 
         // Inicializar valores por defecto
         initDefaultValues()
+        initBindings()
 
         // Añadir listener a la tabla para manejar la selección de productos
         productoTable.selectionModel.selectedItemProperty().addListener { _, _, selectedProducto ->
             selectedProducto?.let { updateProductoSeleccionado(it) }
         }
+
+        // Configurar búsqueda y filtrado
+        configureSearchAndFilter()
     }
 
     /**
@@ -89,13 +94,52 @@ class AdministradorGestionProductosController : KoinComponent {
      */
     private fun initDefaultValues() {
         // Establecer los ítems de la tabla de productos
-        productoTable.items = FXCollections.observableArrayList(viewModel.state.value.productos)
+        filteredData = FilteredList(FXCollections.observableArrayList(viewModel.state.value.productos))
+        productoTable.items = filteredData
 
         // Configurar las columnas de la tabla
         productoPrecio.cellValueFactory = PropertyValueFactory("precio")
         productoNombre.cellValueFactory = PropertyValueFactory("nombre")
         productoCantidad.cellValueFactory = PropertyValueFactory("stock")
         productoTipo.cellValueFactory = PropertyValueFactory("tipo")
+
+        // Configurar el ComboBox de tipo de producto
+        filtrarTipoCombobox.items.addAll("Todos", "BEBIDA", "COMIDA", "OTROS")
+        filtrarTipoCombobox.value = "Todos"
+    }
+
+    private fun initBindings() {
+        viewModel.state.addListener { _, _, newValue ->
+            if (newValue.productos != productoTable.items) {
+                filteredData = FilteredList(FXCollections.observableArrayList(newValue.productos))
+                productoTable.items = filteredData
+            }
+        }
+    }
+
+    /**
+     * Configura la búsqueda y el filtrado de productos.
+     */
+    private fun configureSearchAndFilter() {
+        searchField.textProperty().addListener { _, _, _ -> filterProducts() }
+        filtrarTipoCombobox.valueProperty().addListener { _, _, _ -> filterProducts() }
+    }
+
+    /**
+     * Filtra los productos en la tabla basados en el texto de búsqueda y el tipo seleccionado.
+     */
+    private fun filterProducts() {
+        val searchText = searchField.text.lowercase().trim()
+        val selectedType = filtrarTipoCombobox.value
+
+        filteredData.setPredicate { producto ->
+            val matchesSearchText = producto.nombre.lowercase().contains(searchText)
+            val matchesType = when (selectedType) {
+                "Todos" -> true
+                else -> producto.tipo?.name == selectedType
+            }
+            matchesSearchText && matchesType
+        }
     }
 
     /**
@@ -106,6 +150,9 @@ class AdministradorGestionProductosController : KoinComponent {
         precioProductoSeleccionado.text = producto.precio.toString()
         stockProductoSeleccionado.text = producto.stock.toString()
         ProductoSeleccionadoTipoComboBox.value = asignarTipo(producto)
+        labelnombreProducto.text = producto.nombre
+
+        editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Editar Producto") }
     }
 
     private fun asignarTipo(producto: Producto): String {

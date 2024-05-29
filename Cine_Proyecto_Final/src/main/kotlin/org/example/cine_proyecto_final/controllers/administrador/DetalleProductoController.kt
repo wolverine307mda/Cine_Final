@@ -1,17 +1,21 @@
 package org.example.cine_proyecto_final.controllers.administrador
 
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
 import javafx.stage.FileChooser
+import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.time.LocalDateTime
 
 private val logger = logging()
 
@@ -90,21 +94,32 @@ class DetalleProductoController : KoinComponent {
                 return
             }
         }
-
-        //nuevoProducto(tipoProducto, nombre, precioInt, stockInt)
+        nuevoProducto(tipoProducto, nombre, precioInt, stockInt)
     }
 
-    /*private fun nuevoProducto(tipo: TipoProducto, nombre: String, precio: Int, stock: Int) {
-        viewModel.crearProducto(tipo, nombre, precio, stock)
+    private fun nuevoProducto(tipo: TipoProducto, nombre: String, precio: Int, stock: Int) {
+        val producto = Producto(
+            nombre = nombre,
+            precio = precio.toDouble(),
+            stock = stock,
+            tipo = tipo,
+            image = "producto.jpg",
+            createdAt = LocalDateTime.now(),
+            updatedAt = LocalDateTime.now(),
+            isDeleted = false
+        )
+        viewModel.nuevoProducto(producto)
             .onSuccess {
-                logger.debug { "Registro exitoso" }
-                showAlertOperacion("Registro exitoso", "El producto ha sido registrado con éxito", Alert.AlertType.INFORMATION)
+                logger.debug { "Producto agregado con exito" }
+                showAlertOperacion("Producto agregado con éxito", "El producto ha sido guardado con éxito", Alert.AlertType.INFORMATION)
+                guardarButton.scene.window.hide()
             }
             .onFailure { error ->
                 logger.error { "Error en el registro del producto: $error" }
                 showAlertOperacion("Error de registro", "Hubo un problema al registrar el producto: $error", Alert.AlertType.ERROR)
             }
-    }*/
+    }
+
 
     private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
         val alert = Alert(alerta)
