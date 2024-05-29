@@ -6,6 +6,7 @@ import org.example.cine_final.productos.servicio.storage.ProductoStorage
 import org.example.cine_proyecto_final.butacas.repository.ButacaRepository
 import org.example.cine_proyecto_final.butacas.service.database.ButacaService
 import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorage
+import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorageImpl
 import org.example.cine_proyecto_final.butacas.service.storage.csv.ButacaStorageCsv
 import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJson
 import org.koin.core.module.dsl.singleOf
@@ -38,6 +39,11 @@ import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoS
 import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoStorageCSVImpl
 import org.example.cine_proyecto_final.productos.servicio.storage.ProductoStorageImpl
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
+import org.example.cine_proyecto_final.butacas.service.storage.csv.ButacaStorageCsvImpl
+import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJson
+import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJsonImpl
+import org.example.cine_proyecto_final.butacas.service.database.ButacaServiceImpl
+import org.example.cine_proyecto_final.butacas.repository.ButacaRepositoryImpl
 import org.koin.core.module.dsl.bind
 import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorageImpl
 import org.example.cine_proyecto_final.butacas.service.storage.csv.ButacaStorageCsvImpl
@@ -67,10 +73,26 @@ val appModule = module {
 
     singleOf(::AdministradorGestorProductosViewModel)
 
+    singleOf(::ButacaRepositoryImpl) {
+        bind<ButacaRepository>()
+    }
+    
     singleOf(::AdministradorGestorButacasViewModel)
 
     singleOf(::ProductoRepositoryImpl) {
         bind<ProductosRepository>()
+    }
+
+    singleOf(::ButacaStorageImpl) {
+        bind<ButacaStorage>()
+    }
+
+    singleOf(::ButacaStorageCsvImpl) {
+        bind<ButacaStorageCsv>()
+    }
+
+    singleOf(::ButacaServiceImpl) {
+        bind<ButacaService>()
     }
 
     singleOf(::ProductoServicioImpl) {
@@ -83,6 +105,10 @@ val appModule = module {
 
     singleOf(::ProductoStorageJsonImpl) {
         bind<ProductoStorageJson>()
+    }
+
+    singleOf(::ButacaStorageJsonImpl) {
+        bind<ButacaStorageJson>()
     }
 
     singleOf(::ProductoStorageImpl) {

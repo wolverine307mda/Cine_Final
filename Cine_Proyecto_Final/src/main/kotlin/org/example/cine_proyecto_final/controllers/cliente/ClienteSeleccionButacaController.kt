@@ -1,10 +1,12 @@
 package org.example.cine_proyecto_final.controllers.cliente
 
+import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.control.ToggleButton
+import org.example.cine_proyecto_final.butacas.models.Estado
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.koin.core.component.KoinComponent
@@ -104,12 +106,12 @@ class ClienteSeleccionButacaController : KoinComponent {
     private lateinit var butaca_e7: ToggleButton
 
     @FXML
+    private lateinit var butacasArray: List<ToggleButton>
+
+    @FXML
     fun initialize() {
         logger.debug { "Iniciando pantalla general de Selección de Butacas" }
-        viewModel.buscarButacas(
-            onSuccess = { viewModel.actualizarEstadoButacas(::obtenerToggleButtonPorId) },
-            onFailure = { logger.debug { "Error al buscar butacas" } }
-        )
+
         atras_button.setOnAction {
             logger.debug { "Botón 'Atrás' presionado" }
             RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA)
@@ -117,6 +119,47 @@ class ClienteSeleccionButacaController : KoinComponent {
         siguiente_button.setOnAction {
             logger.debug { "Botón 'Siguiente' presionado" }
             RoutesManager.changeScene(RoutesManager.View.SELECCION_PRODUCTOS)
+        }
+        initBindings()
+        actualizarEstadoButacas()
+    }
+
+    private fun initBindings() {
+        butacasArray.forEachIndexed { index, button ->
+            button.setOnAction {
+                viewModel.state.value.let { state ->
+                    state.butacas.getOrNull(index)?.let { butaca ->
+                        viewModel.addButaca(butaca)
+                        actualizarEstadoButacas()
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    fun actualizarEstadoButacas() {
+            viewModel.state.value.butacas.forEach { butaca ->
+            val toggleButton = obtenerToggleButtonPorId(butaca.id)
+            when (butaca.estado) {
+                Estado.OCUPADA -> {
+                    toggleButton?.style = "-fx-background-color: blue;"
+                    toggleButton?.isDisable = true
+                }
+                Estado.LIBRE -> {
+                    toggleButton?.style = "-fx-background-color: green;"
+                    toggleButton?.isDisable = false
+                }
+                Estado.FUERA_DE_SERVICIO -> {
+                    toggleButton?.style = "-fx-background-color: gray;"
+                    toggleButton?.isDisable = true
+                }
+                else -> {
+                    toggleButton?.style = "-fx-background-color: red;"
+                    toggleButton?.isDisable = true
+                }
+            }
         }
     }
 
