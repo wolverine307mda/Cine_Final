@@ -1,0 +1,50 @@
+/* Estilos para la tabla */
+#productoTable {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Estilos para las filas */
+.table-row-cell {
+    -fx-background-color: #2b2b2b; /* Color de fondo de las filas */
+}
+
+/* Estilos para los títulos de las columnas */
+.table-view .column-header-background {
+    -fx-background-color: #2b2b2b; /* Color de fondo de los títulos de las columnas */
+    -fx-background-radius: 10px; /* Bordes redondeados */
+}
+
+.table-view .column-header {
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-size: 15px; /* Tamaño de la fuente */
+    -fx-background-color: #661b1c;  /*Fondo transparente */
+    -fx-background-radius: 10px;  /* Bordes redondeados */
+}
+
+/* Estilos para el texto */
+.table-row-cell .table-cell {
+    -fx-text-fill: white; /* Color del texto */
+    -fx-font-size: 14px; /* Tamaño de la fuente */
+}
+
+/* Animación al pasar el ratón sobre la fila */
+.table-row-cell:hover {
+    -fx-background-color: #3a3a3a; /* Cambia el color de fondo al pasar el ratón */
+    -fx-background-radius: 10px; /* Bordes redondeados */
+    -fx-background-insets: 0; /* Elimina el margen interno */
+    -fx-padding: 0; /* Elimina el relleno */
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 255, 255, 0.2), 10, 0, 0, 0); /* Sombra al pasar el ratón */
+}
+
+/* Estilo para la selección de fila */
+.table-row-cell:selected {
+    -fx-background-color: #661b1c; /* Color de fondo cuando se selecciona una fila */
+    -fx-background-radius: 10px; /* Bordes redondeados */
+    -fx-background-insets: 0; /* Elimina el margen interno */
+    -fx-padding: 0; /* Elimina el relleno */
+}
+
+.text {
+    -fx-fill: white;
+}

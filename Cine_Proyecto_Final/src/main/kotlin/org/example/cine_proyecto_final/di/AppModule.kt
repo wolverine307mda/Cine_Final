@@ -21,6 +21,7 @@ import org.example.cine_proyecto_final.cuentas.service.storage.json.CuentaStorag
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
+import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
 import org.example.cine_proyecto_final.productos.repository.ProductoRepositoryImpl
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
@@ -51,6 +52,8 @@ val appModule = module {
     singleOf(::ClienteSeleccionButacaViewModel)
 
     singleOf(::ClienteSeleccionProductosViewModel)
+
+    singleOf(::AdministradorGestorProductosViewModel)
 
     singleOf(::ProductoRepositoryImpl) {
         bind<ProductosRepository>()
