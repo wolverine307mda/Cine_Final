@@ -120,6 +120,7 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
      */
     data class ProductSelectionState(
         var allProductos: List<Producto> = emptyList(),
+        var productos: List<Producto> = emptyList(),
         var lineas: List<LineaVenta> = mutableListOf(),
     )
 }
