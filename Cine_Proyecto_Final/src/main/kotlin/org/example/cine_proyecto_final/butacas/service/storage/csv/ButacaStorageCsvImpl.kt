@@ -31,7 +31,7 @@ class ButacaStorageCsvImpl : ButacaStorageCsv {
                         Butaca(
                             id = butaca[0],
                             estado = elegirEstado(butaca[2]),
-                            precio = butaca[4].toDouble(),
+                            precio = butaca[3].toDouble(),
                             tipo = elegirTipo(butaca[1]),
                             updatedAt = LocalDateTime.now(),
                             createdAt = LocalDateTime.now()

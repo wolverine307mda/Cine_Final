@@ -57,7 +57,6 @@ class ClienteSeleccionProductosController : KoinComponent {
 
     @FXML
     private fun initialize() {
-
         logger.debug { "iniciando pantalla general de Selección de Productos" }
         initDefaultValues()
         initBindings()
@@ -95,6 +94,9 @@ class ClienteSeleccionProductosController : KoinComponent {
         }
     }
 
+    /**
+     * Añade una nueva linea de venta a la cesta o modifica una existente
+     */
     private fun onTablaSelected(value : Producto){
         logger.debug { "Añadiendo una nueva linea de venta" }
         val existingLinea = viewModel.state.value.lineas.firstOrNull { it.producto.id == value.id }
@@ -107,6 +109,9 @@ class ClienteSeleccionProductosController : KoinComponent {
 
     }
 
+    /**
+     * Inicializa los valores por defecto
+     */
     private fun initDefaultValues() {
         lineaList.items = FXCollections.observableArrayList(viewModel.state.value.lineas)
         productoTable.items = FXCollections.observableArrayList(viewModel.state.value.productos)
@@ -117,6 +122,9 @@ class ClienteSeleccionProductosController : KoinComponent {
 
     }
 
+    /**
+     * Inicializa los bindings
+     */
     private fun initBindings() {
         lineaList.cellFactory = ItemCellFactory()
         viewModel.state.addListener { _, _, newValue ->

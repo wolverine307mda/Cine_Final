@@ -2,11 +2,11 @@ package org.example.cine_proyecto_final.viewmodels.cliente
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
+import org.example.cine_final.productos.servicio.storage.ProductoStorage
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
-import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoStorageCSV
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.jetbrains.dokka.InternalDokkaApi
 import org.jetbrains.dokka.utilities.ServiceLocator.toFile
@@ -24,7 +24,7 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
 
     // Inyección de dependencias para ProductoServicio y ProductoStorageCSV
     private val productoService: ProductoServicio by inject()
-    private val productoCsv: ProductoStorageCSV by inject()
+    private val productoCsv: ProductoStorage by inject()
 
     // Propiedad de estado que contiene el estado actual de la selección de productos
     val state: SimpleObjectProperty<ProductSelectionState> = SimpleObjectProperty(ProductSelectionState())
@@ -38,12 +38,13 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
         // Cargar productos desde un archivo CSV y guardarlos en la base de datos
         val file = CineApplication::class.java.getResource("data/productos.csv")
         if (file != null) {
-            productoCsv.import(file.toFile())
+            productoCsv.importFromCSV(file.toFile())
                 .onSuccess {
                     it.forEach { productoService.save(it) }
                 }
         }
-        state.value.allProductos = productoService.findAll().value // Cargamos los datos de todos los productos
+        state.value.allProductos = productoService.findAll().value
+            .filter { !it.isDeleted && it.stock > 0} // Cargamos los datos de todos los productos que no esten borrados o agotados
         state.value.productos = state.value.allProductos
     }
 
@@ -68,7 +69,7 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
      */
     fun clearList() {
         state.value = state.value.copy(
-            lineas = listOf()
+            lineas = emptyList()
         )
     }
 
@@ -86,6 +87,10 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
         }
     }
 
+    /**
+     * Filtra la lista de productos por tipo de producto
+     * @param type el tipo de producto a filtrar
+     */
     fun filterListByType(type: TipoProducto) {
         state.value = state.value.copy (
             productos = state.value.allProductos.filter { it.tipo == type }
@@ -101,7 +106,7 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
         lineas.forEach {
             if (it.id == linea.id) it.cantidad = linea.cantidad
         }
-        state.value = state.value.copy (
+        state.value = state.value.copy ( //Para que se actualice
             lineas = emptyList()
         )
         state.value = state.value.copy (
@@ -109,6 +114,9 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
         )
     }
 
+    /**
+     * Actualiza la lista para enseñar todos los productos
+     */
     fun showAllProducts() {
         state.value = state.value.copy(
             productos = state.value.allProductos,
