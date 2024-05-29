@@ -12,6 +12,7 @@ import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraV
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -68,12 +69,62 @@ class ClienteProcesarCompraController: KoinComponent {
 
         //implementar el precio Total
     }
-
     private fun finalizarCompra() {
+        val tarjetaCredito = tarjet_credito_field.text
+        val cvv = cvvField.text
+        val fechaCaducidad = fxCaducidad.text
+
+        if (tarjetaCredito.isEmpty() || cvv.isEmpty() || fechaCaducidad.isEmpty()) {
+            showAlertOperacion("Error", "Por favor, completa todos los campos", Alert.AlertType.ERROR)
+            return
+        }
+
+        if (!validarTarjetaCredito(tarjetaCredito)) {
+            showAlertOperacion("Error", "Por favor, verifica el numero de la tarjeta de credito", Alert.AlertType.ERROR)
+            return
+        }
+
+        if (!validarCVC(cvv)) {
+            showAlertOperacion("Error", "Por favor, verifica el cvv", Alert.AlertType.ERROR)
+            return
+        }
+
+        if (!validarFechaCaducidad(fechaCaducidad)) {
+            showAlertOperacion("Error", "Por favor, verifica la fecha de caducidad", Alert.AlertType.ERROR)
+            return
+        }
 
 
 
+        // Aquí puedes realizar la lógica de finalización de la compra
+        showAlertOperacion("Compra Finalizada", "La compra se ha procesado correctamente")
     }
+
+
+    private fun validarTarjetaCredito(tarjeta: String): Boolean {
+        // Expresión regular para validar el número de tarjeta de crédito
+        val regex = Regex("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$")
+        return regex.matches(tarjeta)
+    }
+
+    private fun validarCVC(cvc: String): Boolean {
+        // Expresión regular para validar el CVC de la tarjeta
+        val regex = Regex("^\\d{3}$")
+        return regex.matches(cvc)
+    }
+
+    private fun validarFechaCaducidad(fecha: String): Boolean {
+        try {
+            // Intenta parsear la fecha en el formato MM/YY
+            val formatter = DateTimeFormatter.ofPattern("MM/yy")
+            val fechaCaducidad = formatter.parse(fecha)
+            // Comprueba si la fecha es válida (no está en el pasado)
+            return !LocalDate.from(fechaCaducidad).isBefore(LocalDate.now())
+        } catch (e: Exception) {
+            return false
+        }
+    }
+
 
     private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
         val alert = Alert(alerta)

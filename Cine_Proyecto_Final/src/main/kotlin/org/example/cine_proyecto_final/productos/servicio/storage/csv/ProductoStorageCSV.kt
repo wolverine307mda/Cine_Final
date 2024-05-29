@@ -6,5 +6,5 @@ import org.example.productos.errors.ProductoError
 import java.io.File
 
 interface ProductoStorageCSV {
-    fun import(file : File) : Result<List<Producto>,ProductoError>
+    fun import(file: File) : Result<List<Producto>,ProductoError>
 }

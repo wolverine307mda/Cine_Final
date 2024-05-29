@@ -1,0 +1,36 @@
+.list-cell-container {
+    -fx-background-color: #2b2b2b;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #661b1c;
+    -fx-border-width: 3px;
+}
+
+.list-cell-anchor-pane {
+    -fx-background-radius: 20px;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.icon-button .image-view {
+    -fx-effect: null;
+}
+
+.name-label {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 16px;
+    -fx-text-fill: #e0e0e0;
+}
+
+.amount-label {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 16px;
+    -fx-text-fill: #e0e0e0;
+}
+
+.button:hover {
+    -fx-background-color: transparent; /* Color de fondo al pasar el ratón */
+}
