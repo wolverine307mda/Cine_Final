@@ -74,29 +74,29 @@ class ClienteProcesarCompraController: KoinComponent {
         val fechaCaducidad = fxCaducidad.text
 
         if (tarjetaCredito.isEmpty() || cvv.isEmpty() || fechaCaducidad.isEmpty()) {
-            showAlertOperacion("Error", "Por favor, completa todos los campos", Alert.AlertType.ERROR)
+            RoutesManager.showAlertOperacion("Error", "Por favor, completa todos los campos", Alert.AlertType.ERROR)
             return
         }
 
         if (!validarTarjetaCredito(tarjetaCredito)) {
-            showAlertOperacion("Error", "Por favor, verifica el numero de la tarjeta de credito", Alert.AlertType.ERROR)
+            RoutesManager.showAlertOperacion("Error", "Por favor, verifica el numero de la tarjeta de credito", Alert.AlertType.ERROR)
             return
         }
 
         if (!validarCVC(cvv)) {
-            showAlertOperacion("Error", "Por favor, verifica el cvv", Alert.AlertType.ERROR)
+            RoutesManager.showAlertOperacion("Error", "Por favor, verifica el cvv", Alert.AlertType.ERROR)
             return
         }
 
         if (!validarFechaCaducidad(fechaCaducidad)) {
-            showAlertOperacion("Error", "Por favor, verifica la fecha de caducidad", Alert.AlertType.ERROR)
+            RoutesManager.showAlertOperacion("Error", "Por favor, verifica la fecha de caducidad", Alert.AlertType.ERROR)
             return
         }
 
 
 
         // Aquí puedes realizar la lógica de finalización de la compra
-        showAlertOperacion("Compra Finalizada", "La compra se ha procesado correctamente")
+        RoutesManager.showAlertOperacion("Compra Finalizada", "La compra se ha procesado correctamente")
     }
 
 
@@ -125,15 +125,6 @@ class ClienteProcesarCompraController: KoinComponent {
         } catch (e: Exception) {
             false
         }
-    }
-
-
-    private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
-        val alert = Alert(alerta)
-        alert.title = title
-        alert.headerText = null
-        alert.contentText = mensaje
-        alert.showAndWait()
     }
 }
 
