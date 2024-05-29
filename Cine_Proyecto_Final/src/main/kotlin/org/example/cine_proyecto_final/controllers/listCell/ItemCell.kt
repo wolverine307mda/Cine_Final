@@ -4,6 +4,7 @@ import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
+import javafx.scene.text.Text
 import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
@@ -21,7 +22,7 @@ class ItemCell : ListCell<LineaVenta>(), KoinComponent{
     lateinit var name: Label
 
     @FXML
-    lateinit var amount: Label
+    lateinit var amount: Text
 
     @FXML
     lateinit var more : Button

@@ -4,10 +4,13 @@ import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
+import javafx.scene.control.Label
 import javafx.scene.control.TableColumn
 import javafx.scene.control.TableView
 import javafx.scene.control.TextField
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.text.Text
+import org.example.cine_proyecto_final.controllers.listCell.ItemCellFactory
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.routes.RoutesManager
@@ -36,6 +39,8 @@ class AdministradorGestionProductosController : KoinComponent {
     private lateinit var filtrarTipoCombobox: ComboBox<String>
 
     //info del producto seleccionado
+    @FXML
+    private lateinit var labelnombreProducto: Text
     @FXML
     private lateinit var ProductoSeleccionadoTipoComboBox: ComboBox<String>
     @FXML
@@ -72,11 +77,12 @@ class AdministradorGestionProductosController : KoinComponent {
 
         // Configuración de acciones de botones
         atrasButton.setOnAction { RoutesManager.changeScene(View.ADMIN_INICIO) }
-        editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Editar Producto") }
+        //editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Editar Producto") }
         nuevoButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Nuevo Producto") }
 
         // Inicializar valores por defecto
         initDefaultValues()
+        initBindings()
 
         // Añadir listener a la tabla para manejar la selección de productos
         productoTable.selectionModel.selectedItemProperty().addListener { _, _, selectedProducto ->
@@ -98,6 +104,14 @@ class AdministradorGestionProductosController : KoinComponent {
         productoTipo.cellValueFactory = PropertyValueFactory("tipo")
     }
 
+    private fun initBindings() {
+        viewModel.state.addListener { _, _, newValue ->
+            if (newValue.productos != productoTable.items){
+                productoTable.items = FXCollections.observableArrayList(newValue.productos)
+            }
+        }
+    }
+
     /**
      * Actualiza los campos de texto con la información del producto seleccionado.
      */
@@ -106,6 +120,9 @@ class AdministradorGestionProductosController : KoinComponent {
         precioProductoSeleccionado.text = producto.precio.toString()
         stockProductoSeleccionado.text = producto.stock.toString()
         ProductoSeleccionadoTipoComboBox.value = asignarTipo(producto)
+        labelnombreProducto.text = producto.nombre
+
+        editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Editar Producto") }
     }
 
     private fun asignarTipo(producto: Producto): String {
