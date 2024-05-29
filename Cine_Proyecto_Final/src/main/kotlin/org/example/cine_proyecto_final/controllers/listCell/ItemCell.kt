@@ -2,11 +2,10 @@ package org.example.cine_proyecto_final.controllers.listCell
 
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
-import javafx.scene.control.Button
-import javafx.scene.control.ContentDisplay
-import javafx.scene.control.Label
-import javafx.scene.control.ListCell
+import javafx.scene.control.*
+import javafx.scene.control.Alert.AlertType
 import org.example.cine_proyecto_final.CineApplication
+import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
 import org.koin.core.component.KoinComponent
@@ -33,6 +32,34 @@ class ItemCell : ListCell<LineaVenta>(), KoinComponent{
     @FXML
     lateinit var delete : Button
 
+    @FXML
+    fun initialize() {
+        more.setOnAction {
+            item?.let {
+                if (it.cantidad+1 <= item.producto.stock){
+                    it.cantidad += 1
+                    amount.text = it.cantidad.toString()
+                    viewModel.updateItem(it)
+                }
+            }
+        }
+        less.setOnAction {
+            item?.let {
+                it.cantidad -= 1
+                if (it.cantidad == 0) viewModel.removeLinea(it)
+                else {
+                    amount.text = it.cantidad.toString()
+                    viewModel.updateItem(it)
+                }
+            }
+        }
+        delete.setOnAction {
+            item?.let {
+                viewModel.removeLinea(it)
+            }
+        }
+    }
+
     init {
         loadFXML()
     }
@@ -57,25 +84,6 @@ class ItemCell : ListCell<LineaVenta>(), KoinComponent{
             name.text = linea.producto.nombre
             amount.text = linea.cantidad.toString()
             contentDisplay = ContentDisplay.GRAPHIC_ONLY
-        }
-        more.setOnAction {
-            item?.let {
-                it.cantidad += 1
-                amount.text = it.cantidad.toString()
-                viewModel.updateItem(it)
-            }
-        }
-        less.setOnAction {
-            item?.let {
-                it.cantidad -= 1
-                amount.text = it.cantidad.toString()
-                viewModel.updateItem(it)
-            }
-        }
-        delete.setOnAction {
-            item?.let {
-                viewModel.removeLinea(it)
-            }
         }
     }
 }

@@ -4,6 +4,7 @@ import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.CineApplication
+import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
 import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoStorageCSV
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
@@ -28,27 +29,30 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
     // Propiedad de estado que contiene el estado actual de la selección de productos
     val state: SimpleObjectProperty<ProductSelectionState> = SimpleObjectProperty(ProductSelectionState())
 
+    /*
+     * Inicializamos los datos de los productos con un fichero que deberia estar en el producto
+     */
     init {
         logger.debug { "Inicializando ClienteSeleccionProductosViewModel" }
 
         // Cargar productos desde un archivo CSV y guardarlos en la base de datos
         val file = CineApplication::class.java.getResource("data/productos.csv")
-        productoCsv.import(file.toFile())
-            .onSuccess {
-                it.forEach { productoService.save(it) }
-            }
-
-        // Cargar todos los productos en el estado
-        state.value.productos = productoService.findAll().value
+        if (file != null) {
+            productoCsv.import(file.toFile())
+                .onSuccess {
+                    it.forEach { productoService.save(it) }
+                }
+        }
+        state.value.allProductos = productoService.findAll().value // Cargamos los datos de todos los productos
+        state.value.productos = state.value.allProductos
     }
 
     /**
-     * Agrega un producto a la lista de elementos seleccionados.
-     *
-     * @param producto El producto a agregar.
+     * Añade una linea de venta a la lista de lineas de venta
+     * @param producto el producto que formará parte de la línea de venta
      */
-    fun addLinea(producto: Producto) {
-        state.value = state.value.copy(
+    fun addLinea (producto: Producto) {
+        state.value= state.value.copy(
             lineas = state.value.lineas.plus(
                 LineaVenta(
                     producto = producto,
@@ -60,7 +64,7 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
     }
 
     /**
-     * Limpia la lista de elementos seleccionados.
+     * Borra todas las lineas de venta
      */
     fun clearList() {
         state.value = state.value.copy(
@@ -71,7 +75,7 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
     /**
      * Elimina un elemento específico de la lista de elementos seleccionados.
      *
-     * @param linea El elemento a eliminar.
+     * @param linea El elemento a eliminar
      */
     fun removeLinea(linea: LineaVenta) {
         val index = state.value.lineas.indexOf(linea)
@@ -82,27 +86,40 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
         }
     }
 
-    /**
-     * Actualiza la cantidad de un elemento específico en la lista de elementos seleccionados.
-     *
-     * @param linea El elemento a actualizar.
-     */
-    fun updateItem(linea: LineaVenta) {
-        state.value.lineas.forEach {
-            if (linea.id == it.id) {
-                it.cantidad = linea.cantidad
-            }
-        }
+    fun filterListByType(type: TipoProducto) {
+        state.value = state.value.copy (
+            productos = state.value.allProductos.filter { it.tipo == type }
+        )
     }
 
     /**
-     * Clase de datos que representa el estado de la selección de productos.
-     *
-     * @property lineas Lista de líneas de venta.
-     * @property productos Lista de productos disponibles.
+     * Actualiza la cantidad de un producto de una linea de venta
+     * @param linea la linea de venta que ya tiene la cantidad correcta
+     */
+    fun updateItem(linea: LineaVenta) {
+        val lineas = state.value.lineas
+        lineas.forEach {
+            if (it.id == linea.id) it.cantidad = linea.cantidad
+        }
+        state.value = state.value.copy (
+            lineas = emptyList()
+        )
+        state.value = state.value.copy (
+            lineas = lineas
+        )
+    }
+
+    fun showAllProducts() {
+        state.value = state.value.copy(
+            productos = state.value.allProductos,
+        )
+    }
+
+    /**
+     * El objeto observable que contiene las lineas y los productos
      */
     data class ProductSelectionState(
-        var lineas: List<LineaVenta> = emptyList(),
-        var productos: List<Producto> = emptyList(),
+        var allProductos: List<Producto> = emptyList(),
+        var lineas: List<LineaVenta> = mutableListOf(),
     )
 }
