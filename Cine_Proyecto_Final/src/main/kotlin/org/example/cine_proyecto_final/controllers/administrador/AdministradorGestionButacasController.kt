@@ -1,9 +1,11 @@
 package org.example.cine_proyecto_final.controllers.administrador
 
 import javafx.collections.FXCollections
+import javafx.collections.transformation.FilteredList
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.text.Text
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.routes.RoutesManager.View
@@ -47,6 +49,21 @@ class AdministradorGestionButacasController : KoinComponent {
     @FXML
     private lateinit var precioTextField: TextField
 
+    // Ordenar la tabla por estado y tipo
+    private lateinit var estado: ToggleGroup
+    @FXML
+    private lateinit var libreButton: ToggleButton
+    @FXML
+    private lateinit var fueraServicioButton: ToggleButton
+    @FXML
+    private lateinit var ocupadaButton: ToggleButton
+    private lateinit var tipo: ToggleGroup
+    @FXML
+    private lateinit var normalButton: ToggleButton
+    @FXML
+    private lateinit var vipButton: ToggleButton
+
+    private lateinit var filteredData: FilteredList<Butaca>
 
     @FXML
     private fun initialize() {
@@ -64,6 +81,19 @@ class AdministradorGestionButacasController : KoinComponent {
         tableButacas.selectionModel.selectedItemProperty().addListener { _, _, selectedButaca ->
             selectedButaca?.let { updateButacaSeleccionada(it) }
         }
+
+        // Agrupar botones
+        estado = ToggleGroup()
+        libreButton.toggleGroup = estado
+        ocupadaButton.toggleGroup = estado
+        fueraServicioButton.toggleGroup = estado
+
+        tipo = ToggleGroup()
+        normalButton.toggleGroup = tipo
+        vipButton.toggleGroup = tipo
+
+        // Configurar búsqueda y filtrado
+        configureSearchAndFilter()
     }
 
     /**
@@ -71,7 +101,8 @@ class AdministradorGestionButacasController : KoinComponent {
      */
     private fun initDefaultValues() {
         // Establecer los ítems de la tabla de butacas
-        tableButacas.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
+        filteredData = FilteredList(FXCollections.observableArrayList(viewModel.state.value.butacas))
+        tableButacas.items = filteredData
 
         // Configurar las columnas de la tabla
         idButacaColumna.cellValueFactory = PropertyValueFactory("id")
@@ -83,8 +114,27 @@ class AdministradorGestionButacasController : KoinComponent {
     private fun initBindings() {
         viewModel.state.addListener { _, _, newValue ->
             if (newValue.butacas != tableButacas.items) {
-                tableButacas.items = FXCollections.observableArrayList(newValue.butacas)
+                filteredData = FilteredList(FXCollections.observableArrayList(newValue.butacas))
+                tableButacas.items = filteredData
             }
+        }
+    }
+
+    /**
+     * Configura la búsqueda y el filtrado de butacas.
+     */
+    private fun configureSearchAndFilter() {
+        buscarPorIdField.textProperty().addListener { _, _, _ -> filterButacas() }
+    }
+
+    /**
+     * Filtra las butacas en la tabla basadas en el texto de búsqueda.
+     */
+    private fun filterButacas() {
+        val searchText = buscarPorIdField.text.lowercase().trim()
+
+        filteredData.setPredicate { butaca ->
+            butaca.id.lowercase().contains(searchText)
         }
     }
 

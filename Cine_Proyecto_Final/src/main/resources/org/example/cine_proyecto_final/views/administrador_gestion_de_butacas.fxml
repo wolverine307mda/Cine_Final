@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,7 +49,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <TextField fx:id="buscarProrIdField" layoutX="186.0" layoutY="17.0" prefHeight="34.0" prefWidth="306.0" />
+                                    <TextField fx:id="buscarPorIdField" layoutX="186.0" layoutY="17.0" prefHeight="34.0" prefWidth="306.0" />
                                     <Label layoutX="131.0" layoutY="19.0" text="Id : " textFill="WHITE">
                                        <font>
                                           <Font name="Arial Black" size="23.0" />
@@ -66,7 +67,7 @@
                         <AnchorPane prefHeight="684.0" prefWidth="678.0">
                            <children>
                               <VBox layoutX="24.0" layoutY="16.0" opacity="0.3" prefHeight="610.0" prefWidth="634.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
-                              <TableView fx:id="tableButacas" layoutX="54.0" layoutY="127.0" opacity="0.78" prefHeight="476.0" prefWidth="570.0" style="-fx-background-color: black; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../styles/table.css">
+                              <TableView fx:id="tableButacas" layoutX="54.0" layoutY="139.0" opacity="0.78" prefHeight="464.0" prefWidth="570.0" style="-fx-background-color: black; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../styles/table.css">
                                  <columns>
                                     <TableColumn fx:id="idButacaColumna" editable="false" prefWidth="142.5" text="id" />
                                     <TableColumn fx:id="precioColum" editable="false" prefWidth="142.5" text="Precio" />
@@ -76,15 +77,15 @@
                               </TableView>
                               <ButtonBar layoutX="36.0" layoutY="87.0" prefHeight="40.0" prefWidth="586.0">
                                  <buttons>
-                                    <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="374.0" style="-fx-background-radius: 0;" text="Libre" />
-                                    <Button mnemonicParsing="false" style="-fx-background-radius: 0;" text="Fuera de Servicio" />
-                                    <Button mnemonicParsing="false" style="-fx-background-radius: 0;" text="Ocupada" />
+                                    <ToggleButton fx:id="libreButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="374.0" style="-fx-background-radius: 0;" text="Libre" />
+                                    <ToggleButton fx:id="fueraServicioButton" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Fuera de Servicio" />
+                                    <ToggleButton fx:id="ocupadaButton" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Ocupada" />
                                  </buttons>
                               </ButtonBar>
                               <ButtonBar layoutX="36.0" layoutY="40.0" prefHeight="40.0" prefWidth="586.0">
                                  <buttons>
-                                    <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="374.0" style="-fx-background-radius: 0;" text="Normal" />
-                                    <Button mnemonicParsing="false" style="-fx-background-radius: 0;" text="VIP" />
+                                    <ToggleButton fx:id="normalButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="374.0" style="-fx-background-radius: 0;" text="Normal" />
+                                    <ToggleButton fx:id="vipButton" mnemonicParsing="false" style="-fx-background-radius: 0;" text="VIP" />
                                  </buttons>
                               </ButtonBar>
                            </children>

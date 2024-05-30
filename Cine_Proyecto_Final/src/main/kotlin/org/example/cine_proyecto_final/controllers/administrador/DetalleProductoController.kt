@@ -1,16 +1,13 @@
-package org.example.cine_proyecto_final.controllers.administrador
-
-import com.github.michaelbull.result.onFailure
+/*import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
-import javafx.stage.FileChooser
+import org.example.cine_proyecto_final.controllers.administrador.AdministradorGestionProductosController
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.models.TipoProducto
-import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -22,12 +19,10 @@ private val logger = logging()
 class DetalleProductoController : KoinComponent {
 
     private val viewModel: AdministradorGestorProductosViewModel by inject()
+    private var producto: Producto? = null
 
     @FXML
     private lateinit var guardarButton: Button
-
-    @FXML
-    private lateinit var imagen_button: Button
 
     @FXML
     private lateinit var idField: TextField
@@ -44,44 +39,97 @@ class DetalleProductoController : KoinComponent {
     @FXML
     private lateinit var tipoCombo: ComboBox<String>
 
-    @FXML
-    private fun initialize() {
+    fun initialize() {
         val tipos = listOf("BEBIDA", "COMIDA", "OTROS")
         tipoCombo.items.addAll(tipos)
 
-        guardarButton.setOnAction {
-            val tipo = tipoCombo.value
-            val nombre = nombreField.text
-            val precio = precioField.text
-            val stock = stockField.text
-            guardarNuevoProducto(tipo, nombre, precio, stock)
+        // Obtén el producto seleccionado de ProductHolder
+        val producto = AdministradorGestionProductosController.ProductHolder.selectedProduct
+
+        // Si hay un producto seleccionado, configura los campos con sus valores
+        if (producto != null) {
+            idField.text = producto.id.toString()
+            nombreField.text = producto.nombre
+            precioField.text = producto.precio.toString()
+            stockField.text = producto.stock.toString()
+            tipoCombo.value = producto.tipo.toString()
         }
 
-        imagen_button.setOnAction { onImageAction() }
-    }
+        /*guardarButton.setOnAction {
+            if (producto != null){editarProducto(producto)}
+            else {crearProducto()}
 
-    private fun onImageAction() {
-        logger.debug { "OnImageAction" }
-        FileChooser().run {
-            title = "Selecciona una imagen"
-            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
-            showOpenDialog(RoutesManager.activeStage)
-        }?.let {
-            // Código para manejar la imagen seleccionada
+        }*/
+    }/*
+    private fun editarProducto(producto: Producto) {
+        val tipo = tipoCombo.value
+        val nombre = nombreField.text
+        val precio = precioField.text
+        val stock = stockField.text
+        val id = idField.text.toIntOrNull()
+
+        if (id != null) {
+            val productoEditado = Producto(
+                id = id.toString(),
+                nombre = nombre,
+                precio = precio.toDoubleOrNull() ?: 0.0,
+                stock = stock.toIntOrNull() ?: 0,
+                tipo = when (tipo) {
+                    "BEBIDA" -> TipoProducto.BEBIDA
+                    "COMIDA" -> TipoProducto.COMIDA
+                    "OTROS" -> TipoProducto.OTROS
+                    else -> {
+                        showAlertOperacion("Error de actualización", "Tipo de producto inválido", Alert.AlertType.ERROR)
+                        return
+                    }
+                },
+                image = "producto.jpg",
+                createdAt = producto.createdAt,
+                updatedAt = LocalDateTime.now(),
+                isDeleted = false
+            )
+
+            viewModel.editarProducto(productoEditado)
+                .onSuccess {
+                    logger.debug { "Producto editado con éxito" }
+                    showAlertOperacion("Producto editado", "El producto ha sido editado con éxito", Alert.AlertType.INFORMATION)
+                    guardarButton.scene.window.hide()
+                }
+                .onFailure { error ->
+                    logger.error { "Error en la edición del producto: $error" }
+                    showAlertOperacion("Error de edición", "Hubo un problema al editar el producto: $error", Alert.AlertType.ERROR)
+                }
+        } else {
+            showAlertOperacion("Error de actualización", "El ID del producto es inválido", Alert.AlertType.ERROR)
         }
     }
 
-    private fun guardarNuevoProducto(tipo: String, nombre: String, precio: String, stock: String) {
+
+    private fun crearProducto() {
+        val tipo = tipoCombo.value
+        val nombre = nombreField.text
+        val precio = precioField.text
+        val stock = stockField.text
+        val id = idField.text.toIntOrNull()
+
+        if (id != null) {
+            guardarProductoNuevo(id, tipo, nombre, precio, stock)
+        } else {
+            showAlertOperacion("Error de actualización", "El ID del producto es inválido", Alert.AlertType.ERROR)
+        }
+    }*/
+
+    /*private fun guardarProductoNuevo(id: Int, tipo: String, nombre: String, precio: String, stock: String) {
         if (nombre.isBlank() || precio.isBlank() || stock.isBlank()) {
-            showAlertOperacion("Error de registro", "Todos los campos deben estar completos", Alert.AlertType.ERROR)
+            showAlertOperacion("Error de actualización", "Todos los campos deben estar completos", Alert.AlertType.ERROR)
             return
         }
 
-        val precioInt = precio.toIntOrNull()
+        val precioDouble = precio.toDoubleOrNull()
         val stockInt = stock.toIntOrNull()
 
-        if (precioInt == null || stockInt == null || precioInt < 0 || stockInt < 0) {
-            showAlertOperacion("Error de guardado", "Precio y stock deben ser números válidos y positivos", Alert.AlertType.ERROR)
+        if (precioDouble == null || stockInt == null || precioDouble < 0 || stockInt < 0) {
+            showAlertOperacion("Error de actualización", "Precio y stock deben ser números válidos y positivos", Alert.AlertType.ERROR)
             return
         }
 
@@ -90,36 +138,33 @@ class DetalleProductoController : KoinComponent {
             "COMIDA" -> TipoProducto.COMIDA
             "OTROS" -> TipoProducto.OTROS
             else -> {
-                showAlertOperacion("Error de guardado", "Tipo de producto inválido", Alert.AlertType.ERROR)
+                showAlertOperacion("Error de actualización", "Tipo de producto inválido", Alert.AlertType.ERROR)
                 return
             }
         }
-        nuevoProducto(tipoProducto, nombre, precioInt, stockInt)
-    }
-
-    private fun nuevoProducto(tipo: TipoProducto, nombre: String, precio: Int, stock: Int) {
         val producto = Producto(
+            id = id.toString(),
             nombre = nombre,
-            precio = precio.toDouble(),
-            stock = stock,
-            tipo = tipo,
+            precio = precioDouble,
+            stock = stockInt,
+            tipo = tipoProducto,
             image = "producto.jpg",
             createdAt = LocalDateTime.now(),
             updatedAt = LocalDateTime.now(),
             isDeleted = false
         )
+
         viewModel.nuevoProducto(producto)
             .onSuccess {
-                logger.debug { "Producto agregado con exito" }
-                showAlertOperacion("Producto agregado con éxito", "El producto ha sido guardado con éxito", Alert.AlertType.INFORMATION)
+                logger.debug { "Producto actualizado con éxito" }
+                showAlertOperacion("Producto actualizado", "El producto ha sido actualizado con éxito", Alert.AlertType.INFORMATION)
                 guardarButton.scene.window.hide()
             }
             .onFailure { error ->
-                logger.error { "Error en el registro del producto: $error" }
-                showAlertOperacion("Error de registro", "Hubo un problema al registrar el producto: $error", Alert.AlertType.ERROR)
+                logger.error { "Error en la actualización del producto: $error" }
+                showAlertOperacion("Error de actualización", "Hubo un problema al actualizar el producto: $error", Alert.AlertType.ERROR)
             }
     }
-
 
     private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
         val alert = Alert(alerta)
@@ -127,5 +172,7 @@ class DetalleProductoController : KoinComponent {
         alert.headerText = null
         alert.contentText = mensaje
         alert.showAndWait()
-    }
+    }*/
+
 }
+*/

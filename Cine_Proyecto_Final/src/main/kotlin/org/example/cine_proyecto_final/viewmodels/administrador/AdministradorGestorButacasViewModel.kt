@@ -20,7 +20,7 @@ private val logger = logging()
 
 @OptIn(InternalDokkaApi::class)
 class AdministradorGestorButacasViewModel : KoinComponent {
-    // Inyección de dependencias para ButacaServicio y ButacaStorageCSV
+    // Inyección de dependencias para ButacaService y ButacaStorageCSV
     private val butacaService: ButacaService by inject()
     private val butacaCsv: ButacaStorageCsv by inject()
     private val validador: ButacaValidator by inject()
@@ -56,9 +56,8 @@ class AdministradorGestorButacasViewModel : KoinComponent {
             .onSuccess {
                 butacaService.save(butaca)
                 logger.debug { "Butaca creada con éxito" }
-                state.value = state.value.copy(
-                    butacas = state.value.butacas + butaca
-                )
+                val updatedButacas = state.value.butacas + butaca
+                state.set(state.value.copy(butacas = updatedButacas))
             }
             .onFailure {
                 logger.debug { "Error al crear butaca: $it" }

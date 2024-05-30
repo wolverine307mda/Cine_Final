@@ -18,7 +18,6 @@ class ProductoServicioImpl(
     private var productosRepositorio: ProductosRepository,
     private var productoValidador: ProductoValidator,
 ) : ProductoServicio {
-
     /**
      * Guarda un nuevo producto.
      * @param producto El producto a guardar.
