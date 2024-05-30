@@ -2,6 +2,7 @@ package org.example.cine_proyecto_final.ventas.models
 
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
+import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraViewModel
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -15,12 +16,11 @@ import java.util.UUID
  * @property isDeleted Indica si la venta ha sido eliminada.
  */
 data class Venta(
-    var id : String = UUID.randomUUID().toString(),
-    var cliente : Cuenta,
-    var butacas : List<Butaca>,
-    var lineasVenta : List<LineaVenta>,
-    var createdAt : LocalDateTime = LocalDateTime.now(),
-    var updatedAt : LocalDateTime = LocalDateTime.now(),
-    var isDeleted : Boolean = false
-) {
-}
+    var id: String = UUID.randomUUID().toString(),
+    var cliente: Cuenta,
+    var butacas: List<Butaca>,
+    var lineasVenta: List<LineaVenta>,
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+    var isDeleted: Boolean = false
+)

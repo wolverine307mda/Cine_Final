@@ -38,7 +38,7 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
     }
 
     /**
-     * Añade una linea de venta a la lista de lineas de venta
+     * Añade una línea de venta a la lista de líneas de venta
      * @param producto el producto que formará parte de la línea de venta
      */
     fun addLinea (producto: Producto) {

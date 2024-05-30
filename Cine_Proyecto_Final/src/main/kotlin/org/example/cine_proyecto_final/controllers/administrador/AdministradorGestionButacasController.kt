@@ -5,7 +5,6 @@ import javafx.collections.transformation.FilteredList
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
-import javafx.scene.text.Text
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.routes.RoutesManager.View

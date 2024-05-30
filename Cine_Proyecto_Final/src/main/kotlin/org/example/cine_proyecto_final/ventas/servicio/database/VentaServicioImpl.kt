@@ -1,12 +1,13 @@
 package org.example.cine_proyecto_final.ventas.servicio.database
 
-import com.github.michaelbull.result.*
-import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorage
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.onSuccess
 import org.example.cine_proyecto_final.ventas.errors.VentaError
 import org.example.cine_proyecto_final.ventas.models.Venta
 import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorio
 import org.example.cine_proyecto_final.ventas.validator.VentaValidator
-import java.time.LocalDateTime
 
 /**
  * Implementación del service de gestión de ventas.

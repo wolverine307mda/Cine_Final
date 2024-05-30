@@ -15,6 +15,8 @@ import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorag
 import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJsonImpl
 import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
 import org.example.cine_proyecto_final.config.AppConfig
+import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicio
+import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicioImpl
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepositoryImpl
 import org.example.cine_proyecto_final.cuentas.service.cache.CuentaCache
@@ -40,6 +42,7 @@ import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGes
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
+import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraViewModel
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -67,6 +70,8 @@ val appModule = module {
 
     singleOf(::AdministradorGestorProductosViewModel)
 
+    singleOf(::ClienteProcesarCompraViewModel)
+
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
     }
@@ -79,6 +84,10 @@ val appModule = module {
 
     singleOf(::ButacaStorageImpl) {
         bind<ButacaStorage>()
+    }
+
+    singleOf(::VentaServicioImpl){
+        bind<VentaServicio>()
     }
 
     singleOf(::ButacaStorageCsvImpl) {
