@@ -120,8 +120,8 @@ class SesionRegistrarseController : KoinComponent {
             return
         }
 
-        if (contrasenia.length < 4) {
-            showAlertOperacion("Error de registro", "La contraseña debe tener al menos 4 caracteres", Alert.AlertType.ERROR)
+        if (!validador.passwordIsValid(contrasenia)) {
+            showAlertOperacion("Error de registro", "La contraseña no cumple con los requisitos de seguridad", Alert.AlertType.ERROR)
             return
         }
 

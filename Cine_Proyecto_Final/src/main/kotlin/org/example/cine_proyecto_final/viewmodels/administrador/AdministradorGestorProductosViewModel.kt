@@ -3,10 +3,8 @@ package org.example.cine_proyecto_final.viewmodels.administrador
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
-import cuenta.errors.CuentaError
 import javafx.beans.property.SimpleObjectProperty
 import org.example.cine_proyecto_final.CineApplication
-import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
 import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoStorageCSV
@@ -45,14 +43,6 @@ class AdministradorGestorProductosViewModel : KoinComponent {
         }
     }
 
-    /**
-     * Crea un nuevo usuario en el sistema.
-     *
-     * @param cuenta La cuenta de usuario a crear.
-     * @return Un [Result] que contiene la cuenta creada en caso de éxito o un [CuentaError] en caso de fallo.
-     * @see Cuenta
-     * @see CuentaError
-     */
     fun nuevoProducto(producto: Producto): Result<Producto, ProductoError> {
         logger.debug { "Añadiendo Producto" }
 
@@ -65,6 +55,42 @@ class AdministradorGestorProductosViewModel : KoinComponent {
             }
             .onFailure {
                 logger.debug { "Error al crear producto: $it" }
+            }
+    }
+
+    fun eliminarProducto(producto: Producto): Result<Unit, ProductoError> {
+        logger.debug { "Eliminando Producto" }
+
+        return productoService.delete(producto.id)
+            .onSuccess {
+                logger.debug { "Producto eliminado con éxito" }
+                val updatedProductos = state.value.productos.filterNot { it.id == producto.id }
+                state.set(state.value.copy(productos = updatedProductos))
+            }
+            .onFailure {
+                logger.debug { "Error al eliminar producto: $it" }
+            }
+    }
+
+    fun editarProducto(producto: Producto): Result<Producto, ProductoError> {
+        logger.debug { "Editando Producto" }
+
+        return validador.validate(producto)
+            .onSuccess {
+                productoService.update(producto.id, producto)
+                    .onSuccess {
+                        logger.debug { "Producto editado con éxito" }
+                        val updatedProductos = state.value.productos.map {
+                            if (it.id == producto.id) producto else it
+                        }
+                        state.set(state.value.copy(productos = updatedProductos))
+                    }
+                    .onFailure {
+                        logger.debug { "Error al editar producto: $it" }
+                    }
+            }
+            .onFailure {
+                logger.debug { "Error al editar producto: $it" }
             }
     }
 

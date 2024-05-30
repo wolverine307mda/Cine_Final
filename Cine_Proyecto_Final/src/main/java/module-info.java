@@ -47,4 +47,6 @@ module org.example.cine_proyecto_final {
 
     // Abre el paquete de pruebas para kotlin.test
     opens org.example.cine_proyecto_final.cuentas.repository;
+
+
 }

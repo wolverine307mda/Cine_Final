@@ -7,6 +7,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.ButtonType
 import javafx.scene.control.ToggleButton
 import org.example.cine_proyecto_final.butacas.models.Estado
+import org.example.cine_proyecto_final.butacas.models.Tipo
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
@@ -81,7 +82,6 @@ class ClienteSeleccionButacaController : KoinComponent {
             }
         }
     }
-
     /**
      * Actualiza el color de fondo de los botones dependiendo de la butaca que represente
      */
@@ -90,20 +90,32 @@ class ClienteSeleccionButacaController : KoinComponent {
         val toggleButton = butacasArray[index]
             when (butaca.estado) {
                 Estado.OCUPADA -> {
-                    toggleButton.style = "-fx-background-color: blue;"
-                    toggleButton.isDisable = true
+                    toggleButton?.style = "-fx-background-color: #B22222;"
+                    toggleButton?.isDisable = true
                 }
                 Estado.LIBRE -> {
-                    toggleButton.style = "-fx-background-color: green;"
-                    toggleButton.isDisable = false
+                    when (butaca.tipo) {
+                        Tipo.VIP -> {
+                            toggleButton?.style = "-fx-background-color: #d59c0c;"
+                            toggleButton?.isDisable = false
+                        }
+                        Tipo.NORMAL -> {
+                            toggleButton?.style = "-fx-background-color: #29577c;"
+                            toggleButton?.isDisable = false
+                        }
+                        null -> {
+                            toggleButton?.style = "-fx-background-color: red;"
+                            toggleButton?.isDisable = true
+                        }
+                    }
                 }
                 Estado.FUERA_DE_SERVICIO -> {
-                    toggleButton.style = "-fx-background-color: gray;"
-                    toggleButton.isDisable = true
+                    toggleButton?.style = "-fx-background-color: #A9A9A9;"
+                    toggleButton?.isDisable = true
                 }
                 else -> {
-                    toggleButton.style = "-fx-background-color: red;"
-                    toggleButton.isDisable = true
+                    toggleButton?.style = "-fx-background-color: #FF6347;" // Rojo para errores
+                    toggleButton?.isDisable = true
                 }
             }
         }

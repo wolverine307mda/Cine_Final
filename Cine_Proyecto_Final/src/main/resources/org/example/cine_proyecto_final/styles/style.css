@@ -70,7 +70,7 @@
 
 .toggle-button:selected {
     -fx-background-color: #6c0606;
-    -fx-border-color: #c02a2a;
+    -fx-border-color: #ff0000;
     -fx-text-fill: white;
 }
 
