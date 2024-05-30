@@ -29,9 +29,9 @@ class AdministradorGestionButacasController : KoinComponent {
     @FXML
     private lateinit var buscarPorIdField: TextField
 
+    // Tabla butacas con sus respectivas columnas
     @FXML
     private lateinit var tableButacas: TableView<Butaca>
-
     @FXML
     private lateinit var idButacaColumna: TableColumn<Butaca, String>
     @FXML
@@ -63,6 +63,7 @@ class AdministradorGestionButacasController : KoinComponent {
     @FXML
     private lateinit var vipButton: ToggleButton
 
+    // filtrado de la butaca
     private lateinit var filteredData: FilteredList<Butaca>
 
     @FXML

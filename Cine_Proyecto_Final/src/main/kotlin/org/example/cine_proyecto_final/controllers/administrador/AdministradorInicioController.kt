@@ -2,6 +2,7 @@ package org.example.cine_proyecto_final.controllers.administrador
 
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.Button
 import javafx.stage.FileChooser
 import org.example.cine_proyecto_final.database.SqlDelightManager
@@ -65,10 +66,28 @@ class AdministradorInicioController: KoinComponent {
     private fun verRecaudacion(){
         looger.debug { "verRecaudaciónAction" }
         calcularRecaudacion()
-        RoutesManager.showAlertOperacion("Recaudación", "La recaudación Total es de: ")
+        showAlertOperacion("Recaudación", "La recaudación Total es de: ")
     }
 
     private fun calcularRecaudacion() {
         TODO("Not yet implemented")
+    }
+
+    /**
+     * Muestra una alerta con la operación realizada.
+     *
+     * @param alerta El tipo de alerta.
+     * @param title El título de la alerta.
+     * @param mensaje El mensaje de la alerta.
+     */
+    private fun showAlertOperacion(
+        title: String = "",
+        mensaje: String = "",
+        alerta: AlertType = AlertType.ERROR,
+    ) {
+        Alert(alerta).apply {
+            this.title = title
+            this.contentText = mensaje
+        }.showAndWait()
     }
 }

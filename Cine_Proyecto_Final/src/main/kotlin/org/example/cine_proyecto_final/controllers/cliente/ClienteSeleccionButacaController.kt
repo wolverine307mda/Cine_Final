@@ -90,32 +90,32 @@ class ClienteSeleccionButacaController : KoinComponent {
         val toggleButton = butacasArray[index]
             when (butaca.estado) {
                 Estado.OCUPADA -> {
-                    toggleButton?.style = "-fx-background-color: #B22222;"
-                    toggleButton?.isDisable = true
+                    toggleButton.style = "-fx-background-color: #B22222;"
+                    toggleButton.isDisable = true
                 }
                 Estado.LIBRE -> {
                     when (butaca.tipo) {
                         Tipo.VIP -> {
-                            toggleButton?.style = "-fx-background-color: #d59c0c;"
-                            toggleButton?.isDisable = false
+                            toggleButton.style = "-fx-background-color: #d59c0c;"
+                            toggleButton.isDisable = false
                         }
                         Tipo.NORMAL -> {
-                            toggleButton?.style = "-fx-background-color: #29577c;"
-                            toggleButton?.isDisable = false
+                            toggleButton.style = "-fx-background-color: #29577c;"
+                            toggleButton.isDisable = false
                         }
                         null -> {
-                            toggleButton?.style = "-fx-background-color: red;"
-                            toggleButton?.isDisable = true
+                            toggleButton.style = "-fx-background-color: red;"
+                            toggleButton.isDisable = true
                         }
                     }
                 }
                 Estado.FUERA_DE_SERVICIO -> {
-                    toggleButton?.style = "-fx-background-color: #A9A9A9;"
-                    toggleButton?.isDisable = true
+                    toggleButton.style = "-fx-background-color: #A9A9A9;"
+                    toggleButton.isDisable = true
                 }
                 else -> {
-                    toggleButton?.style = "-fx-background-color: #FF6347;" // Rojo para errores
-                    toggleButton?.isDisable = true
+                    toggleButton.style = "-fx-background-color: #FF6347;" // Rojo para errores
+                    toggleButton.isDisable = true
                 }
             }
         }
