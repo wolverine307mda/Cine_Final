@@ -10,6 +10,7 @@ import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
+import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -19,6 +20,7 @@ private val logger = logging()
 class ClienteSeleccionProductosController : KoinComponent {
 
     private val viewModel: ClienteSeleccionProductosViewModel by inject()
+    private val cuentaViewModel : SesionViewModel by inject()
 
     @FXML
     private lateinit var atras_button: Button
@@ -72,8 +74,11 @@ class ClienteSeleccionProductosController : KoinComponent {
      */
     private fun initEventos() {
         atras_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.SELECCION_BUTACAS) }
-        siguiente_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.PROCESAR_COMPRA)
-        logger.debug { "${viewModel.state.value.lineas[0].cantidad}" } }
+        siguiente_button.setOnAction {
+            if (cuentaViewModel.usuario == null) {
+                RoutesManager.initSesionInicio()
+            }else RoutesManager.changeScene(RoutesManager.View.PROCESAR_COMPRA)
+        }
 
         limpiarCesta_button.setOnAction { viewModel.clearList() }
         otros_button.setOnAction {

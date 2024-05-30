@@ -1,59 +1,25 @@
 package org.example.cine_proyecto_final.viewmodels.cliente
 
-import com.github.michaelbull.result.onFailure
-import com.github.michaelbull.result.onSuccess
-import javafx.application.Platform
-import javafx.beans.property.SimpleListProperty
-import javafx.beans.property.SimpleObjectProperty
-import javafx.collections.FXCollections
-import javafx.scene.control.ToggleButton
-import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.models.Estado
-import org.example.cine_proyecto_final.butacas.repository.ButacaRepositoryImpl
 import org.example.cine_proyecto_final.butacas.service.database.ButacaService
-import org.example.cine_proyecto_final.butacas.service.database.ButacaServiceImpl
-import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorage
-import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
-import org.example.cine_proyecto_final.config.AppConfig
-import org.example.cine_proyecto_final.database.SqlDelightManager
-import org.jetbrains.dokka.InternalDokkaApi
-import org.jetbrains.dokka.utilities.ServiceLocator.toFile
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
-@OptIn(InternalDokkaApi::class)
 class ClienteSeleccionButacaViewModel : KoinComponent {
 
-    data class ButacaSeleccionState(
-        var butacas : List<Butaca> = emptyList(),
-        var butacasSeleccionadas : MutableList<Butaca> = mutableListOf()
-    )
+    var butacas : List<Butaca> = emptyList()
+    var butacasSeleccionadas : MutableList<Butaca> = mutableListOf()
 
-    val state : SimpleObjectProperty<ButacaSeleccionState> = SimpleObjectProperty(ButacaSeleccionState())
     private val butacaServicio : ButacaService by inject()
-    private val butacaStorageCSV : ButacaStorage by inject()
 
     init {
         logger.debug { "Inicializando ClienteSeleccionProductosViewModel" }
-
-        // Cargar productos desde un archivo CSV y guardarlos en la base de datos
-        val file = CineApplication::class.java.getResource("data/butacas.csv")
-        if (file != null) {
-            butacaStorageCSV.importFromCsv(file.toFile())
-                .onSuccess {
-                    it.forEach { butacaServicio.save(it) }
-                }
-        }
-        state.value.butacas = sortButacas(butacaServicio.findAll().value)
-    }
-
-
-    fun addButaca(butaca: Butaca){
-        state.value.butacasSeleccionadas = state.value.butacasSeleccionadas.plus(butaca).toMutableList()
+        // Carga las butacas desde la base de datos
+        butacas = getExpectedButacasSorted(butacaServicio.findAll().value)
     }
 
     /**
@@ -61,23 +27,45 @@ class ClienteSeleccionButacaViewModel : KoinComponent {
      *
      * @return lista de butacas ordenada por fila y columna
      */
-    private fun sortButacas(butacas : List<Butaca>): List<Butaca> {
-        val sorted = mutableListOf<Butaca>()
-        val letters = listOf('A','B','C','D','E')
-        val numbers = listOf(1, 2, 3, 4, 5, 6, 7) // Changed to list of individual numbers
+    private fun getExpectedButacasSorted(butacas: List<Butaca>): List<Butaca> {
+        //El orden en el que tienen que estar
+        val expectedOrder = listOf(
+            "A1", "B1", "C1", "D1", "E1",
+            "A2", "B2", "C2", "D2", "E2",
+            "A3", "B3", "C3", "D3", "E3",
+            "A4", "B4", "C4", "D4", "E4",
+            "A5", "B5", "C5", "D5", "E5",
+            "A6", "B6", "C6", "D6", "E6",
+            "A7", "B7", "C7", "D7", "E7"
+        )
 
-        for (number in numbers) {
-            for (letter in letters) {
-                butacas.firstOrNull {
-                    (it.id[0] == letter && it.id.substring(1).toIntOrNull() == number)
-                    &&
-                    (sorted.firstOrNull { it.id[0] == letter && it.id.substring(1).toIntOrNull() == number } == null)
-                }?.let {
-                    sorted.add(it)
-                }
+        val sortedButacas = mutableListOf<Butaca>()
+
+        for (expectedId in expectedOrder) {
+            val butaca = butacas.firstOrNull { it.id == expectedId }
+            if (butaca != null) {
+                sortedButacas.add(butaca)
             }
         }
-        return sorted
 
+        return sortedButacas
+    }
+
+    /**
+     * Añade una butaca a la lista de butacas seleccionadas
+     * @param butaca la butaca que se quiere añadir
+     */
+    fun addButaca(butaca: Butaca){
+        val nuevaButaca = butaca.copy( estado = Estado.OCUPADA)
+        butacasSeleccionadas = butacasSeleccionadas.plus(nuevaButaca).toMutableList()
+    }
+
+    /**
+     * Elimina una butaca de la lista de butacas seleccionadas
+     * @param butaca la butaca que se quiere borrar
+     */
+    fun removeButaca(butaca: Butaca){
+        val index = butacasSeleccionadas.indexOfFirst { it.id == butaca.id }
+        butacasSeleccionadas.removeAt(index)
     }
 }
