@@ -150,7 +150,7 @@ class AdministradorGestionProductosController : KoinComponent {
         val selectedProduct = productoTable.selectionModel.selectedItem
         if (selectedProduct != null) {
             ProductHolder.selectedProduct = selectedProduct
-            RoutesManager.changeScene(View.DETALLE_PRODUCTO)
+            RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Edicion de Producto: ${selectedProduct.nombre}")
         } else {
             showAlertOperacion("Error de edición", "No se ha seleccionado ningún producto", Alert.AlertType.ERROR)
         }

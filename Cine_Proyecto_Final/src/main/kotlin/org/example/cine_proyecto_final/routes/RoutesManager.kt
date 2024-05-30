@@ -5,6 +5,7 @@ import javafx.application.Platform
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.ButtonType
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
@@ -141,4 +142,15 @@ object RoutesManager {
             }
         }
     }
+    fun showAlertOperacion(
+        title: String = "",
+        mensaje: String = "",
+        alerta: AlertType = AlertType.ERROR,
+    ) {
+        Alert(alerta).apply {
+            this.title = title
+            this.contentText = mensaje
+        }.showAndWait()
+    }
+
 }
