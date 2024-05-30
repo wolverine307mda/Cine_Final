@@ -35,6 +35,7 @@ class AdministradorGestionProductosController : KoinComponent {
     @FXML
     private lateinit var filtrarTipoCombobox: ComboBox<String>
 
+    // info de Producto seleccionado
     @FXML
     private lateinit var labelnombreProducto: Text
     @FXML

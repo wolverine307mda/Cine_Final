@@ -4,7 +4,6 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.text.Text
-import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
@@ -22,7 +21,6 @@ private val logger = logging()
 
 class ClienteProcesarCompraController : KoinComponent {
 
-    private val dbClient: SqlDelightManager by inject()
     private val viewModel: ClienteProcesarCompraViewModel by inject()
     private val viewModelSesion: SesionViewModel by inject()
     private val viewModelProductos: ClienteSeleccionProductosViewModel by inject()
@@ -164,10 +162,21 @@ class ClienteProcesarCompraController : KoinComponent {
             return
         }
 
-        // Aquí puedes realizar la lógica de finalización de la compra
-        RoutesManager.showAlertOperacion("Compra Finalizada", "La compra se ha procesado correctamente", Alert.AlertType.INFORMATION)
-        RoutesManager.changeScene(RoutesManager.View.MAIN)
+        val usuario = viewModelSesion.usuario ?: throw IllegalStateException("Usuario no encontrado")
+        val butacas = viewModelButacas.butacasSeleccionadas
+        val lineas = viewModelProductos.state.value.lineas
+
+        viewModel.procesarCompra(usuario, butacas, lineas,
+            onSuccess = {
+                RoutesManager.showAlertOperacion("Compra Finalizada", "La compra se ha procesado correctamente", Alert.AlertType.INFORMATION)
+                RoutesManager.changeScene(RoutesManager.View.MAIN)
+            },
+            onFailure = { error ->
+                RoutesManager.showAlertOperacion("Error", "Hubo un problema al procesar la compra: $error", Alert.AlertType.ERROR)
+            }
+        )
     }
+
 
     private fun validarTarjetaCredito(tarjeta: String): Boolean {
         // Expresión regular para validar el número de tarjeta de crédito
