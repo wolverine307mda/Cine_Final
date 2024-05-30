@@ -44,9 +44,9 @@ class ClienteSeleccionButacaController : KoinComponent {
             alert.showAndWait().ifPresent {
                 if (it == ButtonType.OK) {
                     RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA)
+                    seleccionProductosViewModel.clearList()
+                    viewModel.butacasSeleccionadas = mutableListOf()
                 }
-                seleccionProductosViewModel.clearList()
-                viewModel.butacasSeleccionadas = mutableListOf()
             }
         }
         siguiente_button.setOnAction {
@@ -54,7 +54,7 @@ class ClienteSeleccionButacaController : KoinComponent {
             if (viewModel.butacasSeleccionadas.isEmpty()){
                 RoutesManager.showAlertOperacion(
                     mensaje = "No puede seguir sin seleccionar butacas",
-                    alerta = Alert.AlertType.ERROR,
+                    alerta = AlertType.ERROR,
                     title = "Error"
                 )
             }else RoutesManager.changeScene(RoutesManager.View.SELECCION_PRODUCTOS)
