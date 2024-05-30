@@ -39,12 +39,9 @@ class CineApplication : Application() {
             }
 
             dbClient = SqlDelightManager(
-                butacaStorage = ButacaStorageImpl(
-                    butacaStorageJson = ButacaStorageJsonImpl(),
-                    butacaStorageCsv = ButacaStorageCsvImpl(),
-                ),
+
                 config = AppConfig(),
-                butacaValidator = ButacaValidator()
+
             )
 
         } catch (e: Exception) {
