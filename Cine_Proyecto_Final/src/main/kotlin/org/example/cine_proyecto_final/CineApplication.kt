@@ -2,13 +2,15 @@ package org.example.cine_proyecto_final
 
 import javafx.application.Application
 import javafx.stage.Stage
+import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorageImpl
+import org.example.cine_proyecto_final.butacas.service.storage.csv.ButacaStorageCsvImpl
+import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJsonImpl
+import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
 import org.example.cine_proyecto_final.config.AppConfig
-import org.example.cine_proyecto_final.cuentas.models.Cuenta
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.di.appModule
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.koin.core.context.startKoin
-import org.koin.test.verify.verify
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -27,6 +29,7 @@ class CineApplication : Application() {
 
     override fun start(stage: Stage) {
         try {
+            logger.debug { "Iniciando la aplicación" }
             // Initialize application configuration and database client
             RoutesManager.apply {
                 app = this@CineApplication
@@ -35,22 +38,19 @@ class CineApplication : Application() {
                 initMainStage(stage)
             }
 
-            dbClient = SqlDelightManager(AppConfig())
+            dbClient = SqlDelightManager(
+                butacaStorage = ButacaStorageImpl(
+                    butacaStorageJson = ButacaStorageJsonImpl(),
+                    butacaStorageCsv = ButacaStorageCsvImpl(),
+                ),
+                config = AppConfig(),
+                butacaValidator = ButacaValidator()
+            )
 
         } catch (e: Exception) {
             e.printStackTrace()
             // Handle exception appropriately
         }
-    }
-
-    private fun initializeApp() {
-        // Initialize application configuration
-        appConfig = AppConfig()
-
-        // Initialize database client
-        dbClient = SqlDelightManager(appConfig)
-
-        // Additional initializations if necessary
     }
 }
 

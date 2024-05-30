@@ -1,15 +1,24 @@
 package org.example.cine_proyecto_final.database
 
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
+import com.github.michaelbull.result.onSuccess
 import database.DatabaseQueries
 import org.cine.database.AppDatabase
+import org.example.cine_proyecto_final.CineApplication
+import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorage
+import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
 import org.example.cine_proyecto_final.config.AppConfig
+import org.jetbrains.dokka.InternalDokkaApi
+import org.jetbrains.dokka.utilities.ServiceLocator.toFile
 import org.lighthousegames.logging.logging
+import java.time.LocalDateTime
 
 val logger = logging()
 
 class SqlDelightManager(
-    private val config : AppConfig
+    private val config : AppConfig,
+    private val butacaStorage: ButacaStorage,
+    private val butacaValidator: ButacaValidator
 ) {
     private val databaseUrl: String = config.databaseUrl
     private val databaseInitData: Boolean = config.databaseInit
@@ -50,10 +59,34 @@ class SqlDelightManager(
     fun initialize() {
         if (databaseInitData) {
             removeAllData()
+            initSampleButacas()
             databaseQueries.insertAdmin()
         }
     }
 
+    @OptIn(InternalDokkaApi::class)
+    private fun initSampleButacas() {
+        logger.debug { "Inicializando las butacas de ejemplo" }
+        val file = CineApplication::class.java.getResource("data/butacas.csv")
+        if (file != null) {
+            butacaStorage.importFromCsv(file.toFile())
+               .onSuccess {
+                    it.forEach {
+                        butacaValidator.validate(it).onSuccess {
+                            databaseQueries.insertButaca(
+                                id = it.id,
+                                tipo = it.tipo!!.name,
+                                estado = it.estado!!.name,
+                                precio = it.precio,
+                                createdAt = LocalDateTime.now().toString(),
+                                updatedAt = LocalDateTime.now().toString(),
+                                id_venta = null
+                            )
+                        }
+                    }
+                }
+        }
+    }
 
     /**
      * Borra todos los datos de la base de datos con la ayuda de las funciones que crea

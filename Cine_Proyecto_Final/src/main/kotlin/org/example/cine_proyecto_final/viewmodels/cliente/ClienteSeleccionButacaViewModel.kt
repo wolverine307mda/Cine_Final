@@ -1,71 +1,54 @@
 package org.example.cine_proyecto_final.viewmodels.cliente
 
-import com.github.michaelbull.result.onSuccess
-import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.models.Estado
 import org.example.cine_proyecto_final.butacas.service.database.ButacaService
-import org.example.cine_proyecto_final.butacas.service.storage.ButacaStorage
-import org.jetbrains.dokka.InternalDokkaApi
-import org.jetbrains.dokka.utilities.ServiceLocator.toFile
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
-@OptIn(InternalDokkaApi::class)
 class ClienteSeleccionButacaViewModel : KoinComponent {
 
     var butacas : List<Butaca> = emptyList()
     var butacasSeleccionadas : MutableList<Butaca> = mutableListOf()
 
     private val butacaServicio : ButacaService by inject()
-    private val butacaStorageCSV : ButacaStorage by inject()
 
     init {
         logger.debug { "Inicializando ClienteSeleccionProductosViewModel" }
-
-        // Cargar productos desde un archivo CSV y guardarlos en la base de datos
-        val file = CineApplication::class.java.getResource("data/butacas.csv")
-        if (file != null) {
-            butacaStorageCSV.importFromCsv(file.toFile())
-                .onSuccess {
-                    it.forEach { butacaServicio.save(it) }
-                }
-        }
+        // Carga las butacas desde la base de datos
         butacas = getExpectedButacasSorted(butacaServicio.findAll().value)
     }
-
-
-
 
     /**
      * Se encarga en ordenar por ID para poder mostrar la matriz
      *
      * @return lista de butacas ordenada por fila y columna
      */
-    private fun getExpectedButacasSorted(butacas : List<Butaca>): List<Butaca> {
-        val sorted = mutableListOf<Butaca>()
-        val letters = listOf('A','B','C','D','E')
-        val numbers = listOf(1, 2, 3, 4, 5, 6, 7) // Changed to list of individual numbers
+    private fun getExpectedButacasSorted(butacas: List<Butaca>): List<Butaca> {
+        //El orden en el que tienen que estar
+        val expectedOrder = listOf(
+            "A1", "B1", "C1", "D1", "E1",
+            "A2", "B2", "C2", "D2", "E2",
+            "A3", "B3", "C3", "D3", "E3",
+            "A4", "B4", "C4", "D4", "E4",
+            "A5", "B5", "C5", "D5", "E5",
+            "A6", "B6", "C6", "D6", "E6",
+            "A7", "B7", "C7", "D7", "E7"
+        )
 
-        for (number in numbers) {
-            for (letter in letters) {
-                butacas.firstOrNull { butaca ->
-                    //Si la clave tiene dos cifras
-                    (butaca.id.length == 2)
-                            &&
-                    //Si es el elemento que se espera
-                    (butaca.id[0] == letter && butaca.id[1] == number.digitToChar())
-                    &&
-                    (sorted.firstOrNull { it.id[0] == letter && it.id[1] == number.digitToChar() } == null)
-                }?.let {
-                    sorted.add(it)
-                }
+        val sortedButacas = mutableListOf<Butaca>()
+
+        for (expectedId in expectedOrder) {
+            val butaca = butacas.firstOrNull { it.id == expectedId }
+            if (butaca != null) {
+                sortedButacas.add(butaca)
             }
         }
-        return sorted
+
+        return sortedButacas
     }
 
     /**

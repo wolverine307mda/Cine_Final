@@ -1,14 +1,13 @@
 package org.example.cine_proyecto_final.controllers.general
 
 import javafx.fxml.FXML
-import javafx.scene.control.Alert
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.TextField
+import javafx.scene.control.*
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.text.Text
 import javafx.stage.FileChooser
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
+import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -18,6 +17,7 @@ private val logger = logging()
 class GeneralComprarEntradaController : KoinComponent {
 
     private val seleccionButacasViewModel : ClienteSeleccionButacaViewModel by inject()
+    private val inicioViewModel : SesionViewModel by inject()
 
     @FXML
     private lateinit var duracionLabel: Label
@@ -51,7 +51,19 @@ class GeneralComprarEntradaController : KoinComponent {
         logger.debug { "iniciando pantalla general de comprar entrada" }
 
         devolver_entrada_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.ADMIN_INICIO)/*devolverEntradaAction()*/ }
-        iniciar_sesion_button.setOnAction { RoutesManager.initSesionInicio() }
+        iniciar_sesion_button.setOnAction {
+            if (inicioViewModel.usuario != null) {
+                val alert = Alert(AlertType.CONFIRMATION)
+                alert.title = "¿Desea cerrar sesión?"
+                alert.headerText = "Cuenta actual: ${inicioViewModel.usuario!!.email}"
+                alert.contentText = "¿Desea cerrar sesión?"
+                alert.showAndWait().ifPresent {
+                    if (it == ButtonType.OK) {
+                        inicioViewModel.usuario = null
+                    }
+                }
+            } else RoutesManager.initSesionInicio()
+        }
         comprar_entrada_button.setOnAction {
             if (seleccionButacasViewModel.butacas.size != 35) RoutesManager.showAlertOperacion(
                 alerta = Alert.AlertType.ERROR,
