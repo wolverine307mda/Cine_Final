@@ -10,20 +10,23 @@ import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
 import org.example.cine_proyecto_final.config.AppConfig
 import org.jetbrains.dokka.InternalDokkaApi
 import org.jetbrains.dokka.utilities.ServiceLocator.toFile
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
 
 val logger = logging()
 
 class SqlDelightManager(
-    private val config : AppConfig,
-    private val butacaStorage: ButacaStorage,
-    private val butacaValidator: ButacaValidator
-) {
+    private val config : AppConfig
+) : KoinComponent{
     private val databaseUrl: String = config.databaseUrl
     private val databaseInitData: Boolean = config.databaseInit
     private val databaseInMemory: Boolean = config.databaseInMemory
     var databaseQueries: DatabaseQueries = initQueries()
+
+    private val butacaStorage: ButacaStorage by inject()
+    private val butacaValidator: ButacaValidator by inject()
 
     init {
         logger.debug { "Inicializando el gestor de Bases de Datos con SQLDelight" }
