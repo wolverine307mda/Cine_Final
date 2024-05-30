@@ -65,18 +65,10 @@ class AdministradorInicioController: KoinComponent {
     private fun verRecaudacion(){
         looger.debug { "verRecaudaciónAction" }
         calcularRecaudacion()
-        showAlertOperacion("Recaudación", "La recaudación Total es de: ")
+        RoutesManager.showAlertOperacion("Recaudación", "La recaudación Total es de: ")
     }
 
     private fun calcularRecaudacion() {
         TODO("Not yet implemented")
-    }
-
-    private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
-        val alert = Alert(alerta)
-        alert.title = title
-        alert.headerText = null
-        alert.contentText = mensaje
-        alert.showAndWait()
     }
 }
