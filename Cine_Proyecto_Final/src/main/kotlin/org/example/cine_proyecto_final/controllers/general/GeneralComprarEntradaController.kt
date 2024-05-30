@@ -17,7 +17,7 @@ private val logger = logging()
 class GeneralComprarEntradaController : KoinComponent {
 
     private val seleccionButacasViewModel : ClienteSeleccionButacaViewModel by inject()
-    private val inicioViewModel : SesionViewModel by inject()
+    private val sesionViewModel : SesionViewModel by inject()
 
     @FXML
     private lateinit var duracionLabel: Label
@@ -52,14 +52,16 @@ class GeneralComprarEntradaController : KoinComponent {
 
         devolver_entrada_button.setOnAction { RoutesManager.changeScene(RoutesManager.View.ADMIN_INICIO)/*devolverEntradaAction()*/ }
         iniciar_sesion_button.setOnAction {
-            if (inicioViewModel.usuario != null) {
+            if (sesionViewModel.usuario != null) {
                 val alert = Alert(AlertType.CONFIRMATION)
                 alert.title = "¿Desea cerrar sesión?"
-                alert.headerText = "Cuenta actual: ${inicioViewModel.usuario!!.email}"
+                alert.headerText = """Cuenta actual: ${sesionViewModel.usuario!!.email}
+                    |nombre: ${sesionViewModel.usuario!!.nombre} ${sesionViewModel.usuario!!.apellido}
+                """.trimMargin()
                 alert.contentText = "¿Desea cerrar sesión?"
                 alert.showAndWait().ifPresent {
                     if (it == ButtonType.OK) {
-                        inicioViewModel.usuario = null
+                        sesionViewModel.usuario = null
                     }
                 }
             } else RoutesManager.initSesionInicio()
