@@ -22,10 +22,8 @@ class AdministradorGestionButacasController : KoinComponent {
 
     @FXML
     private lateinit var atrasButton: Button
-
     @FXML
     private lateinit var editarButton: Button
-
     @FXML
     private lateinit var buscarPorIdField: TextField
 

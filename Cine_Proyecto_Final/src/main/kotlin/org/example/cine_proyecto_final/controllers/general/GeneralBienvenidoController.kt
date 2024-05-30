@@ -35,7 +35,9 @@ class GeneralBienvenidoController : KoinComponent {
             if (sesionViewModel.usuario != null) {
                 val alert = Alert(AlertType.CONFIRMATION)
                 alert.title = "¿Desea cerrar sesión?"
-                alert.headerText = "Cuenta actual: ${sesionViewModel.usuario!!.email}"
+                alert.headerText = """Cuenta actual: ${sesionViewModel.usuario!!.email}
+                    |nombre: ${sesionViewModel.usuario!!.nombre} ${sesionViewModel.usuario!!.apellido}
+                """.trimMargin()
                 alert.contentText = "¿Desea cerrar sesión?"
                 alert.showAndWait().ifPresent {
                     if (it == ButtonType.OK) {

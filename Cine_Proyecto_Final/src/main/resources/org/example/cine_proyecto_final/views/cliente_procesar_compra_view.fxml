@@ -85,11 +85,12 @@
             <Image url="@../icons/carrito_compra.png" />
          </image>
       </ImageView>
-      <TableView layoutX="843.0" layoutY="196.0" opacity="0.75" prefHeight="320.0" prefWidth="291.0" style="-fx-background-radius: 20; -fx-background-color: #1B222C;">
+      <TableView fx:id="tableCesta" layoutX="843.0" layoutY="196.0" opacity="0.75" prefHeight="320.0" prefWidth="291.0" style="-fx-background-radius: 20; -fx-background-color: #1B222C;" stylesheets="@../styles/table.css">
         <columns>
-          <TableColumn prefWidth="147.20001220703125" text="Producto" />
-          <TableColumn prefWidth="72.79998779296875" text="Precio" />
-            <TableColumn prefWidth="71.2000732421875" text="Cantidad" />
+          <TableColumn fx:id="nombreColum" prefWidth="122.4000244140625" text="Nombre" />
+            <TableColumn fx:id="tipoColum" prefWidth="62.39996337890625" text="Tipo" />
+          <TableColumn fx:id="precioColum" prefWidth="50.39996337890625" text="Precio" />
+            <TableColumn fx:id="cantidadColum" prefWidth="58.4000244140625" text="Cant" />
         </columns>
       </TableView>
       <Text fx:id="textInfo" fill="WHITE" layoutX="176.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="451.99999999999994">

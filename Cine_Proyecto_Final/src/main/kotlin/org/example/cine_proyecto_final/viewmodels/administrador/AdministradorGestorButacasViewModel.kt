@@ -43,26 +43,6 @@ class AdministradorGestorButacasViewModel : KoinComponent {
         }
     }
 
-    /**
-     * Crea una nueva butaca en el sistema.
-     *
-     * @param butaca La butaca a crear.
-     * @return Un [Result] que contiene la butaca creada en caso de éxito o un [ButacaError] en caso de fallo.
-     */
-    fun nuevaButaca(butaca: Butaca): Result<Butaca, ButacaError> {
-        logger.debug { "Añadiendo Butaca" }
-
-        return validador.validate(butaca)
-            .onSuccess {
-                butacaService.save(butaca)
-                logger.debug { "Butaca creada con éxito" }
-                val updatedButacas = state.value.butacas + butaca
-                state.set(state.value.copy(butacas = updatedButacas))
-            }
-            .onFailure {
-                logger.debug { "Error al crear butaca: $it" }
-            }
-    }
 
     /**
      * El objeto observable que contiene las butacas
