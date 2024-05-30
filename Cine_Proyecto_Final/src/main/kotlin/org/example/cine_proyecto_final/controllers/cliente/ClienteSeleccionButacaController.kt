@@ -2,11 +2,14 @@ package org.example.cine_proyecto_final.controllers.cliente
 
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.Button
+import javafx.scene.control.ButtonType
 import javafx.scene.control.ToggleButton
 import org.example.cine_proyecto_final.butacas.models.Estado
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
+import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -16,6 +19,7 @@ private val logger = logging()
 class ClienteSeleccionButacaController : KoinComponent {
 
     private val viewModel: ClienteSeleccionButacaViewModel by inject()
+    private val seleccionProductosViewModel : ClienteSeleccionProductosViewModel by inject()
 
     @FXML
     private lateinit var atras_button: Button
@@ -24,7 +28,7 @@ class ClienteSeleccionButacaController : KoinComponent {
     private lateinit var siguiente_button: Button
 
     @FXML
-    lateinit var butacasArray: List<ToggleButton>
+    private lateinit var butacasArray: List<ToggleButton>
 
     @FXML
     fun initialize() {
@@ -32,7 +36,17 @@ class ClienteSeleccionButacaController : KoinComponent {
         reselectButacas()
         atras_button.setOnAction {
             logger.debug { "Botón 'Atrás' presionado" }
-            RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA)
+            val alert = Alert(AlertType.CONFIRMATION)
+            alert.title = "¿Está seguro/a?"
+            alert.headerText = "Perderá su seleccion de butacas y productos"
+            alert.contentText = "Si vuelve a la pantalla anterior perderá su seleccion, ¿desea continuar?"
+            alert.showAndWait().ifPresent {
+                if (it == ButtonType.OK) {
+                    RoutesManager.changeScene(RoutesManager.View.COMPRAR_ENTRADA)
+                }
+                seleccionProductosViewModel.clearList()
+                viewModel.butacasSeleccionadas = mutableListOf()
+            }
         }
         siguiente_button.setOnAction {
             logger.debug { "Botón 'Siguiente' presionado" }
