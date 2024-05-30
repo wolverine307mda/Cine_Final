@@ -23,6 +23,10 @@ class ImagesServiceImpl(
     private val appConfig: AppConfig
 ) : ImagesService {
 
+    init {
+        Files.createDirectories(Paths.get("images"))
+    }
+
     /**
      * Genera un nombre único para un nuevo archivo de imagen.
      *

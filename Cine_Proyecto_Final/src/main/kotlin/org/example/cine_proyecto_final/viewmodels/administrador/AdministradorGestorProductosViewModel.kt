@@ -22,7 +22,6 @@ private val logger = logging()
 class AdministradorGestorProductosViewModel : KoinComponent {
     // Inyección de dependencias para ProductoServicio y ProductoStorageCSV
     private val productoService: ProductoServicio by inject()
-    private val productoCsv: ProductoStorageCSV by inject()
     private val validador: ProductoValidator by inject()
 
     // Propiedad de estado que contiene el estado actual de los productos
@@ -32,15 +31,8 @@ class AdministradorGestorProductosViewModel : KoinComponent {
         logger.debug { "Inicializando AdministradorGestorProductosViewModel" }
 
         // Cargar productos desde un archivo CSV y guardarlos en la base de datos
-        val file = CineApplication::class.java.getResource("data/productos.csv")
-        file?.let {
-            productoCsv.import(file.toFile())
-                .onSuccess {
-                    it.forEach { productoService.save(it) }
-                }
-            // Cargar todos los productos en el estado
-            state.value.productos = productoService.findAll().value
-        }
+        state.value.productos = productoService.findAll().value
+        state.value.allProductos = productoService.findAll().value
     }
 
     fun nuevoProducto(producto: Producto): Result<Producto, ProductoError> {

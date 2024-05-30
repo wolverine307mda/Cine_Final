@@ -104,7 +104,7 @@ class ClienteProcesarCompraController : KoinComponent {
             val nombre = linea.producto.nombre
             val tipo = linea.producto.tipo.toString()
             val precio = linea.producto.precio
-            val cantidad = 1
+            val cantidad = linea.cantidad
 
             if (cestaMap.containsKey(nombre)) {
                 val existingCesta = cestaMap[nombre]!!

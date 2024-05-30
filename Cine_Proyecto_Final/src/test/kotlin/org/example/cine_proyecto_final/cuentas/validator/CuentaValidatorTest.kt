@@ -20,7 +20,7 @@ class CuentaValidatorTest {
             nombre = "John",
             apellido = "Doe",
             imagen = "imagen.jpg",
-            password = "password",
+            password = "A1b2C",
             tipo = TipoCuenta.USUARIO
         )
 
@@ -140,7 +140,7 @@ class CuentaValidatorTest {
             nombre = "John",
             apellido = "Doe",
             imagen = "imagen.jpg",
-            password = "password",
+            password = "A1b2C",
             tipo = null
         )
 

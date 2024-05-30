@@ -67,10 +67,8 @@ class ProductoServicioImpl(
     override fun update(id: String, producto: Producto): Result<Producto, ProductoError> {
         logger.debug { "Actualizando el producto con id: $id"}
         productoValidador.validate(producto).onSuccess {
-            productosRepositorio.findById(id)?.let {
-                val updatedProducto = producto.copy(id = id)
-                productosRepositorio.update(id,updatedProducto)?.let {
-                }
+            val updatedProducto = producto.copy(id = id)
+            productosRepositorio.update(id,updatedProducto)?.let {
             }
         }
         return Err(ProductoError.ProductoStorageError("No se pudo actualizar el Producto"))

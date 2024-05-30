@@ -22,30 +22,19 @@ private val logger = logging()
 @OptIn(InternalDokkaApi::class)
 class ClienteSeleccionProductosViewModel : KoinComponent {
 
-    // Inyección de dependencias para ProductoServicio y ProductoStorageCSV
-    private val productoService: ProductoServicio by inject()
-    private val productoCsv: ProductoStorage by inject()
-
     // Propiedad de estado que contiene el estado actual de la selección de productos
     val state: SimpleObjectProperty<ProductSelectionState> = SimpleObjectProperty(ProductSelectionState())
+    val productoServicio : ProductoServicio by inject()
 
     /*
      * Inicializamos los datos de los productos con un fichero que deberia estar en el producto
      */
     init {
         logger.debug { "Inicializando ClienteSeleccionProductosViewModel" }
-
-        // Cargar productos desde un archivo CSV y guardarlos en la base de datos
-        val file = CineApplication::class.java.getResource("data/productos.csv")
-        if (file != null) {
-            productoCsv.importFromCSV(file.toFile())
-                .onSuccess {
-                    it.forEach { productoService.save(it) }
-                }
+        productoServicio.findAll().onSuccess {
+            state.value.allProductos = it
+            state.value.productos = it
         }
-        state.value.allProductos = productoService.findAll().value
-            .filter { !it.isDeleted && it.stock > 0} // Cargamos los datos de todos los productos que no esten borrados o agotados
-        state.value.productos = state.value.allProductos
     }
 
     /**
@@ -112,6 +101,9 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
         state.value = state.value.copy (
             lineas = lineas
         )
+        state.value.lineas.forEach {
+            logger.debug { it.cantidad }
+        }
     }
 
     /**

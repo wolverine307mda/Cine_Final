@@ -62,32 +62,7 @@ class SqlDelightManager(
     fun initialize() {
         if (databaseInitData) {
             removeAllData()
-            initSampleButacas()
             databaseQueries.insertAdmin()
-        }
-    }
-
-    @OptIn(InternalDokkaApi::class)
-    private fun initSampleButacas() {
-        logger.debug { "Inicializando las butacas de ejemplo" }
-        val file = CineApplication::class.java.getResource("data/butacas.csv")
-        if (file != null) {
-            butacaStorage.importFromCsv(file.toFile())
-               .onSuccess {
-                    it.forEach {
-                        butacaValidator.validate(it).onSuccess {
-                            databaseQueries.insertButaca(
-                                id = it.id,
-                                tipo = it.tipo!!.name,
-                                estado = it.estado!!.name,
-                                precio = it.precio,
-                                createdAt = LocalDateTime.now().toString(),
-                                updatedAt = LocalDateTime.now().toString(),
-                                id_venta = null
-                            )
-                        }
-                    }
-                }
         }
     }
 

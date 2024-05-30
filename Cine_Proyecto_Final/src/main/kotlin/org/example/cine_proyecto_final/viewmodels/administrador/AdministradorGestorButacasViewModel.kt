@@ -22,25 +22,14 @@ private val logger = logging()
 class AdministradorGestorButacasViewModel : KoinComponent {
     // Inyección de dependencias para ButacaService y ButacaStorageCSV
     private val butacaService: ButacaService by inject()
-    private val butacaCsv: ButacaStorageCsv by inject()
-    private val validador: ButacaValidator by inject()
 
     // Propiedad de estado que contiene el estado actual de las butacas
     val state: SimpleObjectProperty<ButacaSelectionState> = SimpleObjectProperty(ButacaSelectionState())
 
     init {
         logger.debug { "Inicializando AdministradorGestorButacasViewModel" }
-
-        // Cargar butacas desde un archivo CSV y guardarlas en la base de datos
-        val file = CineApplication::class.java.getResource("data/butacas.csv")
-        file?.let {
-            butacaCsv.import(file.toFile())
-                .onSuccess {
-                    it.forEach { butacaService.save(it) }
-                }
-            // Cargar todas las butacas en el estado
-            state.value.butacas = butacaService.findAll().value
-        }
+        state.value.allButacas = butacaService.findAll().value
+        state.value.butacas = butacaService.findAll().value
     }
 
 
