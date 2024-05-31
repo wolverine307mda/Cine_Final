@@ -25,6 +25,9 @@ class ClienteProcesarCompraViewModel : KoinComponent {
     private val serviceProducto: ProductoServicio by inject()
     private val serviceVentas: VentaServicio by inject()
 
+    private val seleccionButacaViewModel : ClienteSeleccionButacaViewModel by inject()
+    private val seleccionProductosViewModel : ClienteSeleccionProductosViewModel by inject()
+
     fun procesarCompra(usuario: Cuenta, butacas: List<Butaca>, lineas: List<LineaVenta>, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
         try {
             val venta = generarVenta(usuario, butacas, lineas)
@@ -44,6 +47,10 @@ class ClienteProcesarCompraViewModel : KoinComponent {
 
             // Generar venta y crear recibo HTML
             val resultado = serviceVentas.save(venta)
+
+            //Quitando las lineas y las butacas seleccionadas guardadas
+            seleccionButacaViewModel.butacasSeleccionadas = mutableListOf()
+            seleccionProductosViewModel.state.value.lineas = emptyList()
 
             resultado.let {
                 val stage = Stage() // Necesitamos una instancia de Stage para mostrar el FileChooser
