@@ -47,7 +47,7 @@ class DetalleButacaController : KoinComponent {
         }
 
         // Cargar los datos de la butaca seleccionada si existe
-        currentButaca = AdministradorGestionButacasController.ButacaHolder.selectedButaca
+        currentButaca = AdministradorGestionButacasController.ButacaSeleccionada.selectedButaca
         currentButaca?.let { mostrarDetalle(it) }
     }
 

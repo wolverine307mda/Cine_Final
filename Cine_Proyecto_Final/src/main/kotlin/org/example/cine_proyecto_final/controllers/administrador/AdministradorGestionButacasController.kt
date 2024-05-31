@@ -1,11 +1,13 @@
 package org.example.cine_proyecto_final.controllers.administrador
 
+import com.github.michaelbull.result.onSuccess
 import javafx.collections.FXCollections
 import javafx.collections.transformation.FilteredList
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import org.example.cine_proyecto_final.butacas.models.Butaca
+import org.example.cine_proyecto_final.butacas.models.Estado
 import org.example.cine_proyecto_final.routes.RoutesManager
 import org.example.cine_proyecto_final.routes.RoutesManager.View
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorButacasViewModel
@@ -64,6 +66,11 @@ class AdministradorGestionButacasController : KoinComponent {
     @FXML
     private lateinit var vipButton: ToggleButton
 
+    @FXML
+    private lateinit var butacasLibresCountField: TextField
+    @FXML
+    private lateinit var butacasNoDisponiblesCountField: TextField
+
     // Filtrado de la butaca
     private lateinit var filteredData: FilteredList<Butaca>
 
@@ -120,9 +127,11 @@ class AdministradorGestionButacasController : KoinComponent {
             if (newValue.butacas != tableButacas.items) {
                 filteredData = FilteredList(FXCollections.observableArrayList(newValue.butacas))
                 tableButacas.items = filteredData
+                calcularButacas() // Asegúrate de recalcular el número de butacas libres y no disponibles
             }
         }
     }
+
 
     /**
      * Configura la búsqueda y el filtrado de butacas.
@@ -159,11 +168,28 @@ class AdministradorGestionButacasController : KoinComponent {
     private fun editarButacaSeleccionada() {
         val selectedButaca = tableButacas.selectionModel.selectedItem
         if (selectedButaca != null) {
-            ButacaHolder.selectedButaca = selectedButaca
+            ButacaSeleccionada.selectedButaca = selectedButaca
             RoutesManager.initDetalle(View.DETALLE_BUTACA, "Editar Butaca")
+
+            // Llama al método actualizarButaca del viewModel
+            val result = viewModel.actualizarButaca(selectedButaca)
+            result.onSuccess {
+                // Actualiza la tabla de butacas
+                viewModel.state.value = viewModel.state.value.copy(butacas = viewModel.state.value.butacas.map { if (it.id == selectedButaca.id) selectedButaca else it })
+            }
         } else {
             showAlertOperacion("Error de edición", "No se ha seleccionado ninguna butaca", Alert.AlertType.ERROR)
         }
+    }
+
+
+    private fun calcularButacas() {
+        val butacas = viewModel.state.value.allButacas
+        val butacasLibres = butacas.count { it.estado == Estado.LIBRE }
+        val butacasNoDisponibles = butacas.count { it.estado != Estado.LIBRE }
+
+        butacasLibresCountField.text = butacasLibres.toString()
+        butacasNoDisponiblesCountField.text = butacasNoDisponibles.toString()
     }
 
     private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
@@ -174,7 +200,7 @@ class AdministradorGestionButacasController : KoinComponent {
         alert.showAndWait()
     }
 
-    object ButacaHolder {
+    object ButacaSeleccionada {
         var selectedButaca: Butaca? = null
     }
 }
