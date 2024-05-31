@@ -15,6 +15,8 @@ import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorag
 import org.example.cine_proyecto_final.butacas.service.storage.json.ButacaStorageJsonImpl
 import org.example.cine_proyecto_final.butacas.validator.ButacaValidator
 import org.example.cine_proyecto_final.config.AppConfig
+import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicio
+import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicioImpl
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepository
 import org.example.cine_proyecto_final.cuentas.repository.CuentaRepositoryImpl
 import org.example.cine_proyecto_final.cuentas.service.cache.CuentaCache
@@ -37,15 +39,14 @@ import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoS
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
 import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorio
 import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorioImpl
-import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicio
 import org.example.cine_proyecto_final.ventas.validator.VentaValidator
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorButacasViewModel
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorBackupViewModel
+import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraViewModel
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
-import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicioImpl
 import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorage
 import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorageImpl
 import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtml
@@ -55,7 +56,6 @@ import org.example.cine_proyecto_final.ventas.servicio.storage.json.VentaStorage
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-
 
 val appModule = module {
     singleOf(::AppConfig)
@@ -79,6 +79,8 @@ val appModule = module {
     singleOf(::AdministradorGestorProductosViewModel)
 
     singleOf(::AdministradorBackupViewModel)
+
+    singleOf(::ClienteProcesarCompraViewModel)
 
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
@@ -112,6 +114,10 @@ val appModule = module {
 
     singleOf(::ButacaStorageImpl) {
         bind<ButacaStorage>()
+    }
+
+    singleOf(::VentaRepositorioImpl) {
+        bind<VentaRepositorio>()
     }
 
     singleOf(::ButacaStorageCsvImpl) {
@@ -160,25 +166,5 @@ val appModule = module {
 
     singleOf(::CuentaStorageJsonImpl) {
         bind<CuentaStorageJson>()
-    }
-
-    singleOf(::ButacaRepositoryImpl) {
-        bind<ButacaRepository>()
-    }
-
-    singleOf(::ButacaServiceImpl) {
-        bind<ButacaService>()
-    }
-
-    singleOf(::ButacaStorageCsvImpl) {
-        bind<ButacaStorageCsv>()
-    }
-
-    singleOf(::ButacaStorageJsonImpl) {
-        bind<ButacaStorageJson>()
-    }
-
-    singleOf(::ButacaStorageImpl) {
-        bind<ButacaStorage>()
     }
 }
