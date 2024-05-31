@@ -45,4 +45,10 @@ class AdministradorGestorButacasViewModel : KoinComponent {
                 logger.error { "Error al actualizar la butaca: $it" }
             }
     }
+
+    /*fun sowAllButacas() {
+        state.value = state.value.copy(
+            butacas = state.value.allButacas,
+        )
+    }*/
 }
