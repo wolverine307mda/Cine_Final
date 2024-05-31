@@ -9,37 +9,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="580.0" style="-fx-background-color: #12151C;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="320.0" prefWidth="580.0" style="-fx-background-color: #12151C;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.sesion.SesionInicioController">
    <children>
       <ImageView fitHeight="320.0" fitWidth="600.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/fondo%20inio%20de%20sesion.jpg" />
          </image>
       </ImageView>
+      <Label layoutX="186.0" layoutY="21.0" opacity="0.85" prefHeight="59.0" prefWidth="354.0" style="-fx-font-size: 40; -fx-font-family: &quot;arial black&quot;;" text="Inicio de Sesión" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="32.0" />
+         </font>
+      </Label>
       <ImageView fitHeight="200.0" fitWidth="190.0" layoutX="23.0" layoutY="41.0" opacity="0.84" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../icons/new%20user%20white.png" />
          </image>
       </ImageView>
-      <Label layoutX="214.0" layoutY="23.0" opacity="0.85" prefHeight="42.0" prefWidth="318.0" style="-fx-font-size: 40; -fx-font-family: arial black;" text="Inicio se Sesión" textFill="WHITE">
-         <font>
-            <Font name="Arial Black" size="32.0" />
-         </font>
-      </Label>
-      <PasswordField layoutX="246.0" layoutY="167.0" prefHeight="26.0" prefWidth="291.0" />
-      <TextField layoutX="246.0" layoutY="109.0" prefHeight="26.0" prefWidth="291.0" />
-      <Label layoutX="246.0" layoutY="94.0" text="e-mail" textFill="WHITE">
+      <Label layoutX="246.0" layoutY="94.0" text="Email" textFill="WHITE">
          <font>
             <Font name="Berlin Sans FB" size="12.0" />
          </font>
       </Label>
+      <TextField fx:id="email_textField" layoutX="246.0" layoutY="109.0" prefHeight="26.0" prefWidth="291.0" />
       <Label layoutX="246.0" layoutY="151.0" text="Contraseña" textFill="WHITE" />
-      <Button layoutX="185.0" layoutY="232.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="291.0" style="-fx-font-family: arial; -fx-font-size: 25;" text="Iniciar Sesión" />
-      <Button layoutX="339.0" layoutY="200.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 12;" text="has olvidado tu contraseña?" />
-      <Label layoutX="323.0" layoutY="283.0" text="No tienes cuenta?" textFill="WHITE">
+      <PasswordField fx:id="contrasenia_field" layoutX="246.0" layoutY="167.0" prefHeight="26.0" prefWidth="291.0" />
+      <Button fx:id="olvidoContraseña_button" layoutX="323.0" layoutY="197.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 12;" text="¿Has olvidado tu contraseña?" />
+      <Button fx:id="iniciarSesion_Button" layoutX="185.0" layoutY="232.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="291.0" style="-fx-font-family: arial; -fx-font-size: 25;" text="Iniciar Sesión" />
+      <Label layoutX="325.0" layoutY="280.0" text="¿No tienes cuenta?" textFill="WHITE">
          <font>
             <Font name="Berlin Sans FB" size="11.0" />
          </font></Label>
-      <Button layoutX="404.0" layoutY="278.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 10;" text="Registrate" />
+      <Button fx:id="registrate_button" layoutX="402.0" layoutY="272.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 10;" text="Regístrate" />
    </children>
 </AnchorPane>

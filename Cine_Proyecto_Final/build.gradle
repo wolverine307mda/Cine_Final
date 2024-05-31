@@ -30,7 +30,7 @@ application {
     mainClass = 'org.example.cine_proyecto_final.CineApplication'
 }
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 javafx {
@@ -68,6 +68,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    jvmArgs("-noverify", "-XX:+EnableDynamicAgentLoading", "-Djdk.instrument.traceUsage")
 }
 
 jlink {

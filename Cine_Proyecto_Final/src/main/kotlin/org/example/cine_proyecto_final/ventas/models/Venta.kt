@@ -2,6 +2,7 @@ package org.example.cine_proyecto_final.ventas.models
 
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
+import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraViewModel
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -14,13 +15,12 @@ import java.util.UUID
  * @property updatedAt La fecha y hora de la última actualización de la venta.
  * @property isDeleted Indica si la venta ha sido eliminada.
  */
-class Venta(
-    var id : String = UUID.randomUUID().toString(),
-    var cliente : Cuenta,
-    var butacas : List<Butaca>,
-    var lineasVenta : List<LineaVenta>,
-    var createdAt : LocalDateTime = LocalDateTime.now(),
-    var updatedAt : LocalDateTime = LocalDateTime.now(),
-    var isDeleted : Boolean = false
-) {
-}
+data class Venta(
+    var id: String = UUID.randomUUID().toString(),
+    var cliente: Cuenta,
+    var butacas: List<Butaca>,
+    var lineasVenta: List<LineaVenta>,
+    var createdAt: LocalDateTime = LocalDateTime.now(),
+    var updatedAt: LocalDateTime = LocalDateTime.now(),
+    var isDeleted: Boolean = false
+)

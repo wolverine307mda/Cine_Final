@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListCell?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+
+<fx:root editable="false" prefHeight="70.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-background-radius: 20;" stylesheets="@../styles/listcellStyle.css" type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <graphic>
+        <HBox prefHeight="70.0" prefWidth="353.0" styleClass="list-cell-container">
+            <AnchorPane prefHeight="23.0" prefWidth="272.0" styleClass="list-cell-anchor-pane" HBox.hgrow="ALWAYS">
+                <children>
+                    <Button fx:id="delete" layoutX="3.0" layoutY="20.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="50.0" styleClass="icon-button">
+                        <graphic>
+                            <ImageView fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icons/deleteIcon.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Label fx:id="name" layoutX="56.0" layoutY="27.0" prefHeight="30.0" styleClass="name-label" text="Label">
+                    </Label>
+                    <Button fx:id="less" layoutX="229.0" layoutY="41.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="42.0" styleClass="icon-button">
+                        <graphic>
+                            <ImageView fitHeight="24.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icons/upIcon.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Button fx:id="more" layoutX="228.0" layoutY="3.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="44.0" styleClass="icon-button">
+                        <graphic>
+                            <ImageView fitHeight="26.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icons/downIcon.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                    <Text fx:id="amount" fill="WHITE" layoutX="237.0" layoutY="48.0" styleClass="amount-label" text="0" textAlignment="CENTER" wrappingWidth="34.87196350097656">
+                    </Text>
+                </children>
+            </AnchorPane>
+        </HBox>
+    </graphic>
+</fx:root>

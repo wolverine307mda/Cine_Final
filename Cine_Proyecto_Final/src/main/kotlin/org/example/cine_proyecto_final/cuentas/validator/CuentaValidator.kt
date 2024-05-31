@@ -6,35 +6,38 @@ import com.github.michaelbull.result.Result
 import cuenta.errors.CuentaError
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
 
-
 class CuentaValidator {
-    /**
- * Valida un objeto de tipo [Cuenta] dado.
- * @param cuenta La cuenta que se desea validar.
- * @return Un error o la Cuenta envuelta en un Result
- */
-fun validate(cuenta: Cuenta): Result<Cuenta,CuentaError> {
-    when{
-        cuenta.nombre.isEmpty() -> return Err(CuentaError.CuentaInvalidaError("El nombre no puede estar vacío"))
-        cuenta.apellido.isEmpty() -> return Err(CuentaError.CuentaInvalidaError("Los apellidos no pueden estar vacíos"))
-        cuenta.email.isEmpty() -> return verifyEmail(cuenta)
-        cuenta.password.isEmpty() -> return Err(CuentaError.CuentaInvalidaError("La contraseña no puede estar vacía"))
-        cuenta.tipo == null -> return Err(CuentaError.CuentaInvalidaError("El tipo de cuenta no es válido"))
-        else -> return Ok(cuenta)
+
+    fun validate(cuenta: Cuenta): Result<Cuenta, CuentaError> {
+        when {
+            !emailIsValid(cuenta.email) -> return Err(CuentaError.CuentaInvalida("El email ${cuenta.email} no es válido"))
+            cuenta.nombre.isEmpty() -> return Err(CuentaError.CuentaInvalida("El nombre no puede estar vacío"))
+            cuenta.apellido.isEmpty() -> return Err(CuentaError.CuentaInvalida("Los apellidos no pueden estar vacíos"))
+            cuenta.password.isEmpty() -> return Err(CuentaError.CuentaInvalida("La contraseña no puede estar vacía"))
+            !passwordIsValid(cuenta.password) -> return Err(CuentaError.CuentaInvalida("La contraseña no cumple con los requisitos de seguridad"))
+            cuenta.tipo == null -> return Err(CuentaError.CuentaInvalida("El tipo de cuenta no es válido"))
+            else -> return Ok(cuenta)
+        }
     }
-}
 
     /**
- * Función privada para verificar la validez de un correo electrónico.
- *
- * @param cuenta La cuenta cuyo correo electrónico se desea verificar.
- * @return Un error o la Cuenta envuelta en un Result
- *
- * Esta función utiliza una expresión regular para comprobar si la dirección de correo es válida.
- */
-private fun verifyEmail(cuenta: Cuenta) : Result<Cuenta,CuentaError> {
-    val emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}".toRegex()
-    if (cuenta.email.matches(emailRegex)) return Ok(cuenta)
-    else return Err(CuentaError.CuentaInvalidaError("El email no es válido"))
-}
+     * @return true si es válido o false si no lo es
+     *
+     * Esta función utiliza una expresión regular para comprobar si la dirección de correo es válida.
+     */
+    fun emailIsValid(email: String): Boolean {
+        val emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}".toRegex()
+        return email.matches(emailRegex)
+    }
+
+    /**
+     * @return true si la contraseña es válida o false si no lo es
+     *
+     * Esta función comprueba si la contraseña contiene al menos una letra mayúscula,
+     * una letra minúscula, un número y tiene al menos 5 caracteres.
+     */
+    fun passwordIsValid(password: String): Boolean {
+        val passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{5,}$".toRegex()
+        return password.matches(passwordRegex)
+    }
 }

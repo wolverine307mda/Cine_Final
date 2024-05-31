@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.administrador.AdministradorGestionButacasController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/pantalla%20de%20inicio%20(1).png" />
+         </image>
+      </ImageView>
+      <SplitPane dividerPositions="0.5329428989751098" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: transparent;">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="449.0" prefWidth="444.0">
+               <children>
+                  <VBox prefHeight="449.0" prefWidth="361.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="678.0">
+                           <padding>
+                              <Insets bottom="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <AnchorPane prefHeight="189.0" prefWidth="678.0">
+                                 <children>
+                                    <Button fx:id="atrasButton" layoutY="6.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="0.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fitHeight="48.0" fitWidth="41.0" opacity="0.68" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../icons/icono_atras_blanco.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TextField fx:id="buscarPorIdField" layoutX="186.0" layoutY="17.0" prefHeight="34.0" prefWidth="306.0" />
+                                    <Label layoutX="131.0" layoutY="19.0" text="Id : " textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial Black" size="23.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="38.0" fitWidth="36.0" layoutX="509.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/search_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <AnchorPane prefHeight="684.0" prefWidth="678.0">
+                           <children>
+                              <VBox layoutX="24.0" layoutY="16.0" opacity="0.3" prefHeight="610.0" prefWidth="634.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
+                              <TableView fx:id="tableButacas" layoutX="54.0" layoutY="139.0" opacity="0.78" prefHeight="464.0" prefWidth="570.0" style="-fx-background-color: black; -fx-background-radius: 20; -fx-border-radius: 20;" stylesheets="@../styles/table.css">
+                                 <columns>
+                                    <TableColumn fx:id="idButacaColumna" editable="false" prefWidth="142.5" text="id" />
+                                    <TableColumn fx:id="precioColum" editable="false" prefWidth="142.5" text="Precio" />
+                                    <TableColumn fx:id="estadoColum" prefWidth="142.5" text="Estado" />
+                                    <TableColumn fx:id="tipoColumna" minWidth="0.0" prefWidth="142.5" text="Tipo" />
+                                 </columns>
+                              </TableView>
+                              <ButtonBar layoutX="36.0" layoutY="87.0" prefHeight="40.0" prefWidth="586.0">
+                                 <buttons>
+                                    <ToggleButton fx:id="libreButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="374.0" style="-fx-background-radius: 0;" text="Libre" />
+                                    <ToggleButton fx:id="fueraServicioButton" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Fuera de Servicio" />
+                                    <ToggleButton fx:id="ocupadaButton" mnemonicParsing="false" style="-fx-background-radius: 0;" text="Ocupada" />
+                                 </buttons>
+                              </ButtonBar>
+                              <ButtonBar layoutX="36.0" layoutY="40.0" prefHeight="40.0" prefWidth="586.0">
+                                 <buttons>
+                                    <ToggleButton fx:id="normalButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="374.0" style="-fx-background-radius: 0;" text="Normal" />
+                                    <ToggleButton fx:id="vipButton" mnemonicParsing="false" style="-fx-background-radius: 0;" text="VIP" />
+                                 </buttons>
+                              </ButtonBar>
+                           </children>
+                        </AnchorPane>
+                        <HBox alignment="CENTER" prefHeight="87.0" prefWidth="358.0">
+                           <children>
+                              <Label text="Butacas libres: " textFill="WHITE">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="butacasLibresCountField" editable="false" prefHeight="26.0" prefWidth="90.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label text="       Butacas no Disponibles: " textFill="WHITE">
+                                 <padding>
+                                    <Insets right="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="butacasNoDisponiblesCountField" editable="false" prefHeight="26.0" prefWidth="90.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="449.0" prefWidth="351.0" style="-fx-background-color: transparent;">
+               <children>
+                  <VBox layoutX="46.0" layoutY="42.0" opacity="0.3" prefHeight="714.0" prefWidth="507.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
+                  <Label layoutX="67.0" layoutY="57.0" text="BUTACA:" textFill="WHITE" AnchorPane.leftAnchor="67.0" AnchorPane.topAnchor="57.0">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <GridPane layoutX="62.0" layoutY="399.0" prefHeight="298.0" prefWidth="468.0" AnchorPane.leftAnchor="62.0" AnchorPane.rightAnchor="64.39999999999998">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="80.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="204.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="73.60001220703126" minHeight="10.0" prefHeight="73.60001220703126" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="76.8000244140625" minHeight="10.0" prefHeight="75.19998779296876" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label style="-fx-font-family: &quot;arial black&quot;;" text="Id:" textFill="WHITE">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label style="-fx-font-family: &quot;arial black&quot;;" text="Estado:" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="IdButacaSeleccionada" editable="false" prefHeight="26.0" prefWidth="156.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="precioTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label style="-fx-font-family: &quot;arial black&quot;;" text="Precio:" textFill="WHITE" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label style="-fx-font-family: &quot;arial black&quot;;" text="Tipo:" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="tipoComboBox" prefHeight="42.0" prefWidth="210.0" stylesheets="@../styles/table.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="butacaSeleccionadaEstadoCombox" prefHeight="42.0" prefWidth="210.0" stylesheets="@../styles/table.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <HBox alignment="CENTER" layoutX="14.0" layoutY="697.0" prefHeight="46.0" prefWidth="294.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="17.199999999999932">
+                     <children>
+                        <Button fx:id="editarButton" mnemonicParsing="false" text="   Editar">
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/edit_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label fx:id="labelId" layoutX="252.0" layoutY="110.0" style="-fx-font-size: 60; -fx-font-family: &quot;arial Black&quot;;" text="B1" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="40.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="192.0" fitWidth="196.0" layoutX="201.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/seat_icon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

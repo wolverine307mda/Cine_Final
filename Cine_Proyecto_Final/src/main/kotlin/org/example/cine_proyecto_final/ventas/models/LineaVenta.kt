@@ -1,6 +1,6 @@
 package org.example.cine_proyecto_final.ventas.models
 
-import org.example.cine_final.productos.models.Producto
+import org.example.cine_proyecto_final.productos.models.Producto
 import java.time.LocalDateTime
 import java.util.UUID
 

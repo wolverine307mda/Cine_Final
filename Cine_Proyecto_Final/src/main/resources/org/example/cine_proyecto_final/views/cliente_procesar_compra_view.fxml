@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cine_proyecto_final.controllers.cliente.ClienteProcesarCompraController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1280.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fondo_luces.jpg" />
+         </image>
+      </ImageView>
+      <VBox layoutX="114.0" layoutY="516.0" opacity="0.3" prefHeight="171.0" prefWidth="575.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
+      <VBox layoutX="114.0" layoutY="88.0" opacity="0.3" prefHeight="404.0" prefWidth="575.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
+      <VBox layoutX="164.0" layoutY="382.0" opacity="0.3" prefHeight="72.0" prefWidth="476.0" style="-fx-background-color: black; -fx-background-radius: 20;" />
+      <Label layoutX="163.0" layoutY="182.0" text="Nombre" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nombre_field" editable="false" layoutX="164.0" layoutY="209.0" opacity="0.75" prefHeight="30.0" prefWidth="476.0" stylesheets="@../styles/style.css" />
+      <Label layoutX="162.0" layoutY="272.0" text="E-mail" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="email_field" editable="false" layoutX="164.0" layoutY="299.0" opacity="0.75" prefHeight="30.0" prefWidth="476.0" stylesheets="@../styles/style.css" />
+      <Label layoutX="162.0" layoutY="540.0" text="TARJETA DE CRÉDITO" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tarjet_credito_field" layoutX="170.0" layoutY="567.0" opacity="0.75" prefHeight="38.0" prefWidth="464.0" />
+      <TextField fx:id="fxCaducidad" layoutX="291.0" layoutY="633.0" opacity="0.75" prefHeight="33.0" prefWidth="86.0" />
+      <TextField fx:id="cvvField" layoutX="429.0" layoutY="633.0" opacity="0.75" prefHeight="34.0" prefWidth="85.0" />
+      <Button layoutX="28.0" layoutY="74.0" mnemonicParsing="false" style="-fx-background-color: transparent;" />
+      <Label layoutX="148.0" layoutY="112.0" text="Confirma tu compra" textFill="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="48.0" />
+         </font>
+      </Label>
+      <Button fx:id="atras_button" layoutX="14.0" layoutY="25.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="46.0" fitWidth="42.0" opacity="0.68" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/icono_atras_blanco.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="finalizar_compra_button" layoutX="937.0" layoutY="676.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="226.0" stylesheets="@../styles/style.css" text="FINALIZAR COMPRA" />
+      <Label layoutX="162.0" layoutY="356.0" text="Información de la Compra:" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <VBox layoutX="799.0" layoutY="132.0" opacity="0.3" prefHeight="454.0" prefWidth="386.0" style="-fx-background-color: white; -fx-background-radius: 20;" />
+      <TextField fx:id="precio_total_field" editable="false" layoutX="1068.0" layoutY="526.0" opacity="0.75" prefHeight="23.0" prefWidth="69.0" />
+      <Label layoutX="1007.0" layoutY="529.0" prefHeight="28.0" prefWidth="50.0" text="Total:" textFill="WHITE">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="843.0" layoutY="156.0" prefHeight="31.0" prefWidth="213.0" text="Tu cesta" textFill="WHITE">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="1146.0" layoutY="547.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€">
+         <font>
+            <Font name="Arial Black" size="21.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="31.0" fitWidth="30.0" layoutX="1103.0" layoutY="157.0">
+         <image>
+            <Image url="@../icons/carrito_compra.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableCesta" layoutX="843.0" layoutY="196.0" opacity="0.75" prefHeight="320.0" prefWidth="291.0" style="-fx-background-radius: 20; -fx-background-color: #1B222C;" stylesheets="@../styles/table.css">
+        <columns>
+          <TableColumn fx:id="nombreColum" prefWidth="122.4000244140625" text="Nombre" />
+            <TableColumn fx:id="tipoColum" prefWidth="62.39996337890625" text="Tipo" />
+          <TableColumn fx:id="precioColum" prefWidth="50.39996337890625" text="Precio" />
+            <TableColumn fx:id="cantidadColum" prefWidth="58.4000244140625" text="Cant" />
+        </columns>
+      </TableView>
+      <Text fx:id="textInfo" fill="WHITE" layoutX="176.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="451.99999999999994">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Label layoutX="301.0" layoutY="616.0" text="Caducidad" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="458.0" layoutY="616.0" text="CVV" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+   <stylesheets>
+      <URL value="@Cine_Proyecto_Final%20copia/src/main/resources/org/example/cine_proyecto_final/styles/style.css" />
+      <URL value="@../styles/style.css" />
+   </stylesheets>
+</AnchorPane>

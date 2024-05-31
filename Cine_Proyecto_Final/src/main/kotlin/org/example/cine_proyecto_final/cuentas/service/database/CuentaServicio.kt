@@ -8,4 +8,5 @@ interface CuentaServicio {
     fun findByEmail(email : String) : Result<Cuenta, CuentaError>
     fun save(cuenta: Cuenta) : Result<Cuenta,CuentaError>
     fun update(email: String, cuenta: Cuenta) : Result<Cuenta, CuentaError>
+    fun findAll() : Result<List<Cuenta>, CuentaError>
 }

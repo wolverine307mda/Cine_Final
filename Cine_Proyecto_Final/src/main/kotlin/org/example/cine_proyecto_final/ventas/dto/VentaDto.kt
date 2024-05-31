@@ -1,7 +1,7 @@
 package org.example.cine_proyecto_final.ventas.dto
 
 import kotlinx.serialization.Serializable
-import org.example.cine_final.cuentas.dto.CuentaDTO
+import org.example.cine_proyecto_final.cuentas.dto.CuentaDto
 import org.example.cine_proyecto_final.butacas.dto.ButacaDto
 
 /**
@@ -17,7 +17,7 @@ import org.example.cine_proyecto_final.butacas.dto.ButacaDto
 @Serializable
 class VentaDto(
     var id : String,
-    var cliente : CuentaDTO,
+    var cliente : CuentaDto,
     var butacas : List<ButacaDto>,
     var lineasVenta : List<LineaVentaDto>,
     var createdAt : String,
