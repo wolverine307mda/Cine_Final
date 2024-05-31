@@ -77,7 +77,7 @@ val appModule = module {
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
     }
-    
+
     singleOf(::AdministradorGestorButacasViewModel)
 
     singleOf(::ProductoRepositoryImpl) {

@@ -28,44 +28,47 @@ class VentaStorageHtmlImpl : VentaStorageHtml {
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            padding: 0;
+            background-color: #121212;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            background-image: url('https://hips.hearstapps.com/hmg-prod/images/deadpool-lobezno-jackman-reynolds-662677816d477.jpg');
+            background-size: cover;
+            background-position: center;
         }
-        .receipt {
-            max-width: 600px;
-            background-color: #ffffff;
+        .receipt-container {
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
-        .receipt h2 {
+        .receipt-container h2, .receipt-container h3 {
             text-align: center;
-            margin-bottom: 20px;
         }
-        .receipt p {
-            margin: 5px 0;
+        .receipt-container p, .receipt-container ul {
+            margin: 10px 0;
         }
-        .receipt ul {
+        .receipt-container ul {
             list-style-type: none;
             padding: 0;
         }
-        .receipt ul li {
-            background-color: #f9f9f9;
+        .receipt-container ul li {
+            background-color: #333333;
             margin: 5px 0;
             padding: 10px;
-            border: 1px solid #ddd;
             border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="receipt">
+    <div class="receipt-container">
         <h2>Recibo de Compra</h2>
+        <p><strong>Película:</strong> Deadpool & Wolverine</p>
         <p><strong>Cliente:</strong> ${venta.cliente.nombre} (${venta.cliente.email})</p>
         <p><strong>Fecha:</strong> ${LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT))}</p>
         <h3>Detalles de la Compra</h3>

@@ -1,5 +1,6 @@
 package org.example.cine_proyecto_final.controllers.cliente
 
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
@@ -13,7 +14,6 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import java.time.LocalDateTime
-import java.time.YearMonth
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 
@@ -76,15 +76,17 @@ class ClienteProcesarCompraController : KoinComponent {
         precioColum.cellValueFactory = PropertyValueFactory("precio")
         cantidadColum.cellValueFactory = PropertyValueFactory("cantidad")
 
-        tableCesta.items = javafx.collections.FXCollections.observableArrayList(cesta)
+        tableCesta.items = FXCollections.observableArrayList(cesta)
     }
 
     private fun infoCompra() {
         val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT)
         textInfo.text = """DeadPool & Wolverine
-        Fecha de compra: ${LocalDateTime.now().format(formatter)}""".trimIndent()
+    Fecha de compra: ${LocalDateTime.now().format(formatter)}""".trimIndent()
         obtenerCesta()
-        precio_total_field.text = obtenerTotal().toString()
+        // Formatear el precio total con dos decimales
+        val precioTotalFormateado = String.format("%.2f", obtenerTotal())
+        precio_total_field.text = precioTotalFormateado
         nombre_field.text = viewModelSesion.usuario?.nombre + " " + viewModelSesion.usuario?.apellido
         email_field.text = viewModelSesion.usuario?.email
     }
@@ -123,81 +125,34 @@ class ClienteProcesarCompraController : KoinComponent {
             logger.debug { it }
         }
 
-        // Actualizar la TableView
-        tableCesta.items.setAll(cesta)
+        tableCesta.items = FXCollections.observableArrayList(cesta)
     }
 
     private fun obtenerTotal(): Double {
-        return cesta.sumOf { it.precio * it.cantidad }
+        return cesta.sumByDouble { it.precio * it.cantidad }
     }
 
     private fun finalizarCompra() {
-        val tarjetaCredito = tarjet_credito_field.text
-        val cvv = cvvField.text
-        val fechaCaducidad = fxCaducidad.text
+        val usuario = viewModelSesion.usuario ?: return
 
-        if (tarjetaCredito.isEmpty() || cvv.isEmpty() || fechaCaducidad.isEmpty()) {
-            RoutesManager.showAlertOperacion("Error", "Por favor, completa todos los campos", Alert.AlertType.ERROR)
-            return
-        }
-
-        if (!validarTarjetaCredito(tarjetaCredito)) {
-            RoutesManager.showAlertOperacion("Error", "Por favor, verifica el numero de la tarjeta de credito", Alert.AlertType.ERROR)
-            return
-        }
-
-        if (!validarCVC(cvv)) {
-            RoutesManager.showAlertOperacion("Error", "Por favor, verifica el cvv", Alert.AlertType.ERROR)
-            return
-        }
-
-        if (!validarFechaCaducidad(fechaCaducidad)) {
-            RoutesManager.showAlertOperacion("Error", "Por favor, verifica la fecha de caducidad", Alert.AlertType.ERROR)
-            return
-        }
-
-        val usuario = viewModelSesion.usuario ?: throw IllegalStateException("Usuario no encontrado")
         val butacas = viewModelButacas.butacasSeleccionadas
         val lineas = viewModelProductos.state.value.lineas
 
-        viewModel.procesarCompra(usuario, butacas, lineas,
-            onSuccess = {
-                RoutesManager.showAlertOperacion("Compra Finalizada", "La compra se ha procesado correctamente", Alert.AlertType.INFORMATION)
-                RoutesManager.changeScene(RoutesManager.View.MAIN)
-            },
-            onFailure = { error ->
-                RoutesManager.showAlertOperacion("Error", "Hubo un problema al procesar la compra: $error", Alert.AlertType.ERROR)
-            }
-        )
+        viewModel.procesarCompra(usuario, butacas, lineas, onSuccess = {
+            // Limpiar la cesta y las líneas después de una compra exitosa
+            viewModelButacas.butacasSeleccionadas.clear()
+            viewModelProductos.clearList()
+            cesta.clear()
+            tableCesta.items.clear()
+            tableCesta.refresh()
+            logger.debug { "Compra finalizada con éxito y cesta limpiada." }
+            // Volver a la pantalla de inicio
+            RoutesManager.changeScene(RoutesManager.View.MAIN)
+        }, onFailure = { mensajeError ->
+            // Mostrar el mensaje de error
+            logger.error { "Error al finalizar la compra: $mensajeError" }
+        })
     }
-
-    private fun validarTarjetaCredito(tarjeta: String): Boolean {
-        // Expresión regular para validar el número de tarjeta de crédito
-        val regex = Regex("^\\d{4}-\\d{4}-\\d{4}-\\d{4}$")
-        return regex.matches(tarjeta)
-    }
-
-    private fun validarCVC(cvc: String): Boolean {
-        // Expresión regular para validar el CVC de la tarjeta
-        val regex = Regex("^\\d{3}$")
-        return regex.matches(cvc)
-    }
-
-    private fun validarFechaCaducidad(fecha: String): Boolean {
-        return try {
-            // Define el formato de la fecha MM/yy
-            val formatter = DateTimeFormatter.ofPattern("MM/yy")
-            // Parsea la fecha de caducidad
-            val fechaCaducidad = YearMonth.parse(fecha, formatter)
-            // Define la fecha de referencia 05/24
-            val fechaReferencia = YearMonth.of(2024, 5)
-            // Comprueba si la fecha de caducidad es posterior a 05/24
-            fechaCaducidad.isAfter(fechaReferencia)
-        } catch (e: Exception) {
-            false
-        }
-    }
-
     data class Cesta(
         val nombre: String,
         val tipo: String,
