@@ -7,6 +7,7 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
+import javafx.scene.image.ImageView
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.models.TipoProducto
 import org.example.cine_proyecto_final.routes.RoutesManager.showAlertOperacion
@@ -20,7 +21,7 @@ private val logger = logging()
 
 class DetalleProductoController: KoinComponent {
     private val viewModel: AdministradorGestorProductosViewModel by inject()
-    private var producto: Producto? = null
+    //private var producto: Producto? = null
 
     @FXML
     private lateinit var guardarButton: Button
@@ -37,6 +38,10 @@ class DetalleProductoController: KoinComponent {
     @FXML
     private lateinit var tipoCombo: ComboBox<String>
 
+    @FXML
+    private lateinit var image : ImageView
+
+    @FXML
     fun initialize() {
         val tipos = listOf("BEBIDA", "COMIDA", "OTROS")
         tipoCombo.items.addAll(tipos)
@@ -57,10 +62,12 @@ class DetalleProductoController: KoinComponent {
             else {crearProducto()}
 
         }
+
+        image.image = viewModel.state.value.currentImage
     }
 
     private fun editarProducto(producto: Producto) {
-
+        viewModel.editarProducto(producto)
     }
 
     private fun crearProducto() {

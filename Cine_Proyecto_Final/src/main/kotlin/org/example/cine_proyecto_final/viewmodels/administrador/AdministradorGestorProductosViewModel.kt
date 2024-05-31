@@ -4,6 +4,7 @@ import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
+import javafx.scene.image.Image
 import org.example.cine_proyecto_final.CineApplication
 import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
@@ -11,7 +12,6 @@ import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoSt
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
 import org.example.productos.errors.ProductoError
 import org.jetbrains.dokka.InternalDokkaApi
-import org.jetbrains.dokka.utilities.ServiceLocator.toFile
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -66,20 +66,13 @@ class AdministradorGestorProductosViewModel : KoinComponent {
 
     fun editarProducto(producto: Producto): Result<Producto, ProductoError> {
         logger.debug { "Editando Producto" }
-
-        return validador.validate(producto)
+        return productoService.update(producto.id, producto)
             .onSuccess {
-                productoService.update(producto.id, producto)
-                    .onSuccess {
-                        logger.debug { "Producto editado con éxito" }
-                        val updatedProductos = state.value.productos.map {
-                            if (it.id == producto.id) producto else it
-                        }
-                        state.set(state.value.copy(productos = updatedProductos))
-                    }
-                    .onFailure {
-                        logger.debug { "Error al editar producto: $it" }
-                    }
+                logger.debug { "Producto editado con éxito" }
+                val updatedProductos = state.value.productos.map {
+                    if (it.id == producto.id) producto else it
+                }
+                state.set(state.value.copy(productos = updatedProductos))
             }
             .onFailure {
                 logger.debug { "Error al editar producto: $it" }
@@ -93,5 +86,6 @@ class AdministradorGestorProductosViewModel : KoinComponent {
     data class ProductSelectionState(
         var allProductos: List<Producto> = emptyList(),
         var productos: List<Producto> = emptyList(),
+        var currentImage: Image = Image(CineApplication::class.java.getResourceAsStream("images/NoImage.png"))
     )
 }

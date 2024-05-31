@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS ButacaEntity (
    precio REAL NOT NULL,
    createdAt TEXT NOT NULL,
    updatedAt TEXT NOT NULL,
-   PRIMARY KEY(id, updatedAt),
+   PRIMARY KEY(id),
    FOREIGN KEY (id_venta) REFERENCES VentaEntity(id)
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS ProductoEntity (
     isDeleted INTEGER NOT NULL,
     createdAt TEXT NOT NULL,
     updatedAt TEXT NOT NULL,
-    PRIMARY KEY(id, updatedAt)
+    PRIMARY KEY(id)
 );
 
 -- Tabla para almacenar información de las ventas
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS VentaEntity (
     isDeleted INTEGER NOT NULL,
     createdAt TEXT NOT NULL,
     updatedAt TEXT NOT NULL,
-    PRIMARY KEY(id, updatedAt),
+    PRIMARY KEY(id),
     FOREIGN KEY (id_socio) REFERENCES CuentaEntity(email)
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS LineaVentaEntity (
    isDeleted INTEGER NOT NULL,
    createdAt TEXT NOT NULL,
    updatedAt TEXT NOT NULL,
-   PRIMARY KEY(id, updatedAt),
+   PRIMARY KEY(id),
    FOREIGN KEY (id_producto) REFERENCES ProductoEntity(id),
    FOREIGN KEY (id_venta) REFERENCES VentaEntity(id)
 );
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS CuentaEntity (
     tipo TEXT NOT NULL,
     createdAt TEXT NOT NULL,
     updatedAt TEXT NOT NULL,
-    PRIMARY KEY(email, updatedAt)
+    PRIMARY KEY(email)
 );
 
 -- Insertar cuenta de administrador
@@ -71,10 +71,11 @@ VALUES ('administrador@dev.com', 'Administrador', '1', 'sin_imagen.jpg', '1234',
 ('user@gmail.com', 'Diego', 'Novillo', 'sin_imagen.jpg', '1234', 'USUARIO', '2024-05-15T10:30', '2024-05-15T10:30');
 
 -- Consultas
--- Obtener producto por ID y fecha
-findProductByIdAndDate:
-SELECT *
-FROM ProductoEntity WHERE id = ?;
+countAllCuentas:
+SELECT COUNT(*) FROM CuentaEntity;
+
+getAllCuentas:
+SELECT * FROM CuentaEntity;
 
 -- Obtener butaca por ID
 getButacaById:

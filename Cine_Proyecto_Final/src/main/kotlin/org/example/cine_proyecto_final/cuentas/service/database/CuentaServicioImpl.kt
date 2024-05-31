@@ -20,6 +20,8 @@ class CuentaServicioImpl(
     private val cache : CuentaCache
 ): CuentaServicio {
 
+
+
     /**
      * Busca una cuenta de usuario por su identificador único.
      * @param email El identificador único de la cuenta de usuario a buscar.
@@ -75,5 +77,11 @@ class CuentaServicioImpl(
         return Err(CuentaError.CuentaStorageError("La cuenta con el email: ${cuenta.email} no se pudo actualizar"))
     }
 
-
+    /**
+     * Busca todas las cuentas de usuario en la base de datos.
+     * @return un [Result] que contiene la lista de usuarios o un error [CuentaError].
+     */
+    override fun findAll(): Result<List<Cuenta>, CuentaError> {
+        return Ok(cuentaRepository.findAll())
+    }
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.Button
 import javafx.stage.FileChooser
 import org.example.cine_proyecto_final.database.SqlDelightManager
 import org.example.cine_proyecto_final.routes.RoutesManager
+import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorBackupViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -17,6 +18,7 @@ class AdministradorInicioController: KoinComponent {
 
     private val dbClient: SqlDelightManager by inject()
     private val viewModel: AdministradorInicioController by inject()
+    private val backupViewModel : AdministradorBackupViewModel by inject()
 
     @FXML
     private lateinit var gestion_productos_button: Button
@@ -46,7 +48,7 @@ class AdministradorInicioController: KoinComponent {
 
         ver_recaudacion_button.setOnAction {  }
         restaurar_button.setOnAction { restaurarEstado() }
-        exportar_estado_button.setOnAction {  }
+        exportar_estado_button.setOnAction { exportarEstado() }
     }
 
     private fun restaurarEstado(){
@@ -56,11 +58,20 @@ class AdministradorInicioController: KoinComponent {
             extensionFilters.addAll(FileChooser.ExtensionFilter("ZIP","*.zip"))
             showOpenDialog(RoutesManager.activeStage)
         }?.let {
+            backupViewModel.restoreFromBackUp(it)
         }
     }
 
     private fun exportarEstado(){
         looger.debug { "exportarAction" }
+        FileChooser().run {
+            title = "Selecciona un archivo"
+            extensionFilters.addAll(FileChooser.ExtensionFilter("ZIP","*.zip"))
+            showSaveDialog(RoutesManager.activeStage)
+        }?.let {
+            backupViewModel.createBackup(it)
+        }
+
     }
 
     private fun verRecaudacion(){

@@ -25,9 +25,6 @@ class SqlDelightManager(
     private val databaseInMemory: Boolean = config.databaseInMemory
     var databaseQueries: DatabaseQueries = initQueries()
 
-    private val butacaStorage: ButacaStorage by inject()
-    private val butacaValidator: ButacaValidator by inject()
-
     init {
         logger.debug { "Inicializando el gestor de Bases de Datos con SQLDelight" }
         initialize()
@@ -70,7 +67,7 @@ class SqlDelightManager(
      * Borra todos los datos de la base de datos con la ayuda de las funciones que crea
      * SqlDelight dentro del fichero Database.sq
      */
-    private fun removeAllData() {
+    fun removeAllData() {
         logger.debug { "Borrando todo el data existente en la base de datos" }
         databaseQueries.transaction {
             databaseQueries.removeAllButacas()
