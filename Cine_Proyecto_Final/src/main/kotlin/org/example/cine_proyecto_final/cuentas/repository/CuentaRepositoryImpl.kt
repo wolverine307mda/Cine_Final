@@ -21,6 +21,15 @@ class CuentaRepositoryImpl(
      * Recupera todas las cuentas de usuario almacenadas en la base de datos.
      * @return una lista de todas las cuentas de usuario, o una lista vacía si no se encontraron cuentas o si ocurrió un error.
      */
+    override fun findAll(): List<Cuenta> {
+        logger.debug { "Buscando todas las cuentas en la base de datos" }
+        if (db.countAllCuentas().executeAsOne() > 0){
+            return db.getAllCuentas().executeAsList().map {
+                it.toCuenta()
+            }
+        }
+        return emptyList()
+    }
 
     /**
      * Busca una cuenta de usuario por su identificador único.
@@ -51,9 +60,9 @@ class CuentaRepositoryImpl(
             apellido = cuenta.apellido,
             updatedAt = cuenta.updatedAt.toString(),
             createdAt = cuenta.createdAt.toString(),
-            imagen = cuenta.imagen,
             password =  cuenta.password,
-            tipo = cuenta.tipo!!.name
+            tipo = cuenta.tipo!!.name,
+            imagen = cuenta.imagen
         )
         return cuenta
     }
@@ -78,8 +87,8 @@ class CuentaRepositoryImpl(
                 nombre = cuenta.nombre,
                 apellido = cuenta.apellido,
                 updatedAt = date.toString(),
-                imagen = cuenta.imagen,
-                password =  cuenta.password
+                password =  cuenta.password,
+                imagen = cuenta.imagen
             )
             return nuevaCuenta
         }

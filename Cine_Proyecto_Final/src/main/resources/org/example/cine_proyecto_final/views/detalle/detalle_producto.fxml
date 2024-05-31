@@ -61,7 +61,7 @@
       </GridPane>
       <Button fx:id="imagen_button" layoutX="99.0" layoutY="29.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
          <graphic>
-            <ImageView fitHeight="150.0" fitWidth="200.0" opacity="0.78" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" opacity="0.78" pickOnBounds="true" preserveRatio="true" fx:id="image">
                <image>
                   <Image url="@../../icons/productos_icon.png" />
                </image>

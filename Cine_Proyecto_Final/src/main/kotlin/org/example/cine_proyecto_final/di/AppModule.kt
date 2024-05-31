@@ -35,12 +35,23 @@ import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoSt
 import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoStorageJson
 import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoStorageJsonImpl
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
+import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorio
+import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorioImpl
+import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicio
 import org.example.cine_proyecto_final.ventas.validator.VentaValidator
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorButacasViewModel
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
+import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorBackupViewModel
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
+import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicioImpl
+import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorage
+import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorageImpl
+import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtml
+import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtmlImpl
+import org.example.cine_proyecto_final.ventas.servicio.storage.json.VentaStorageJson
+import org.example.cine_proyecto_final.ventas.servicio.storage.json.VentaStorageJsonImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -67,10 +78,32 @@ val appModule = module {
 
     singleOf(::AdministradorGestorProductosViewModel)
 
+    singleOf(::AdministradorBackupViewModel)
+
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
     }
-    
+
+    singleOf(::VentaServicioImpl) {
+        bind<VentaServicio>()
+    }
+
+    singleOf(::VentaStorageImpl) {
+        bind<VentaStorage>()
+    }
+
+    singleOf(::VentaStorageJsonImpl) {
+        bind<VentaStorageJson>()
+    }
+
+    singleOf(::VentaStorageHtmlImpl) {
+        bind<VentaStorageHtml>()
+    }
+
+    singleOf(::VentaRepositorioImpl) {
+        bind<VentaRepositorio>()
+    }
+
     singleOf(::AdministradorGestorButacasViewModel)
 
     singleOf(::ProductoRepositoryImpl) {
