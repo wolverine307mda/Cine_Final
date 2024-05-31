@@ -24,7 +24,7 @@ class ImagesServiceImpl(
 ) : ImagesService {
 
     init {
-        Files.createDirectories(Paths.get("images"))
+        Files.createDirectories(Paths.get(appConfig.imagesDirectory))
     }
 
     /**

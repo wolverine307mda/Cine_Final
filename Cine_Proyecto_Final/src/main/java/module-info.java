@@ -25,6 +25,9 @@ module org.example.cine_proyecto_final {
     opens org.example.cine_proyecto_final.productos.models to javafx.fxml;
     exports org.example.cine_proyecto_final.productos.models;
 
+    opens org.example.cine_proyecto_final.butacas.models to javafx.fxml;
+    exports org.example.cine_proyecto_final.butacas.models;
+
     // Cliente Controllers
     opens org.example.cine_proyecto_final.controllers.listCell to javafx.fxml;
     exports org.example.cine_proyecto_final.controllers.listCell;

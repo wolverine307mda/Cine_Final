@@ -44,12 +44,18 @@ import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGes
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionButacaViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteSeleccionProductosViewModel
+import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorBackupViewModel
 import org.example.cine_proyecto_final.viewmodels.cliente.ClienteProcesarCompraViewModel
 import org.example.cine_proyecto_final.viewmodels.sesion.SesionViewModel
+import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorage
+import org.example.cine_proyecto_final.ventas.servicio.storage.VentaStorageImpl
+import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtml
+import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtmlImpl
+import org.example.cine_proyecto_final.ventas.servicio.storage.json.VentaStorageJson
+import org.example.cine_proyecto_final.ventas.servicio.storage.json.VentaStorageJsonImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-
 
 val appModule = module {
     singleOf(::AppConfig)
@@ -72,10 +78,36 @@ val appModule = module {
 
     singleOf(::AdministradorGestorProductosViewModel)
 
+    singleOf(::AdministradorBackupViewModel)
+
     singleOf(::ClienteProcesarCompraViewModel)
 
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
+    }
+
+    singleOf(::VentaServicioImpl) {
+        bind<VentaServicio>()
+    }
+
+    singleOf(::VentaStorageImpl) {
+        bind<VentaStorage>()
+    }
+
+    singleOf(::VentaStorageJsonImpl) {
+        bind<VentaStorageJson>()
+    }
+    
+    singleOf(::VentaRepositorioImpl) {
+        bind<VentaRepositorio>()
+    }
+
+    singleOf(::VentaStorageHtmlImpl) {
+        bind<VentaStorageHtml>()
+    }
+
+    singleOf(::VentaRepositorioImpl) {
+        bind<VentaRepositorio>()
     }
 
     singleOf(::AdministradorGestorButacasViewModel)
@@ -86,14 +118,6 @@ val appModule = module {
 
     singleOf(::ButacaStorageImpl) {
         bind<ButacaStorage>()
-    }
-
-    singleOf(::VentaServicioImpl){
-        bind<VentaServicio>()
-    }
-
-    singleOf(::VentaRepositorioImpl) {
-        bind<VentaRepositorio>()
     }
 
     singleOf(::ButacaStorageCsvImpl) {
@@ -142,25 +166,5 @@ val appModule = module {
 
     singleOf(::CuentaStorageJsonImpl) {
         bind<CuentaStorageJson>()
-    }
-
-    singleOf(::ButacaRepositoryImpl) {
-        bind<ButacaRepository>()
-    }
-
-    singleOf(::ButacaServiceImpl) {
-        bind<ButacaService>()
-    }
-
-    singleOf(::ButacaStorageCsvImpl) {
-        bind<ButacaStorageCsv>()
-    }
-
-    singleOf(::ButacaStorageJsonImpl) {
-        bind<ButacaStorageJson>()
-    }
-
-    singleOf(::ButacaStorageImpl) {
-        bind<ButacaStorage>()
     }
 }
