@@ -14,7 +14,6 @@ import org.example.cine_proyecto_final.ventas.models.Venta
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import java.io.File
 import java.util.*
 
 private val logger = logging()

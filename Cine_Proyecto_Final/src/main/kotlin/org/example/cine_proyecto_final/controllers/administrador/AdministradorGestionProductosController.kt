@@ -80,7 +80,7 @@ class AdministradorGestionProductosController : KoinComponent {
         initBindings()
 
         productoTable.selectionModel.selectedItemProperty().addListener { _, _, selectedProducto ->
-            selectedProducto?.let { updateProductoSeleccionado(it) }
+            selectedProducto?.let { updateProductoSeleccionado(selectedProducto) }
         }
 
         configureSearchAndFilter()
@@ -131,6 +131,7 @@ class AdministradorGestionProductosController : KoinComponent {
     }
 
     private fun updateProductoSeleccionado(producto: Producto) {
+        viewModel.state.value.currentProduct = producto
         nombreProductoSeleccionado.text = producto.nombre
         precioProductoSeleccionado.text = producto.precio.toString()
         stockProductoSeleccionado.text = producto.stock.toString()
@@ -150,7 +151,7 @@ class AdministradorGestionProductosController : KoinComponent {
     private fun editarProductoSeleccionado() {
         val selectedProduct = productoTable.selectionModel.selectedItem
         if (selectedProduct != null) {
-            ProductHolder.selectedProduct = selectedProduct
+            viewModel.state.value.currentProduct = selectedProduct
             RoutesManager.initDetalle(View.DETALLE_PRODUCTO, "Edicion de Producto: ${selectedProduct.nombre}")
         } else {
             showAlertOperacion("Error de edición", "No se ha seleccionado ningún producto", Alert.AlertType.ERROR)
@@ -195,9 +196,5 @@ class AdministradorGestionProductosController : KoinComponent {
 
         val result = alert.showAndWait()
         return result.orElse(ButtonType.CANCEL)
-    }
-
-    object ProductHolder {
-        var selectedProduct: Producto? = null
     }
 }

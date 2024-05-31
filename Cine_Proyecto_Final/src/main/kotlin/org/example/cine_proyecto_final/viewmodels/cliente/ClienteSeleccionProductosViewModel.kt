@@ -116,6 +116,16 @@ class ClienteSeleccionProductosViewModel : KoinComponent {
     }
 
     /**
+     * Actualiza la lista de productos
+     */
+    fun updateProducts(){
+        productoServicio.findAll().onSuccess {
+            state.value.allProductos = it.filter { it.stock <= 0 || !it.isDeleted }
+            state.value.productos = it.filter { it.stock <= 0 || !it.isDeleted }
+        }
+    }
+
+    /**
      * El objeto observable que contiene las lineas y los productos
      */
     data class ProductSelectionState(
