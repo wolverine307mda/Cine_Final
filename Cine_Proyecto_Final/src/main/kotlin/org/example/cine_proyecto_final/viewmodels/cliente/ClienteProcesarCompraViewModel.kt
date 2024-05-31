@@ -1,5 +1,7 @@
 package org.example.cine_proyecto_final.viewmodels.cliente
 
+import javafx.stage.FileChooser
+import javafx.stage.Stage
 import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtmlImpl
 import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
 import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicio
@@ -44,10 +46,12 @@ class ClienteProcesarCompraViewModel : KoinComponent {
             val resultado = serviceVentas.save(venta)
 
             resultado.let {
-                exportarReciboHtml(venta)
+                val stage = Stage() // Necesitamos una instancia de Stage para mostrar el FileChooser
+                exportarReciboHtml(venta, stage)
                 onSuccess()
             }
         } catch (e: Exception) {
+            logger.error { "Hubo un problema al procesar la compra: ${e.message}" }
             onFailure("Hubo un problema al procesar la compra: ${e.message}")
         }
     }
@@ -65,8 +69,12 @@ class ClienteProcesarCompraViewModel : KoinComponent {
         return UUID.randomUUID().toString()
     }
 
-    private fun exportarReciboHtml(venta: Venta) {
-        val file = File("recibo_${venta.id}.html")
+    private fun exportarReciboHtml(venta: Venta, stage: Stage) {
+        val fileChooser = FileChooser()
+        fileChooser.title = "Guardar Recibo"
+        fileChooser.extensionFilters.add(FileChooser.ExtensionFilter("Archivos HTML", "*.html"))
+        val file = fileChooser.showSaveDialog(stage) ?: return
+
         VentaStorageHtmlImpl().export(venta, file)
     }
 }

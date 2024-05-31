@@ -76,7 +76,6 @@ class ClienteProcesarCompraController : KoinComponent {
         precioColum.cellValueFactory = PropertyValueFactory("precio")
         cantidadColum.cellValueFactory = PropertyValueFactory("cantidad")
 
-        // Vincular la lista cesta con la TableView
         tableCesta.items = javafx.collections.FXCollections.observableArrayList(cesta)
     }
 
@@ -98,32 +97,24 @@ class ClienteProcesarCompraController : KoinComponent {
         // Usamos un mapa para agrupar productos por nombre
         val cestaMap = mutableMapOf<String, Cesta>()
 
-        lineas.forEach { linea ->
-            val nombre = linea.producto.nombre
-            val tipo = linea.producto.tipo.toString()
-            val precio = linea.producto.precio
-            val cantidad = linea.cantidad
-
-            if (cestaMap.containsKey(nombre)) {
-                val existingCesta = cestaMap[nombre]!!
-                cestaMap[nombre] = existingCesta.copy(cantidad = existingCesta.cantidad + cantidad)
-            } else {
-                cestaMap[nombre] = Cesta(nombre, tipo, precio, cantidad)
-            }
+        butacas.forEach { butaca ->
+            val itemCesta = Cesta(
+                nombre = "Butaca: " + butaca.id,
+                tipo = butaca.tipo.toString(),
+                precio = butaca.precio,
+                cantidad = 1
+            )
+            cestaMap[itemCesta.nombre] = itemCesta
         }
 
-        butacas.forEach { butaca ->
-            val nombre = butaca.id
-            val tipo = butaca.tipo.toString()
-            val precio = butaca.precio
-            val cantidad = 1
-
-            if (cestaMap.containsKey(nombre)) {
-                val existingCesta = cestaMap[nombre]!!
-                cestaMap[nombre] = existingCesta.copy(cantidad = existingCesta.cantidad + cantidad)
-            } else {
-                cestaMap[nombre] = Cesta(nombre, tipo, precio, cantidad)
-            }
+        lineas.forEach { linea ->
+            val itemCesta = Cesta(
+                nombre = linea.producto.nombre,
+                tipo = linea.producto.tipo.toString(),
+                precio = linea.producto.precio,
+                cantidad = linea.cantidad
+            )
+            cestaMap[itemCesta.nombre] = itemCesta
         }
 
         cesta.addAll(cestaMap.values)
@@ -131,6 +122,9 @@ class ClienteProcesarCompraController : KoinComponent {
         cesta.forEach {
             logger.debug { it }
         }
+
+        // Actualizar la TableView
+        tableCesta.items.setAll(cesta)
     }
 
     private fun obtenerTotal(): Double {
@@ -176,7 +170,6 @@ class ClienteProcesarCompraController : KoinComponent {
             }
         )
     }
-
 
     private fun validarTarjetaCredito(tarjeta: String): Boolean {
         // Expresión regular para validar el número de tarjeta de crédito

@@ -98,13 +98,13 @@ class VentaStorageHtmlImpl : VentaStorageHtml {
         venta.butacas.forEach {
             price += it.precio
         }
-        return price.toString()
+        return String.format("%.2f", price)
     }
 
     private fun getProductList(venta: Venta): String {
         var output = ""
         venta.lineasVenta.forEach {
-            output += "<li>${it.producto.nombre} - ${it.cantidad} x ${it.producto.precio}€</li>"
+            output += "<li>${it.producto.nombre} - ${it.cantidad} x ${String.format("%.2f", it.producto.precio)}€</li>"
         }
         if (output.isBlank()) return "<li>No se compraron productos adicionales</li>"
         return output
@@ -113,7 +113,7 @@ class VentaStorageHtmlImpl : VentaStorageHtml {
     private fun getButacaList(butacas: List<Butaca>): String {
         var output = ""
         butacas.forEach {
-            output += "<li>Butaca ${it.id} - ${it.tipo} - ${it.precio}€</li>"
+            output += "<li>Butaca ${it.id} - ${it.tipo} - ${String.format("%.2f", it.precio)}€</li>"
         }
         return output
     }

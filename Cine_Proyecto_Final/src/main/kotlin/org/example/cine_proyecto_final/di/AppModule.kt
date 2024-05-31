@@ -37,6 +37,8 @@ import org.example.cine_proyecto_final.productos.servicio.storage.csv.ProductoSt
 import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoStorageJson
 import org.example.cine_proyecto_final.productos.servicio.storage.json.ProductoStorageJsonImpl
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
+import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorio
+import org.example.cine_proyecto_final.ventas.respositorio.VentaRepositorioImpl
 import org.example.cine_proyecto_final.ventas.validator.VentaValidator
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorButacasViewModel
 import org.example.cine_proyecto_final.viewmodels.administrador.AdministradorGestorProductosViewModel
@@ -88,6 +90,10 @@ val appModule = module {
 
     singleOf(::VentaServicioImpl){
         bind<VentaServicio>()
+    }
+
+    singleOf(::VentaRepositorioImpl) {
+        bind<VentaRepositorio>()
     }
 
     singleOf(::ButacaStorageCsvImpl) {
