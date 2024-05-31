@@ -34,7 +34,7 @@ class AdministradorGestionButacasController : KoinComponent {
     @FXML
     private lateinit var tipoColumna: TableColumn<Butaca, String>
     @FXML
-    private lateinit var precioColum: TableColumn<Butaca, Int>
+    private lateinit var precioColum: TableColumn<Butaca, Double>
     @FXML
     private lateinit var estadoColum: TableColumn<Butaca, String>
 
@@ -42,7 +42,11 @@ class AdministradorGestionButacasController : KoinComponent {
     @FXML
     private lateinit var labelId: Label
     @FXML
+    private lateinit var IdButacaSeleccionada: TextField
+    @FXML
     private lateinit var tipoComboBox: ComboBox<String>
+    @FXML
+    private lateinit var butacaSeleccionadaEstadoCombox: ComboBox<String>
     @FXML
     private lateinit var precioTextField: TextField
 
@@ -60,7 +64,7 @@ class AdministradorGestionButacasController : KoinComponent {
     @FXML
     private lateinit var vipButton: ToggleButton
 
-    // filtrado de la butaca
+    // Filtrado de la butaca
     private lateinit var filteredData: FilteredList<Butaca>
 
     @FXML
@@ -69,7 +73,6 @@ class AdministradorGestionButacasController : KoinComponent {
 
         // Configuración de acciones de botones
         atrasButton.setOnAction { RoutesManager.changeScene(View.ADMIN_INICIO) }
-        editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_BUTACA, "Editar Butaca") }
 
         // Inicializar valores por defecto
         initDefaultValues()
@@ -92,6 +95,9 @@ class AdministradorGestionButacasController : KoinComponent {
 
         // Configurar búsqueda y filtrado
         configureSearchAndFilter()
+
+        // Configurar acción del botón editar
+        editarButton.setOnAction { editarButacaSeleccionada() }
     }
 
     /**
@@ -141,8 +147,34 @@ class AdministradorGestionButacasController : KoinComponent {
      */
     private fun updateButacaSeleccionada(butaca: Butaca) {
         labelId.text = butaca.id
+        IdButacaSeleccionada.text = butaca.id
         precioTextField.text = butaca.precio.toString()
         tipoComboBox.value = butaca.tipo.toString()
-        editarButton.setOnAction { RoutesManager.initDetalle(View.DETALLE_BUTACA, "Editar Butaca") }
+        butacaSeleccionadaEstadoCombox.value = butaca.estado.toString()
+    }
+
+    /**
+     * Maneja la acción de editar la butaca seleccionada.
+     */
+    private fun editarButacaSeleccionada() {
+        val selectedButaca = tableButacas.selectionModel.selectedItem
+        if (selectedButaca != null) {
+            ButacaHolder.selectedButaca = selectedButaca
+            RoutesManager.initDetalle(View.DETALLE_BUTACA, "Editar Butaca")
+        } else {
+            showAlertOperacion("Error de edición", "No se ha seleccionado ninguna butaca", Alert.AlertType.ERROR)
+        }
+    }
+
+    private fun showAlertOperacion(title: String, mensaje: String, alerta: Alert.AlertType = Alert.AlertType.INFORMATION) {
+        val alert = Alert(alerta)
+        alert.title = title
+        alert.headerText = null
+        alert.contentText = mensaje
+        alert.showAndWait()
+    }
+
+    object ButacaHolder {
+        var selectedButaca: Butaca? = null
     }
 }
