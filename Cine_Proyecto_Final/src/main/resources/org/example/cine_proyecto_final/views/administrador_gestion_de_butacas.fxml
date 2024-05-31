@@ -157,8 +157,8 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="textAlumnoNumero" editable="false" prefHeight="26.0" prefWidth="156.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="textAlumnoNombre" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField fx:id="IdButacaSeleccionada" editable="false" prefHeight="26.0" prefWidth="156.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="precioTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label style="-fx-font-family: &quot;arial black&quot;;" text="Precio:" textFill="WHITE" GridPane.rowIndex="3">
                            <font>
                               <Font size="16.0" />
@@ -169,8 +169,8 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="comboTipo1" prefHeight="42.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <ComboBox fx:id="comboTipo13" prefHeight="42.0" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="tipoComboBox" prefHeight="42.0" prefWidth="210.0" stylesheets="@../styles/table.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="butacaSeleccionadaEstadoCombox" prefHeight="42.0" prefWidth="210.0" stylesheets="@../styles/table.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" layoutX="14.0" layoutY="697.0" prefHeight="46.0" prefWidth="294.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="17.199999999999932">
@@ -189,7 +189,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Label layoutX="252.0" layoutY="110.0" style="-fx-font-size: 60; -fx-font-family: &quot;arial Black&quot;;" text="B1" textFill="WHITE">
+                  <Label fx:id="labelId" layoutX="252.0" layoutY="110.0" style="-fx-font-size: 60; -fx-font-family: &quot;arial Black&quot;;" text="B1" textFill="WHITE">
                      <font>
                         <Font name="Arial Black" size="40.0" />
                      </font>
