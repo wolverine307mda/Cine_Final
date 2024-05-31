@@ -68,4 +68,11 @@ class ClienteSeleccionButacaViewModel : KoinComponent {
         val index = butacasSeleccionadas.indexOfFirst { it.id == butaca.id }
         butacasSeleccionadas.removeAt(index)
     }
+
+    /**
+     * Actualiza la lista de butacas
+     */
+    fun updateButacas(){
+        butacas = getExpectedButacasSorted(butacaServicio.findAll().value)
+    }
 }

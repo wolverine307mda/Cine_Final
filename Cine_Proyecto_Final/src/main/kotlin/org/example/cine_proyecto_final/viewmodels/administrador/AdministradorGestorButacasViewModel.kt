@@ -1,11 +1,10 @@
 package org.example.cine_proyecto_final.viewmodels.administrador
 
-import com.github.michaelbull.result.Result
-import com.github.michaelbull.result.onFailure
-import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
-import org.example.cine_proyecto_final.butacas.errors.ButacaError
+
 import org.example.cine_proyecto_final.butacas.models.Butaca
+import org.example.cine_proyecto_final.butacas.service.database.ButacaService
+import org.example.cine_proyecto_final.butacas.errors.ButacaError
 import org.example.cine_proyecto_final.butacas.service.database.ButacaService
 import org.jetbrains.dokka.InternalDokkaApi
 import org.koin.core.component.KoinComponent
@@ -14,7 +13,6 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
-@OptIn(InternalDokkaApi::class)
 class AdministradorGestorButacasViewModel : KoinComponent {
 
     private val butacaService: ButacaService by inject()
@@ -27,6 +25,9 @@ class AdministradorGestorButacasViewModel : KoinComponent {
         state.value.butacas = butacaService.findAll().value
     }
 
+    /**
+     * El objeto observable que contiene las butacas
+     */
     data class ButacaSelectionState(
         var allButacas: List<Butaca> = emptyList(),
         var butacas: List<Butaca> = emptyList(),

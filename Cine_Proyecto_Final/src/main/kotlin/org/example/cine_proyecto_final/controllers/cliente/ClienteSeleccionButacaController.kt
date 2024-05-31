@@ -35,6 +35,7 @@ class ClienteSeleccionButacaController : KoinComponent {
     fun initialize() {
         logger.debug { "Iniciando pantalla general de Selección de Butacas" }
         reselectButacas()
+        viewModel.updateButacas()
         atras_button.setOnAction {
             logger.debug { "Botón 'Atrás' presionado" }
             val alert = Alert(AlertType.CONFIRMATION)
