@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recibo de Compra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .receipt {
+            max-width: 600px;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .receipt h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .receipt p {
+            margin: 5px 0;
+        }
+        .receipt ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .receipt ul li {
+            background-color: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt">
+        <h2>Recibo de Compra</h2>
+        <p><strong>Cliente:</strong> Diego (user@gmail.com)</p>
+        <p><strong>Fecha:</strong> 31 may 2024, 10:17</p>
+        <h3>Detalles de la Compra</h3>
+        <p><strong>Butacas:</strong></p>
+        <ul>
+            <li>Butaca C5 - VIP - 12.0€</li><li>Butaca C6 - NORMAL - 12.0€</li>
+        </ul>
+        <p><strong>Productos:</strong></p>
+        <ul>
+            <li>Pepsi - 2 x 1.25€</li><li>Hamburguesa - 4 x 6.49€</li><li>Agua - 1 x 0.99€</li><li>Patatas Fritas - 1 x 2.49€</li>
+        </ul>
+        <p><strong>Total Pagado:</strong> 55.94€</p>
+    </div>
+</body>
+</html>
