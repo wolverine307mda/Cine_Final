@@ -2,19 +2,18 @@ package org.example.cine_proyecto_final.viewmodels.cliente
 
 import javafx.stage.FileChooser
 import javafx.stage.Stage
-import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtmlImpl
-import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
-import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicio
-import org.example.cine_proyecto_final.butacas.service.database.ButacaService
-import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.models.Estado
+import org.example.cine_proyecto_final.butacas.service.database.ButacaService
 import org.example.cine_proyecto_final.cuentas.models.Cuenta
+import org.example.cine_proyecto_final.productos.servicio.database.ProductoServicio
+import org.example.cine_proyecto_final.ventas.models.LineaVenta
 import org.example.cine_proyecto_final.ventas.models.Venta
+import org.example.cine_proyecto_final.ventas.servicio.database.VentaServicio
+import org.example.cine_proyecto_final.ventas.servicio.storage.html.VentaStorageHtmlImpl
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import java.io.File
 import java.util.*
 
 private val logger = logging()
@@ -35,14 +34,14 @@ class ClienteProcesarCompraViewModel : KoinComponent {
             // Actualizar estado de las butacas
             butacas.forEach { butaca ->
                 butaca.estado = Estado.OCUPADA
-                serviceButacas.update(butaca.id, butaca, venta) // Método que actualiza el estado de la butaca en la base de datos
+                serviceButacas.update(butaca.id, butaca, venta)
             }
 
             // Actualizar stock de productos
             lineas.forEach { linea ->
                 val producto = linea.producto
                 producto.stock -= linea.cantidad
-                serviceProducto.update(producto.id, producto) // Método que actualiza el stock del producto en la base de datos
+                serviceProducto.update(producto.id, producto)
             }
 
             // Generar venta y crear recibo HTML
@@ -79,6 +78,7 @@ class ClienteProcesarCompraViewModel : KoinComponent {
     private fun exportarReciboHtml(venta: Venta, stage: Stage) {
         val fileChooser = FileChooser()
         fileChooser.title = "Guardar Recibo"
+        fileChooser.initialFileName = "recibo_${venta.id}.html"
         fileChooser.extensionFilters.add(FileChooser.ExtensionFilter("Archivos HTML", "*.html"))
         val file = fileChooser.showSaveDialog(stage) ?: return
 

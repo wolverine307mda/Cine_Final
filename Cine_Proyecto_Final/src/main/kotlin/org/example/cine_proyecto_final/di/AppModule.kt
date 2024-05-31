@@ -97,6 +97,10 @@ val appModule = module {
     singleOf(::VentaStorageJsonImpl) {
         bind<VentaStorageJson>()
     }
+    
+    singleOf(::VentaRepositorioImpl) {
+        bind<VentaRepositorio>()
+    }
 
     singleOf(::VentaStorageHtmlImpl) {
         bind<VentaStorageHtml>()
@@ -114,10 +118,6 @@ val appModule = module {
 
     singleOf(::ButacaStorageImpl) {
         bind<ButacaStorage>()
-    }
-
-    singleOf(::VentaRepositorioImpl) {
-        bind<VentaRepositorio>()
     }
 
     singleOf(::ButacaStorageCsvImpl) {

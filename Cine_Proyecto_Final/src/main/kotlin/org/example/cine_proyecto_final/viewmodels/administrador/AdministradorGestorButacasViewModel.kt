@@ -1,8 +1,12 @@
 package org.example.cine_proyecto_final.viewmodels.administrador
 
 import javafx.beans.property.SimpleObjectProperty
+
 import org.example.cine_proyecto_final.butacas.models.Butaca
 import org.example.cine_proyecto_final.butacas.service.database.ButacaService
+import org.example.cine_proyecto_final.butacas.errors.ButacaError
+import org.example.cine_proyecto_final.butacas.service.database.ButacaService
+import org.jetbrains.dokka.InternalDokkaApi
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -10,10 +14,9 @@ import org.lighthousegames.logging.logging
 private val logger = logging()
 
 class AdministradorGestorButacasViewModel : KoinComponent {
-    // Inyección de dependencias para ButacaService y ButacaStorageCSV
+
     private val butacaService: ButacaService by inject()
 
-    // Propiedad de estado que contiene el estado actual de las butacas
     val state: SimpleObjectProperty<ButacaSelectionState> = SimpleObjectProperty(ButacaSelectionState())
 
     init {
@@ -29,4 +32,18 @@ class AdministradorGestorButacasViewModel : KoinComponent {
         var allButacas: List<Butaca> = emptyList(),
         var butacas: List<Butaca> = emptyList(),
     )
+
+    fun actualizarButaca(butaca: Butaca): Result<Butaca, ButacaError> {
+        return butacaService.update(butaca.id, butaca, null)
+            .onSuccess {
+                val updatedButacas = state.value.butacas.map {
+                    if (it.id == butaca.id) butaca else it
+                }
+                state.value = state.value.copy(butacas = updatedButacas)
+            }
+            .onFailure {
+                logger.error { "Error al actualizar la butaca: $it" }
+            }
+    }
+
 }
