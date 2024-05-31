@@ -6,6 +6,7 @@ import org.example.cine_proyecto_final.productos.models.Producto
 import org.example.cine_proyecto_final.productos.repository.ProductosRepository
 import org.example.cine_proyecto_final.productos.validador.ProductoValidator
 import org.lighthousegames.logging.logging
+import java.time.LocalDateTime
 
 private val logger = logging()
 
@@ -67,8 +68,9 @@ class ProductoServicioImpl(
     override fun update(id: String, producto: Producto): Result<Producto, ProductoError> {
         logger.debug { "Actualizando el producto con id: $id"}
         productoValidador.validate(producto).onSuccess {
-            val updatedProducto = producto.copy(id = id)
+            val updatedProducto = producto.copy(id = id, updatedAt = LocalDateTime.now())
             productosRepositorio.update(id,updatedProducto)?.let {
+                return Ok(updatedProducto)
             }
         }
         return Err(ProductoError.ProductoStorageError("No se pudo actualizar el Producto"))

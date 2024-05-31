@@ -59,6 +59,7 @@ class ClienteSeleccionProductosController : KoinComponent {
 
     @FXML
     private fun initialize() {
+        viewModel.updateProducts()
         logger.debug { "iniciando pantalla general de Selección de Productos" }
         initDefaultValues()
         initBindings()

@@ -21,7 +21,7 @@ private val logger = logging()
 
 class DetalleProductoController: KoinComponent {
     private val viewModel: AdministradorGestorProductosViewModel by inject()
-    //private var producto: Producto? = null
+    private var producto: Producto? = null
 
     @FXML
     private lateinit var guardarButton: Button
@@ -47,7 +47,7 @@ class DetalleProductoController: KoinComponent {
         tipoCombo.items.addAll(tipos)
 
         // Obtén el producto seleccionado de ProductHolder
-        val producto = AdministradorGestionProductosController.ProductHolder.selectedProduct
+        var producto = viewModel.state.value.currentProduct
 
         // Si hay un producto seleccionado, configura los campos con sus valores
         if (producto != null) {
@@ -58,16 +58,24 @@ class DetalleProductoController: KoinComponent {
         }
 
         guardarButton.setOnAction {
-            if (producto != null){editarProducto(producto)}
+            producto = Producto(
+                nombre = nombreField.text,
+                precio = precioField.text.toDouble(),
+                stock = stockField.text.toInt(),
+                tipo = when (tipoCombo.value) {
+                    "BEBIDA" -> TipoProducto.BEBIDA
+                    "COMIDA" -> TipoProducto.COMIDA
+                    "OTROS" -> TipoProducto.OTROS
+                    else -> TipoProducto.OTROS
+                },
+                image = producto!!.image
+            )
+            if (producto != null) viewModel.editarProducto(producto!!)
             else {crearProducto()}
 
         }
 
         image.image = viewModel.state.value.currentImage
-    }
-
-    private fun editarProducto(producto: Producto) {
-        viewModel.editarProducto(producto)
     }
 
     private fun crearProducto() {
